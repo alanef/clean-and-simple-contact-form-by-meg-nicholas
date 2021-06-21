@@ -17,7 +17,7 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
 
-        return isset($options['theme']) ? esc_html($options['theme']) : 'light';
+        return isset($options['theme']) ? $options['theme'] : 'light';
     }
 
 	static
@@ -41,7 +41,7 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
 
-        return isset($options['sent_message_heading']) ? esc_html($options['sent_message_heading']) : esc_html__('Message Sent', 'clean-and-simple-contact-form-by-meg-nicholas');
+        return isset($options['sent_message_heading']) ? $options['sent_message_heading'] : esc_html__('Message Sent', 'clean-and-simple-contact-form');
     }
 
     static
@@ -49,7 +49,7 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
 
-        return isset($options['sent_message_body']) ? esc_html($options['sent_message_body']) : esc_html__('Thank you for your message, we will be in touch very shortly.', 'clean-and-simple-contact-form-by-meg-nicholas');
+        return isset($options['sent_message_body']) ? $options['sent_message_body'] : esc_html__('Thank you for your message, we will be in touch very shortly.', 'clean-and-simple-contact-form');
     }
 
     static
@@ -57,7 +57,7 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
 
-        return isset($options['message']) ? esc_html($options['message']) : esc_html__('Please enter your contact details and a short message below and I will try to answer your query as soon as possible.', 'clean-and-simple-contact-form-by-meg-nicholas');
+        return isset($options['message'])? $options['message'] : esc_html__('Please enter your contact details and a short message below and I will try to answer your query as soon as possible.', 'clean-and-simple-contact-form');
     }
 
     static
@@ -83,7 +83,7 @@ class cscf_PluginSettings
 			unset( $options['recipient_emails'] );
 		}
 
-		return isset( $options['recipient_emails'] ) ? esc_html($options['recipient_emails']) : array( get_bloginfo( 'admin_email' ) );
+		return isset( $options['recipient_emails'] ) ? $options['recipient_emails'] : array( get_bloginfo( 'admin_email' ) );
 	}
 
     static
@@ -91,7 +91,7 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
 
-        return isset($options['subject']) ? esc_html($options['subject']): get_bloginfo('name') . esc_html__(' -  Web Enquiry', 'clean-and-simple-contact-form-by-meg-nicholas');
+        return isset($options['subject']) ? $options['subject']: get_bloginfo('name') . esc_html__(' -  Web Enquiry', 'clean-and-simple-contact-form');
     }
 
     static
@@ -99,7 +99,7 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
 
-        return isset($options['from-email']) ? esc_html($options['from-email']) : "";
+        return isset($options['from-email']) ? $options['from-email'] : "";
     }
 
     static
@@ -139,7 +139,7 @@ class cscf_PluginSettings
 
         $options = get_option(CSCF_OPTIONS_KEY);
 
-	    return isset( $options['contact-consent-msg'] ) ? esc_html($options['contact-consent-msg']) : esc_html__( 'I consent to my contact details being stored', 'clean-and-simple-contact-form-by-meg-nicholas' );
+	    return isset( $options['contact-consent-msg'] ) ? $options['contact-consent-msg'] : esc_html__( 'I consent to my contact details being stored', 'clean-and-simple-contact-form' );
 
     }
 
@@ -159,14 +159,12 @@ class cscf_PluginSettings
 
     }
 
-    static
-    function InputIcons()
+    static  function InputIcons()
     {
         return false;
     }
 
-    static
-    function ConfirmEmail()
+    static function ConfirmEmail()
     {
         $options = get_option(CSCF_OPTIONS_KEY);
         return isset($options['confirm-email']) ? true : false;

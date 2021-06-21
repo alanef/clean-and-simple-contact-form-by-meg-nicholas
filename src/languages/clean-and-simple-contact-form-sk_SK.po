@@ -1,248 +1,241 @@
-
-
-
-
-
-
-# Copyright (C) 2013 Clean and Simple Contact Form
-# This file is distributed under the same license as the Clean and Simple Contact Form package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Clean and Simple Contact Form 4.1.1\n"
+"Project-Id-Version: clean-and-simple-contact-form.4.1.1\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/plugins/clean-and-simple-contact-"
-"form-by-meg-nicholas\n"
+"form\n"
 "POT-Creation-Date: 2013-06-13 10:12:32+00:00\n"
+"PO-Revision-Date: 2013-07-28 02:08+0100\n"
+"Last-Translator: \n"
+"Language-Team: faktorzwei.net <faktorzwei.net@gmail.com>\n"
+"Language: de_DE informal\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2013-08-06 15:51+0100\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.5.4\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop\n"
+"X-Poedit-Basepath: .\n"
 
 #: class.cff.php:90
 msgid "Settings"
-msgstr "Configuració"
+msgstr "Nastavenia"
 
 #: class.cff_contact.php:55
 msgid "Sorry the email addresses do not match."
-msgstr "Alerta. Les adreces no coincideixen"
+msgstr "Prepáčte, ale emailová adresa nesedí."
 
 #: class.cff_contact.php:59 views/contact-form-with-recaptcha.view.php:29
 #: views/contact-form.view.php:14
 msgid "Please give your email address."
-msgstr "Si us plau, introduïu el vostre correu"
+msgstr "Prosím, vložte Vašu emailovú adresu"
 
 #: class.cff_contact.php:63
 msgid "Please confirm your email address."
-msgstr "Si us plau, confirmeu el vostre correu"
+msgstr "Prosím, potvrďte Vašu emailovú adresu"
 
 #: class.cff_contact.php:67 views/contact-form-with-recaptcha.view.php:49
 #: views/contact-form.view.php:34
 msgid "Please give your name."
-msgstr "Si us plau, introduïu el vostre nom"
+msgstr "Prosím, vložte Vaše meno"
 
 #: class.cff_contact.php:71
 msgid "Please enter a message."
-msgstr "Si us plau, introduïu el vostre comentari"
+msgstr "Prosím, vložte Vašu správu"
 
 #: class.cff_contact.php:75 views/contact-form-with-recaptcha.view.php:29
 #: views/contact-form.view.php:14
 msgid "Please enter a valid email address."
-msgstr "Si us plau, introduïu una adreça valida de correu"
+msgstr "Prosím, vložte validnú emailovú adresu"
 
 #: class.cff_contact.php:83
 msgid "Sorry the code wasn't entered correctly please try again."
-msgstr "Alerta!. El codi introduit no es correcte"
+msgstr "Prepáčte, ale kód nebol opísaný správne, skúste znovu"
 
 #: class.cff_pluginsettings.php:40
 msgid "Message Sent"
-msgstr "Comentari enviat"
+msgstr "Správa poslaná"
 
 #: class.cff_pluginsettings.php:47
 msgid "Thank you for your message, we will be in touch very shortly."
-msgstr ""
-"Gràcies per el teu Comentari, ens posarem en contacte el mes aviat possible."
+msgstr "Ďakujem za Vašu správu, ozvem sa Vám čo najskôr"
 
 #: class.cff_pluginsettings.php:54
 msgid ""
 "Please enter your contact details and a short message below and I will try "
 "to answer your query as soon as possible."
 msgstr ""
-"Introdueix les teves dades, un comentari curt i et contestarem el mes aviat "
-"possible."
+"Prosím vložte vaše kontaktné detaily a krátku správu nižšie a ja sa vám "
+"pokúsim odpovedať čo najskôr."
 
 #: class.cff_pluginsettings.php:83
 msgid " -  Web Enquiry"
-msgstr "- Pregunta Web"
+msgstr "- Webová otázka"
 
 #: class.cff_settings.php:41
 msgid "Clean and Simple Contact Form Settings"
-msgstr "Configuració de Clean and Simple Contact Form"
+msgstr "Čistý a jednoduchý kontaktný formulár"
 
 #: class.cff_settings.php:43
 msgid "You are using version"
-msgstr "Aquesta es la versió"
+msgstr "Používate verziu"
 
 #: class.cff_settings.php:44
 msgid "If you find this plugin useful please consider"
-msgstr "Si t'es util, si us plau considera"
+msgstr "Ak si myslíte, že tento plugin je užitočný, prosím zvážte"
 
 #: class.cff_settings.php:47
 msgid "leaving a review"
-msgstr "deja un comentari"
+msgstr "zanechať hodnotenie"
 
 #: class.cff_settings.php:49
 msgid "Thank you!"
-msgstr "Moltes Gràcies!"
+msgstr "Ďakujem!"
 
 #: class.cff_settings.php:68
 msgid "ReCAPTCHA Settings"
-msgstr "Configuració ReCAPTCHA "
+msgstr "ReCAPTCHA nastavenia"
 
 #: class.cff_settings.php:76
 msgid "Use reCAPTCHA :"
-msgstr "Utilitza ReCAPTCHA :"
+msgstr "Použiť reCAPTCHA :"
 
 #: class.cff_settings.php:82
 msgid "reCAPTCHA Theme :"
-msgstr "Tema reCAPTCHA :"
+msgstr "reCAPTCHA šablóna :"
 
 #: class.cff_settings.php:88
 msgid "reCAPTCHA Public Key :"
-msgstr "Clau Publica reCAPTCHA :"
+msgstr "reCAPTCHA Public Key :"
 
 #: class.cff_settings.php:94
 msgid "reCAPTCHA Private Key :"
-msgstr "Clau Privada reCAPTCHA :"
+msgstr "reCAPTCHA Private Key :"
 
 #: class.cff_settings.php:100
 msgid "Message Settings"
-msgstr "Configuració dels Missatges"
+msgstr "Nastavenie správy"
 
 #: class.cff_settings.php:104
 msgid "Recipient Email :"
-msgstr "Adressa de Correu del destinatari:"
+msgstr "Adresa prijímateľa:"
 
 #: class.cff_settings.php:110
 msgid "Email Subject :"
-msgstr "Assumpte del correo:"
+msgstr "Predmet správy"
 
 #: class.cff_settings.php:116
 msgid "Message :"
-msgstr "Comentari:"
+msgstr "Správa"
 
 #: class.cff_settings.php:122
 msgid "Message Sent Heading :"
-msgstr "Titol de Missatge Enviat:"
+msgstr "Nadpis správy:"
 
 #: class.cff_settings.php:128
 msgid "Message Sent Content :"
-msgstr "Contingut de Missatge Enviat:"
+msgstr "Obsah správy:"
 
 #: class.cff_settings.php:134
 msgid "Styling and Validation"
-msgstr "Estils i Validació"
+msgstr "Štýlovanie a validácia"
 
 #: class.cff_settings.php:138
 msgid ""
 "Use the plugin default stylesheet (un-tick to use your theme style sheet "
 "instead) :"
-msgstr ""
-"Utilitza els estils del plugin por defectet (desmarca para utilitzar el teu "
-"estil) :"
+msgstr "Použiť východzí stylesheet "
 
 #: class.cff_settings.php:144
 msgid "Use client side validation (AJAX) :"
-msgstr "Utilitza la validació de client (AJAX) :"
+msgstr "Client side validácia (AJAX):"
 
 #: class.cff_settings.php:216
 msgid "Enter your reCAPTCHA settings below :"
-msgstr "Introduíu la teva configuració reCAPTCHA :"
+msgstr "Vložte vaše reCAPTCHA nastavenia nižšie:"
 
 #: class.cff_settings.php:217
 msgid "To use reCAPTCHA you must get an API key from"
-msgstr "Per utilitzar reCAPTCHA has de demanar una API key de"
+msgstr "Pre použitie reCAPTCHA prosím vložte API key "
 
 #: class.cff_settings.php:222
 msgid "Enter your message settings below :"
-msgstr "Introdueix la teva configuració del missatge :"
+msgstr "Vložte vaše nastavenie správy nižšie:"
 
 #: class.cff_settings.php:274
 msgid "Red"
-msgstr "Vermell"
+msgstr "Červená"
 
 #: class.cff_settings.php:275
 msgid "White"
-msgstr "Blanc"
+msgstr "Biela"
 
 #: class.cff_settings.php:276
 msgid "Blackglass"
-msgstr "Negre Vidre"
+msgstr "Čierne sklo"
 
 #: class.cff_settings.php:277
 msgid "Clean"
-msgstr "Transparent"
+msgstr "Čistá"
 
 #: views/contact-form-with-recaptcha.view.php:27
 #: views/contact-form.view.php:12
 msgid "Email Address:"
-msgstr "Adreça de Correu:"
+msgstr "Emailová adresa:"
 
 #: views/contact-form-with-recaptcha.view.php:29
 #: views/contact-form.view.php:14
 msgid "Your Email Address"
-msgstr "La teva Adreça de Correu"
+msgstr "Vaša emailová adresa"
 
 #: views/contact-form-with-recaptcha.view.php:37
 #: views/contact-form.view.php:22
 msgid "Confirm Email Address:"
-msgstr "Confirma l'Adreça de Correu"
+msgstr "Potvrďte emailovú adresu:"
 
 #: views/contact-form-with-recaptcha.view.php:39
 #: views/contact-form.view.php:24
 msgid "Please enter the same email address again."
-msgstr "Si us plau repeteix l'Adreça de Correu"
+msgstr "Prosím vložte rovnakú emailovú adresu znovu."
 
 #: views/contact-form-with-recaptcha.view.php:39
 #: views/contact-form.view.php:24
 msgid "Confirm Your Email Address"
-msgstr "Confirma la teva Adreça de Correu"
+msgstr "Potvrďte vašu emailovú adresu"
 
 #: views/contact-form-with-recaptcha.view.php:47
 #: views/contact-form.view.php:32
 msgid "Name:"
-msgstr "Nom:"
+msgstr "Meno"
 
 #: views/contact-form-with-recaptcha.view.php:49
 #: views/contact-form.view.php:34
 msgid "Your Name"
-msgstr "El teu Nom:"
+msgstr "Vaše meno"
 
 #: views/contact-form-with-recaptcha.view.php:57
 #: views/contact-form.view.php:42
 msgid "Message:"
-msgstr "Comentari:"
+msgstr "Správa:"
 
 #: views/contact-form-with-recaptcha.view.php:59
 #: views/contact-form.view.php:44
 msgid "Please give a message."
-msgstr "Si us plau, escriu un Comentari"
+msgstr "Prosím vložte správu."
 
 #: views/contact-form-with-recaptcha.view.php:59
 #: views/contact-form.view.php:44
 msgid "Your Message"
-msgstr "El teu Comentari"
+msgstr "Vaša správa"
 
 #: views/contact-form-with-recaptcha.view.php:75
 #: views/contact-form.view.php:51
 msgid "Send Message"
-msgstr "Enviar"
+msgstr "Odoslať správu"
 
 #: views/message-not-sent.view.php:1
 msgid "Sorry, there has been a problem and your message was not sent."
-msgstr "Alerta!. Hi ha algun problema, no s'ha enviat el Correu"
+msgstr "Prepáčte, ale nastal problém s odoslaním vašej správy."
 
+# Plugin Name des plugin/theme
 #. Plugin Name of the plugin/theme
 msgid "Clean and Simple Contact Form"
 msgstr "Clean and Simple Contact Form"
@@ -253,13 +246,14 @@ msgid ""
 msgstr ""
 "http://www.megnicholas.co.uk/wordpress-plugins/clean-and-simple-contact-form"
 
+# Beschreibung des plugin/theme
 #. Description of the plugin/theme
 msgid ""
 "A clean and simple contact form with Google reCAPTCHA and Twitter Bootstrap "
 "markup."
 msgstr ""
-"Un formulari de contacte net i sencill, amb Google, reCAPTCHA  i Twitter "
-"Bootstrap."
+"Ein sauberes und einfaches Kontaktformular mit Google reCAPTCHA und Twitter "
+"Bootstrap markup."
 
 #. Author of the plugin/theme
 msgid "Meghan Nicholas"

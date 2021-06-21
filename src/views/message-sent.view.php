@@ -1,2 +1,2 @@
-<h3><?php echo $heading; ?></h3>
-<p><?php echo $message; ?> </p>
+<h3><?php echo esc_html($heading); ?></h3>
+<p><?php echo esc_html($message); ?> </p>

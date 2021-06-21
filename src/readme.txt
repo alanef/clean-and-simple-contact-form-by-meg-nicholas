@@ -10,7 +10,6 @@ Stable tag: 4.7.2
 
 A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup and Akismet spam filtering.
 
-This is a fork of clena-and-simple-contact-form-by-meg-nicholas v 4.7.1
 
 == Description ==
 A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup and Akismet spam filtering.
@@ -361,7 +360,7 @@ Polish thanks to Patryk Peas
 * Improvement: Ajax now works better.
 * Documentation update: nicer links (worked how to do them in markdown!), changelog and upgrade notice sections now correctly formatted.
 = 4.0.7 =
-* Fixed a bug: Plugin name is actually clean-and-simple-contact-form-by-meg-nicholas now (not contact-form) but this new name needed to be updated in the plugin settings definitions. I also needed to rename contact-form.php to clean-and-simple-contact-form-by-meg-nicholas.php. My thanks to Jakub for finding this bug.
+* Fixed a bug: Plugin name is actually clean-and-simple-contact-form now (not contact-form) but this new name needed to be updated in the plugin settings definitions. I also needed to rename contact-form.php to clean-and-simple-contact-form.php. My thanks to Jakub for finding this bug.
 * If your webpage is ssl then reCAPTCHA will now also use ssl mode.
 
 
