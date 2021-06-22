@@ -26,35 +26,35 @@ class cscf_Contact {
 			$this->RecaptchaPrivateKey = cscf_PluginSettings::PrivateKey();
 		}
 
-		if ( $_SERVER['REQUEST_METHOD'] == 'POST'  ) {
+		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
 			if ( isset( $_POST['cscf'] ) ) {
-				$cscf        = (array) $_POST['cscf'];
-				foreach( $cscf as $key =>$value ) {
-					switch ($key) {
+				$cscf = (array) $_POST['cscf'];
+				foreach ( $cscf as $key => $value ) {
+					switch ( $key ) {
 						case 'name':
-							$this->Name = sanitize_text_field($value);
+							$this->Name = sanitize_text_field( $value );
 							break;
 						case 'email':
-							$this->Email = sanitize_email($value);
+							$this->Email = sanitize_email( $value );
 							break;
 						case 'confirm-email':
-							$this->ConfirmEmail = sanitize_email($value);
+							$this->ConfirmEmail = sanitize_email( $value );
 							break;
 						case 'email-sender':
-							$this->EmailToSender = sanitize_text_field($value);
+							$this->EmailToSender = sanitize_text_field( $value );
 							break;
 						case 'message':
-							$this->Message = sanitize_textarea_field($value);
+							$this->Message = sanitize_textarea_field( $value );
 							break;
 						case 'contact-consent':
 							if ( cscf_PluginSettings::ContactConsent() ) {
-								$this->ContactConsent = sanitize_text_field($value);
+								$this->ContactConsent = sanitize_text_field( $value );
 							}
 							break;
 						default:
-							$cscf[$key] = esc_attr($value);  // should never get this but just in case.
+							$cscf[ $key ] = null;  // should never get this but just in case.
 					}
-				};
+				}
 
 				if ( isset( $_POST['post-id'] ) ) {
 					$this->PostID = sanitize_text_field( $_POST['post-id'] );
@@ -157,10 +157,10 @@ class cscf_Contact {
 		$header = "Content-Type: text/plain\r\nReply-To: " . $this->Email . "\r\n";
 
 		//message
-		$message = esc_html__( 'From: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . esc_attr($this->Name). "\r\n";
-		$message .= esc_html__( 'Email: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . esc_attr($this->Email) . "\r\n";
+		$message = esc_html__( 'From: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . esc_attr( $this->Name ) . "\r\n";
+		$message .= esc_html__( 'Email: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . esc_attr( $this->Email ) . "\r\n";
 		$message .= esc_html__( 'Page URL: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . get_permalink( $this->PostID ) . "\r\n";
-		$message .= esc_html__( 'Message:', 'clean-and-simple-contact-form-by-meg-nicholas' ) . "\n\n" . esc_html($this->Message) . "\r\n";
+		$message .= esc_html__( 'Message:', 'clean-and-simple-contact-form-by-meg-nicholas' ) . "\n\n" . esc_html( $this->Message ) . "\r\n";
 		$message .= cscf_PluginSettings::ContactConsentMsg() . ': ' . ( $this->ContactConsent ? esc_html__( 'yes', 'clean-and-simple-contact-form-by-meg-nicholas' ) : esc_html__( 'no', 'clean-and-simple-contact-form-by-meg-nicholas' ) );
 
 
