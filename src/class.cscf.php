@@ -42,7 +42,7 @@ class cscf
     {
         //$path = CSCF_PLUGIN_DIR . '/languages';
         $path = '/' . CSCF_PLUGIN_NAME . '/languages';
-        load_plugin_textdomain('clean-and-simple-contact-form', false, $path );
+        load_plugin_textdomain('clean-and-simple-contact-form-by-meg-nicholas', false, $path );
     }
 
     function RegisterScripts()
@@ -151,7 +151,7 @@ class cscf
             /*
              * Insert the link at the beginning
             */
-            $in = '<a href="options-general.php?page=contact-form-settings">' . esc_html__('Settings', 'clean-and-simple-contact-form') . '</a>';
+            $in = '<a href="options-general.php?page=contact-form-settings">' . esc_html__('Settings', 'clean-and-simple-contact-form-by-meg-nicholas') . '</a>';
             array_unshift($links, $in);
 
             /*

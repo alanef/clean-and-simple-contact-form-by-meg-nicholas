@@ -41,7 +41,7 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
 
-        return isset($options['sent_message_heading']) ? $options['sent_message_heading'] : esc_html__('Message Sent', 'clean-and-simple-contact-form');
+        return isset($options['sent_message_heading']) ? $options['sent_message_heading'] : esc_html__('Message Sent', 'clean-and-simple-contact-form-by-meg-nicholas');
     }
 
     static
@@ -49,7 +49,7 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
 
-        return isset($options['sent_message_body']) ? $options['sent_message_body'] : esc_html__('Thank you for your message, we will be in touch very shortly.', 'clean-and-simple-contact-form');
+        return isset($options['sent_message_body']) ? $options['sent_message_body'] : esc_html__('Thank you for your message, we will be in touch very shortly.', 'clean-and-simple-contact-form-by-meg-nicholas');
     }
 
     static
@@ -57,7 +57,7 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
 
-        return isset($options['message'])? $options['message'] : esc_html__('Please enter your contact details and a short message below and I will try to answer your query as soon as possible.', 'clean-and-simple-contact-form');
+        return isset($options['message'])? $options['message'] : esc_html__('Please enter your contact details and a short message below and I will try to answer your query as soon as possible.', 'clean-and-simple-contact-form-by-meg-nicholas');
     }
 
     static
@@ -91,7 +91,7 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
 
-        return isset($options['subject']) ? $options['subject']: get_bloginfo('name') . esc_html__(' -  Web Enquiry', 'clean-and-simple-contact-form');
+        return isset($options['subject']) ? $options['subject']: get_bloginfo('name') . esc_html__(' -  Web Enquiry', 'clean-and-simple-contact-form-by-meg-nicholas');
     }
 
     static
@@ -139,7 +139,7 @@ class cscf_PluginSettings
 
         $options = get_option(CSCF_OPTIONS_KEY);
 
-	    return isset( $options['contact-consent-msg'] ) ? $options['contact-consent-msg'] : esc_html__( 'I consent to my contact details being stored', 'clean-and-simple-contact-form' );
+	    return isset( $options['contact-consent-msg'] ) ? $options['contact-consent-msg'] : esc_html__( 'I consent to my contact details being stored', 'clean-and-simple-contact-form-by-meg-nicholas' );
 
     }
 

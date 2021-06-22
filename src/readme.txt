@@ -34,8 +34,7 @@ The email address used is the one you have set up in WordPress under ‘Settings
 
 To help prevent spam all data is scanned via Akismet.
 For this to work you must have the [Akismet Plugin](http://wordpress.org/plugins/akismet/ "Akismet Plugin") installed and activated.
-All spam will be placed in your 'comments' list which you can then review if you want to
-[learn more](http://www.megnicholas.co.uk/articles/contact-form-plugin-can-detect-spam/ "Learn More").
+All spam will be placed in your 'comments' list which you can then review if you want to,
 
 For added piece of mind this plugin also allows you to add a ‘**reCAPTCHA**’.
 This adds a picture of a couple of words to the bottom of the contact form.
@@ -63,9 +62,9 @@ You can turn on reCAPTCHA to avoid your form being abused by bots.
 
 *   Works with the **latest version of WordPress**.
 
-*   Written by an **experienced PHP programmer**, the code is rock solid, safe, and rigorously tested as standard practice.
+*   Original plugin written by an **experienced PHP programmer**, Megan Nicholas, the code is rock solid, safe, and rigorously tested as standard practice.
 
-Hopefully this plugin will fulfil all your needs, if not [get in-touch](http://www.megnicholas.co.uk/contact-me "Get In Touch") and I will customise to your exact requirements.
+Hopefully this plugin will fulfil all your needs.
 
 
 == Installation ==
@@ -79,8 +78,6 @@ Then visit the plugin page on your wordpress site and click ‘Activate’ again
 
 To place the contact form on your page use the shortcode [cscf-contact-form]
 
-[More information on how to use the plugin.](http://www.megnicholas.co.uk/wordpress-plugins/clean-and-simple-contact-form/ "More Information")
-
 == How to Use ==
 Unless you want to change messages or add reCAPTCHA to your contact form then this plugin will work out of the box without any additional setup.
 
@@ -89,8 +86,6 @@ Important: Check that you have an email address set-up in your WordPress ‘Sett
 To add the contact form to your WordPress website simply place the shortcode [cscf-contact-form] on the post or page that you wish the form to appear on.
 
 **If you have Jetpack plugin installed disable the contact form otherwise the wrong form might display.**
-
-[More information on how to use the plugin.](http://www.megnicholas.co.uk/wordpress-plugins/clean-and-simple-contact-form/ "More Information")
 
 == Additional Settings ==
 This plugin will work out of the box without any additional setup. You have the option to change the default messages that are displayed to your user and to add reCAPTCHA capabilities.
@@ -134,7 +129,7 @@ Here is a list of things that you can change
 
 *   **Option to allow enquiry to email themselves a copy of the message.
 
-*   **!NEW! Contact consent**: This option allows you to be GDPR compliant by adding a 'Consent to contact' check box at the bottom of the form.
+*   **Contact consent**: This option allows you to be GDPR compliant by adding a 'Consent to contact' check box at the bottom of the form.
 
 
 == Screenshots ==
@@ -145,12 +140,7 @@ Here is a list of things that you can change
 5. Place this shortcode on your post or page to deploy
 
 == Demo ==
-This is a demonstration of this plugin working on the default Twenty Twelve theme ->
-[Clean and Simple Contact Form Demonstration](http://demo.megnicholas.co.uk/wordpress-clean-and-simple-contact-form "Plugin Demonstration")
-
-==About Meg Nicholas ==
-I am a freelance WordPress Developer.
-[Hire me for all your Wordpress needs](http://www.megnicholas.co.uk "Hire Me").
+Demo site coming soon.
 
 == Frequently Asked Questions ==
 = I get a message to say that the message could not be sent =
@@ -186,8 +176,8 @@ screen so you can add your own styles to your theme's stylesheet.
 
 = Can I have this plugin in my own language? =
 
-Yes, I am currently building up translation files for this plugin. If your language is not yet available you are very welcome to translate it.
-If you are not sure how to go about doing this [get in touch](http://www.megnicholas.co.uk/contact-me/ "Contact Me").
+Yes, I am currently building up translation files for this plugin.
+If your language is not yet available you are very welcome to translate it.
 
 = How do I change the text box sizes? =
 
@@ -208,8 +198,9 @@ The comments form will never validate due to no supplied reCAPTCHA code.
 
 == Changelog ==
 = 4.7.2 =
-* fork of original plugin v 4.7.1
-* tested up to 5.8 beta 2
+* Updated santization and escaping to current plugin directory recommendations
+* add email header to specify text to improve formatting
+* tested up to 5.8 beta 2 and PHP 8.0
 
 = 4.7.1 =
 * Tested with Wordpress version 5.3

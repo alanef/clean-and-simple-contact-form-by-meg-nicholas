@@ -1,4 +1,4 @@
-var project                 = 'clean-and-simple-contact-form'; // Project Name.
+var project                 = 'clean-and-simple-contact-form-by-meg-nicholas'; // Project Name.
 
 
 var gulp = require('gulp');
@@ -17,7 +17,7 @@ gulp.task('zip', (done) => {
         .pipe(rename(function (file) {
             file.dirname = project + '/' + file.dirname;
         }))
-        .pipe(zip(project + '.zip'))
+        .pipe(zip(project + '-free.zip'))
         .pipe(gulp.dest('zipped'))
     done()
 });

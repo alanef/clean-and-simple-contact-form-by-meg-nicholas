@@ -23,8 +23,8 @@ class cscf_settings {
 
 		// This page will be under "Settings".
 		add_options_page(
-			esc_html__( 'Contact Form Settings', 'clean-and-simple-contact-form' ),
-			esc_html__( 'Contact Form', 'clean-and-simple-contact-form' ),
+			esc_html__( 'Contact Form Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ),
+			esc_html__( 'Contact Form', 'clean-and-simple-contact-form-by-meg-nicholas' ),
 			'manage_options',
 			'contact-form-settings',
 			array(
@@ -36,22 +36,22 @@ class cscf_settings {
 
 	public function create_admin_page() {
 		?>
-        <h2><?php esc_html_e( 'Clean and Simple Contact Form Settings', 'clean-and-simple-contact-form' ); ?></h2>
+        <h2><?php esc_html_e( 'Clean and Simple Contact Form Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></h2>
         <hr/>
         <div style="float:left;">
-            <p><?php esc_html_e( 'You are using version', 'clean-and-simple-contact-form' ); ?><?php echo esc_attr(CSCF_VERSION_NUM); ?></p>
+            <p><?php esc_html_e( 'You are using version', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?><?php echo esc_attr(CSCF_VERSION_NUM); ?></p>
 
-            <p><?php esc_html_e( 'If you find this plugin useful please consider', 'clean-and-simple-contact-form' ); ?>
+            <p><?php esc_html_e( 'If you find this plugin useful please consider', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
                 <a target="_blank"
                    href="http://wordpress.org/support/view/plugin-reviews/<?php echo esc_attr(CSCF_PLUGIN_NAME); ?>">
-					<?php esc_html_e( 'leaving a review', 'clean-and-simple-contact-form' ); ?>
+					<?php esc_html_e( 'leaving a review', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
                 </a>
-                . <?php esc_html_e( 'Thank you!', 'clean-and-simple-contact-form' ); ?>
+                . <?php esc_html_e( 'Thank you!', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
             </p>
 
 			<?php if ( cscf_PluginSettings::IsJetPackContactFormEnabled() ) { ?>
                 <p class="highlight">
-					<?php esc_html_e( 'NOTICE: You have JetPack\'s Contact Form enabled please deactivate it or use the shortcode [cscf-contact-form] instead.', 'clean-and-simple-contact-form' ); ?>
+					<?php esc_html_e( 'NOTICE: You have JetPack\'s Contact Form enabled please deactivate it or use the shortcode [cscf-contact-form] instead.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
                     &nbsp;            </p>
 			<?php } ?>
 
@@ -75,7 +75,7 @@ class cscf_settings {
 	public function page_init() {
 		add_settings_section(
 			'section_recaptcha',
-			'<h3>' . esc_html__( 'ReCAPTCHA Settings', 'clean-and-simple-contact-form' ) . '</h3>',
+			'<h3>' . esc_html__( 'ReCAPTCHA Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</h3>',
 			array(
 				$this,
 				'print_section_info_recaptcha',
@@ -86,111 +86,111 @@ class cscf_settings {
 			$this,
 			'check_form'
 		) );
-		add_settings_field( 'use_recaptcha', esc_html__( 'Use reCAPTCHA :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'use_recaptcha', esc_html__( 'Use reCAPTCHA :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_recaptcha', array(
 			'use_recaptcha'
 		) );
-		add_settings_field( 'theme', esc_html__( 'reCAPTCHA Theme :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'theme', esc_html__( 'reCAPTCHA Theme :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_recaptcha', array(
 			'theme'
 		) );
-		add_settings_field( 'recaptcha_public_key', esc_html__( 'reCAPTCHA Public Key :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'recaptcha_public_key', esc_html__( 'reCAPTCHA Public Key :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_recaptcha', array(
 			'recaptcha_public_key'
 		) );
-		add_settings_field( 'recaptcha_private_key', esc_html__( 'reCAPTCHA Private Key :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'recaptcha_private_key', esc_html__( 'reCAPTCHA Private Key :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_recaptcha', array(
 			'recaptcha_private_key'
 		) );
-		add_settings_section( 'section_message', '<h3>' . esc_html__( 'Message Settings', 'clean-and-simple-contact-form' ) . '</h3>', array(
+		add_settings_section( 'section_message', '<h3>' . esc_html__( 'Message Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</h3>', array(
 			$this,
 			'print_section_info_message'
 		), 'contact-form-settings' );
-		add_settings_field( 'recipient_emails', esc_html__( 'Recipient Emails :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'recipient_emails', esc_html__( 'Recipient Emails :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'recipient_emails'
 		) );
-		add_settings_field( 'confirm-email', esc_html__( 'Confirm Email Address :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'confirm-email', esc_html__( 'Confirm Email Address :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'confirm-email'
 		) );
-		add_settings_field( 'email-sender', esc_html__( 'Allow users to email themselves a copy :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'email-sender', esc_html__( 'Allow users to email themselves a copy :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'email-sender'
 		) );
-		add_settings_field( 'contact-consent', '<span style="color:red;">' . esc_html__( '*New*', 'clean-and-simple-contact-form' ) . '</span> ' . esc_html__( 'Add a consent checkbox :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'contact-consent', '<span style="color:red;">' . esc_html__( '*New*', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</span> ' . esc_html__( 'Add a consent checkbox :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'contact-consent'
 		) );
-		add_settings_field( 'contact-consent-msg', '<span style="color:red;">' . esc_html__( '*New*', 'clean-and-simple-contact-form' ) . '</span> ' . esc_html__( 'Consent message :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'contact-consent-msg', '<span style="color:red;">' . esc_html__( '*New*', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</span> ' . esc_html__( 'Consent message :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'contact-consent-msg'
 		) );
-		add_settings_field( 'override-from', esc_html__( 'Override \'From\' Address :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'override-from', esc_html__( 'Override \'From\' Address :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'override-from'
 		) );
-		add_settings_field( 'from-email', esc_html__( '\'From\' Email Address :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'from-email', esc_html__( '\'From\' Email Address :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'from-email'
 		) );
-		add_settings_field( 'subject', esc_html__( 'Email Subject :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'subject', esc_html__( 'Email Subject :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'subject'
 		) );
-		add_settings_field( 'message', esc_html__( 'Message :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'message', esc_html__( 'Message :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'message'
 		) );
-		add_settings_field( 'sent_message_heading', esc_html__( 'Message Sent Heading :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'sent_message_heading', esc_html__( 'Message Sent Heading :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'sent_message_heading'
 		) );
-		add_settings_field( 'sent_message_body', esc_html__( 'Message Sent Content :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'sent_message_body', esc_html__( 'Message Sent Content :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'sent_message_body'
 		) );
-		add_settings_section( 'section_styling', '<h3>' . esc_html__( 'Styling and Validation', 'clean-and-simple-contact-form' ) . '</h3>', array(
+		add_settings_section( 'section_styling', '<h3>' . esc_html__( 'Styling and Validation', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</h3>', array(
 			$this,
 			'print_section_info_styling'
 		), 'contact-form-settings' );
-		add_settings_field( 'load_stylesheet', esc_html__( 'Use the plugin default stylesheet (un-tick to use your theme style sheet instead) :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'load_stylesheet', esc_html__( 'Use the plugin default stylesheet (un-tick to use your theme style sheet instead) :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_styling', array(
 			'load_stylesheet'
 		) );
-		add_settings_field( 'use_client_validation', esc_html__( 'Use client side validation (AJAX) :', 'clean-and-simple-contact-form' ), array(
+		add_settings_field( 'use_client_validation', esc_html__( 'Use client side validation (AJAX) :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_styling', array(
@@ -274,12 +274,12 @@ class cscf_settings {
 	}
 
 	public function print_section_info_recaptcha() {
-		print esc_html__( 'Enter your reCAPTCHA settings below :', 'clean-and-simple-contact-form' );
-		print "<p>" . esc_html__( 'To use reCAPTCHA you must get an API key from', 'clean-and-simple-contact-form' ) . " <a target='_blank' href='" . csf_RecaptchaV2::$signUpUrl . "'>Google reCAPTCHA</a></p>";
+		print esc_html__( 'Enter your reCAPTCHA settings below :', 'clean-and-simple-contact-form-by-meg-nicholas' );
+		print "<p>" . esc_html__( 'To use reCAPTCHA you must get an API key from', 'clean-and-simple-contact-form-by-meg-nicholas' ) . " <a target='_blank' href='" . csf_RecaptchaV2::$signUpUrl . "'>Google reCAPTCHA</a></p>";
 	}
 
 	public function print_section_info_message() {
-		print esc_html__( 'Enter your message settings below :', 'clean-and-simple-contact-form' );
+		print esc_html__( 'Enter your message settings below :', 'clean-and-simple-contact-form-by-meg-nicholas' );
 	}
 
 	public function print_section_info_styling() {
@@ -389,9 +389,9 @@ class cscf_settings {
 				?>
                 <select <?php echo esc_attr($disabled); ?> id="theme" name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[theme]">
                     <option <?php echo ( 'light' == $theme ) ? 'selected' : ''; ?>
-                            value="light"><?php esc_html_e( 'Light', 'clean-and-simple-contact-form' ); ?></option>
+                            value="light"><?php esc_html_e( 'Light', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></option>
                     <option <?php echo (  'dark' == $theme ) ? 'selected' : ''; ?>
-                            value="dark"><?php esc_html_e( 'Dark', 'clean-and-simple-contact-form' ); ?></option>
+                            value="dark"><?php esc_html_e( 'Dark', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></option>
                 </select>
 				<?php
 				break;

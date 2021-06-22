@@ -22,7 +22,7 @@
 			<div class="control-group form-group<?php if ( isset( $contact->Errors['name'] ) ) {
 				echo ' error has-error';
 			} ?>">
-				<label for="cscf_name"><?php esc_html_e( 'Name:', 'clean-and-simple-contact-form' ); ?></label>
+				<label for="cscf_name"><?php esc_html_e( 'Name:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
 
 
 				<div class="<?php echo ( true === cscf_PluginSettings::InputIcons()) ? 'input-group' : ''; ?>">
@@ -31,10 +31,10 @@
 					<?php } ?>
 					<input class="form-control input-xlarge"
 					       data-rule-required="true"
-					       data-msg-required="<?php esc_html_e( 'Please give your name.', 'clean-and-simple-contact-form' ); ?>"
+					       data-msg-required="<?php esc_html_e( 'Please give your name.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
 					       type="text" id="cscf_name" name="cscf[name]"
 					       value="<?php echo esc_attr( $contact->Name ); ?>"
-					       placeholder="<?php esc_html_e( 'Your Name', 'clean-and-simple-contact-form' ); ?>"
+					       placeholder="<?php esc_html_e( 'Your Name', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
 						/>
 				</div>
                 <span for="cscf_name" class="help-inline help-block error"
@@ -51,7 +51,7 @@
 			<div class="control-group form-group<?php if ( isset( $contact->Errors['email'] ) ) {
 				echo ' error has-error';
 			} ?>">
-				<label for="cscf_email"><?php esc_html_e( 'Email Address:', 'clean-and-simple-contact-form' ); ?></label>
+				<label for="cscf_email"><?php esc_html_e( 'Email Address:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
 
 				<div class="<?php echo ( true === cscf_PluginSettings::InputIcons()) ? 'input-group' : ''; ?>">
 					<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
@@ -60,11 +60,11 @@
 					<input class="form-control input-xlarge"
 					       data-rule-required="true"
 					       data-rule-email="true"
-					       data-msg-required="<?php esc_html_e( 'Please give your email address.', 'clean-and-simple-contact-form' ); ?>"
-					       data-msg-email="<?php esc_html_e( 'Please enter a valid email address.', 'clean-and-simple-contact-form' ); ?>"
+					       data-msg-required="<?php esc_html_e( 'Please give your email address.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
+					       data-msg-email="<?php esc_html_e( 'Please enter a valid email address.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
 					       type="email" id="cscf_email" name="cscf[email]"
 					       value="<?php echo esc_attr( $contact->Email ); ?>"
-					       placeholder="<?php esc_html_e( 'Your Email Address', 'clean-and-simple-contact-form' ); ?>"
+					       placeholder="<?php esc_html_e( 'Your Email Address', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
 						/>
 				</div>
                 <span for="cscf_email" class="help-inline help-block error"
@@ -80,7 +80,7 @@
 				<div class="control-group form-group<?php if ( isset( $contact->Errors['confirm-email'] ) ) {
 					echo ' error has-error';
 				} ?>">
-					<label for="cscf_confirm-email"><?php esc_html_e( 'Confirm Email Address:', 'clean-and-simple-contact-form' ); ?></label>
+					<label for="cscf_confirm-email"><?php esc_html_e( 'Confirm Email Address:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
 					<div class="<?php echo ( true === cscf_PluginSettings::InputIcons() ) ? 'input-group' : ''; ?>">
 						<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
@@ -89,12 +89,12 @@
 						       data-rule-required="true"
 						       data-rule-email="true"
 						       data-rule-equalTo="#cscf_email"
-						       data-msg-required="<?php esc_html_e( 'Please enter the same email address again.', 'clean-and-simple-contact-form' ); ?>"
-						       data-msg-email="<?php esc_html_e( 'Please enter a valid email address.', 'clean-and-simple-contact-form' ); ?>"
-						       data-msg-equalTo="<?php esc_html_e( 'Please enter the same email address again.', 'clean-and-simple-contact-form' ); ?>"
+						       data-msg-required="<?php esc_html_e( 'Please enter the same email address again.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
+						       data-msg-email="<?php esc_html_e( 'Please enter a valid email address.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
+						       data-msg-equalTo="<?php esc_html_e( 'Please enter the same email address again.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
 						       type="email" id="cscf_confirm-email" name="cscf[confirm-email]"
 						       value="<?php echo esc_attr( $contact->ConfirmEmail ); ?>"
-						       placeholder="<?php esc_html_e( 'Confirm Your Email Address', 'clean-and-simple-contact-form' ); ?>"
+						       placeholder="<?php esc_html_e( 'Confirm Your Email Address', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
 							/>
 					</div>
                 <span for="cscf_confirm-email" class="help-inline help-block error"
@@ -111,16 +111,16 @@
 			<div class="control-group form-group<?php if ( isset( $contact->Errors['message'] ) ) {
 				echo ' error has-error';
 			} ?>">
-				<label for="cscf_message"><?php esc_html_e( 'Message:', 'clean-and-simple-contact-form' ); ?></label>
+				<label for="cscf_message"><?php esc_html_e( 'Message:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
 				<div class="<?php echo ( true === cscf_PluginSettings::InputIcons() ) ? 'input-group' : ''; ?>">
 					<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
 						<span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
 					<?php } ?>
 					<textarea class="form-control input-xlarge"
 					          data-rule-required="true"
-					          data-msg-required="<?php esc_html_e( 'Please give a message.', 'clean-and-simple-contact-form' ); ?>"
+					          data-msg-required="<?php esc_html_e( 'Please give a message.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
 					          id="cscf_message" name="cscf[message]" rows="10"
-					          placeholder="<?php esc_html_e( 'Your Message', 'clean-and-simple-contact-form' ); ?>"><?php echo esc_textarea( $contact->Message ); ?></textarea>
+					          placeholder="<?php esc_html_e( 'Your Message', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"><?php echo esc_textarea( $contact->Message ); ?></textarea>
 				</div>
 
 					<span for="cscf_message" class="help-inline help-block error"
@@ -136,7 +136,7 @@
 				<div class="control-group form-group<?php if ( isset( $contact->Errors['email-sender'] ) ) {
 					echo ' error has-error';
 				} ?>">
-					<label for="cscf_email-sender"><?php esc_html_e( 'Send me a copy:', 'clean-and-simple-contact-form' ); ?></label>
+					<label for="cscf_email-sender"><?php esc_html_e( 'Send me a copy:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
 					<div class="<?php echo ( true === cscf_PluginSettings::InputIcons()) ? "input-group" : ""; ?>">
 						<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
 							<span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
@@ -167,7 +167,7 @@
 							<span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
 						<?php } ?>
 						<input data-rule-required="true"
-                               data-msg-required="<?php esc_html_e( 'Please give your consent.', 'clean-and-simple-contact-form' ); ?>"
+                               data-msg-required="<?php esc_html_e( 'Please give your consent.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
                             <?php echo $contact->ContactConsent == true ? 'checked' : ''; ?> type="checkbox"
 						                                                                       id="cscf_contact-consent"
 						                                                                       name="cscf[contact-consent]">
@@ -225,7 +225,7 @@
 					</div>
 				</div>
 			<?php } ?>
-			<input type="submit" id="cscf_SubmitButton" class="btn btn-default" value="<?php esc_html_e( 'Send Message', 'clean-and-simple-contact-form' ); ?>"/>
+			<input type="submit" id="cscf_SubmitButton" class="btn btn-default" value="<?php esc_html_e( 'Send Message', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"/>
 		</form>
 	</div>
 </div>
