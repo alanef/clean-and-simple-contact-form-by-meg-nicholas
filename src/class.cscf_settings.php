@@ -55,8 +55,8 @@ class cscf_settings {
                     &nbsp;            </p>
 			<?php } ?>
 
-            <p class="howto"><?php esc_html_e( "Please Note: To add the contact form to your page please add the text", "clean-and-simple-contact-form" ); ?>
-                <code>[cscf-contact-form]</code> <?php esc_html_e( "to your post or page.", "clean-and-simple-contact-form" ); ?>
+            <p class="howto"><?php esc_html_e( 'Please Note: To add the contact form to your page please add the text', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
+                <code>[cscf-contact-form]</code> <?php esc_html_e( 'to your post or page.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
             </p>
 
             <form method="post" action="options.php">

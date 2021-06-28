@@ -6,7 +6,7 @@ Tags: simple, contact, form, contact button, contact form, contact form plugin, 
 Requires at least: 4.6
 Tested up to: 5.7
 Requires PHP: 5.6
-Stable tag: 4.7.4
+Stable tag: 4.7.5
 
 A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup and Akismet spam filtering.
 
@@ -197,6 +197,9 @@ the reCAPTCHA for the contact form will be displayed correctly but not in the co
 The comments form will never validate due to no supplied reCAPTCHA code.
 
 == Changelog ==
+= 4.7.5 =
+* correct a couple of text domain issues introduced at 4.7.2
+
 = 4.7.4 =
 * correct santization
 

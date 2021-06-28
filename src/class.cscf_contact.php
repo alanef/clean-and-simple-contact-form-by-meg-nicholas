@@ -188,7 +188,7 @@ class cscf_Contact {
 
 			$header  = "";
 			$message = cscf_PluginSettings::SentMessageBody() . "\n\n";
-			$message .= esc_html__( "Here is a copy of your message :", "clean-and-simple-contact-form" ) . "\n\n";
+			$message .= esc_html__( 'Here is a copy of your message :', 'clean-and-simple-contact-form-by-meg-nicholas' ) . "\n\n";
 			$message .= $this->Message;
 
 			$result = ( wp_mail( $this->Email, cscf_PluginSettings::Subject(), stripslashes( $message ), $header ) );
