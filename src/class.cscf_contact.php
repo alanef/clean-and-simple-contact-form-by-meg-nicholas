@@ -142,9 +142,9 @@ class cscf_Contact {
 		$filters = new cscf_Filters;
 
 		if ( cscf_PluginSettings::OverrideFrom() & cscf_PluginSettings::FromEmail() != "" ) {
-			$filters->fromEmail = cscf_PluginSettings::FromEmail();
+			$filters->from_email = cscf_PluginSettings::FromEmail();
 		} else {
-			$filters->fromEmail = $this->Email;
+			$filters->from_email = $this->Email;
 		}
 
 		$filters->from_name = $this->Name;
@@ -175,9 +175,9 @@ class cscf_Contact {
 			$recipients = cscf_PluginSettings::RecipientEmails();
 
 			if ( cscf_PluginSettings::OverrideFrom() & cscf_PluginSettings::FromEmail() != "" ) {
-				$filters->fromEmail = cscf_PluginSettings::FromEmail();
+				$filters->from_email = cscf_PluginSettings::FromEmail();
 			} else {
-				$filters->fromEmail = $recipients[0];
+				$filters->from_email = $recipients[0];
 			}
 
 			$filters->from_name = get_bloginfo( 'name' );
