@@ -132,13 +132,13 @@ class cscf_settings {
 		), 'contact-form-settings', 'section_message', array(
 			'email-sender'
 		) );
-		add_settings_field( 'contact-consent', '<span style="color:red;">' . esc_html__( '*New*', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</span> ' . esc_html__( 'Add a consent checkbox :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
+		add_settings_field( 'contact-consent', esc_html__( 'Add a consent checkbox :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'contact-consent'
 		) );
-		add_settings_field( 'contact-consent-msg', '<span style="color:red;">' . esc_html__( '*New*', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</span> ' . esc_html__( 'Consent message :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
+		add_settings_field( 'contact-consent-msg', esc_html__( 'Consent message :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
