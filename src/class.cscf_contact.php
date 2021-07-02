@@ -157,10 +157,10 @@ class cscf_Contact {
 		$header = "Content-Type: text/plain\r\nReply-To: " . $this->Email . "\r\n";
 
 		//message
-		$message = esc_html__( 'From: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . esc_attr( $this->Name ) . "\r\n";
-		$message .= esc_html__( 'Email: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . esc_attr( $this->Email ) . "\r\n";
-		$message .= esc_html__( 'Page URL: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . get_permalink( $this->PostID ) . "\r\n";
-		$message .= esc_html__( 'Message:', 'clean-and-simple-contact-form-by-meg-nicholas' ) . "\n\n" . esc_html( $this->Message ) . "\r\n";
+		$message = esc_html__( 'From: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . esc_attr( $this->Name ) . "\n\n";
+		$message .= esc_html__( 'Email: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . esc_attr( $this->Email ) . "\n\n";
+		$message .= esc_html__( 'Page URL: ', 'clean-and-simple-contact-form-by-meg-nicholas' ) . get_permalink( $this->PostID ) . "\n\n";
+		$message .= esc_html__( 'Message:', 'clean-and-simple-contact-form-by-meg-nicholas' ) . "\n\n" . esc_html( $this->Message ) . "\n\n";
 		$message .= cscf_PluginSettings::ContactConsentMsg() . ': ' . ( $this->ContactConsent ? esc_html__( 'yes', 'clean-and-simple-contact-form-by-meg-nicholas' ) : esc_html__( 'no', 'clean-and-simple-contact-form-by-meg-nicholas' ) );
 
 
