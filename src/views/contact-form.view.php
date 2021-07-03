@@ -106,6 +106,33 @@
                 </div>
 			<?php } ?>
 
+			<?php if ( cscf_PluginSettings::PhoneNumber() ) { ?>
+                <!-- telephone number -->
+                <div class="control-group form-group<?php if ( isset( $contact->Errors['phone-number'] ) ) {
+					echo ' error has-error';
+				} ?>">
+                    <label for="cscf_phone-number"><?php esc_html_e( 'Phone Number:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
+                    <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() ) ? 'input-group' : ''; ?>">
+						<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-phone-alt"></span></span>
+						<?php } ?>
+                        <input class="form-control input-xlarge"
+                               data-rule-required="<?php echo ( true === cscf_PluginSettings::PhoneNumberMandatory() ) ? 'true' : 'false'; ?>"
+							   data-msg-required="<?php esc_html_e( 'Please give your phone number.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
+							   type="text" id="cscf_phone-number" name="cscf[phone-number]"
+                               value="<?php echo esc_attr( $contact->PhoneNumber ); ?>"
+                               placeholder="<?php esc_html_e( 'Your Phone Number', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
+                        />
+                    </div>
+                    <span for="cscf_phone-number" class="help-inline help-block error"
+                          style="display:<?php echo isset( $contact->Errors['phone-number'] ) ? 'block' : 'none'; ?>;">
+                    <?php if ( isset( $contact->Errors['phone-number'] ) ) {
+	                    echo esc_attr( $contact->Errors['phone-number'] );
+                    } ?>
+                </span>
+                </div>
+			<?php } ?>
+
 
             <!-- message -->
             <div class="control-group form-group<?php if ( isset( $contact->Errors['message'] ) ) {
@@ -161,13 +188,13 @@
                 <div class="control-group form-group<?php if ( isset( $contact->Errors['contact-consent'] ) ) {
 					echo ' error has-error';
 				} ?>">
-                    <label for="cscf_contact-consent"><?php echo esc_html( cscf_PluginSettings::ContactConsentMsg() ); ?>
-                        :</label>
+                    <label for="cscf_contact-consent"><?php echo esc_html( cscf_PluginSettings::ContactConsentMsg() ); ?>:</label>
                     <div class="<?php echo ( cscf_PluginSettings::InputIcons() ) ? "input-group" : ""; ?>">
 						<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
                             <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
 						<?php } ?>
-                        <input data-rule-required="true"
+                        <input class="form-control input-xlarge"
+							   data-rule-required="true"
                                data-msg-required="<?php esc_html_e( 'Please give your consent.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
 							<?php echo ( true === $contact->ContactConsent ) ? 'checked' : ''; ?> type="checkbox"
                                id="cscf_contact-consent"
