@@ -39,8 +39,7 @@ class cscf_settings {
         <h2><?php esc_html_e( 'Clean and Simple Contact Form Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></h2>
         <hr/>
         <div style="float:left;">
-            <p><?php esc_html_e( 'You are using version', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?> <?php echo esc_attr(CSCF_VERSION_NUM); ?>.</p>
-
+            <p><?php esc_html_e( 'You are using version', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?> <?php echo esc_attr(CSCF_VERSION_NUM); ?></p>
             <p><?php esc_html_e( 'If you find this plugin useful please consider', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
                 <a target="_blank"
                    href="http://wordpress.org/support/view/plugin-reviews/<?php echo esc_attr(CSCF_PLUGIN_NAME); ?>">
