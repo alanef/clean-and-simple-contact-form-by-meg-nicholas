@@ -48,14 +48,10 @@ class cscf_Contact {
 							$this->Message = sanitize_textarea_field( $value );
 							break;
 						case 'phone-number':
-							if ( cscf_PluginSettings::PhoneNumber() ) {
-								$this->PhoneNumber = sanitize_text_field( $value );
-							}
+							$this->PhoneNumber = sanitize_text_field( $value );
 							break;
 						case 'contact-consent':
-							if ( cscf_PluginSettings::ContactConsent() ) {
-								$this->ContactConsent = sanitize_text_field( $value );
-							}
+							$this->ContactConsent = sanitize_text_field( $value );
 							break;
 						default:
 							$cscf[ $key ] = null;  // should never get this but just in case.
@@ -201,7 +197,7 @@ class cscf_Contact {
 			$filters->add( 'wp_mail_from' );
 			$filters->add( 'wp_mail_from_name' );
 
-			$header  = "";
+			$header  = "Content-Type: text/plain\r\n";
 			$message = cscf_PluginSettings::SentMessageBody() . "\n\n";
 			$message .= esc_html__( 'Here is a copy of your message :', 'clean-and-simple-contact-form-by-meg-nicholas' ) . "\n\n";
 			$message .= $this->Message;
