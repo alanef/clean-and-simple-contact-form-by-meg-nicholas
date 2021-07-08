@@ -40,7 +40,6 @@ class cscf_settings {
         <hr/>
         <div style="float:left;">
             <p><?php esc_html_e( 'You are using version', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?> <?php echo esc_attr(CSCF_VERSION_NUM); ?></p>
-
             <p><?php esc_html_e( 'If you find this plugin useful please consider', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
                 <a target="_blank"
                    href="http://wordpress.org/support/view/plugin-reviews/<?php echo esc_attr(CSCF_PLUGIN_NAME); ?>">
@@ -132,17 +131,29 @@ class cscf_settings {
 		), 'contact-form-settings', 'section_message', array(
 			'email-sender'
 		) );
-		add_settings_field( 'contact-consent', '<span style="color:red;">' . esc_html__( '*New*', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</span> ' . esc_html__( 'Add a consent checkbox :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
+		add_settings_field( 'contact-consent', esc_html__( 'Add a consent checkbox :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'contact-consent'
 		) );
-		add_settings_field( 'contact-consent-msg', '<span style="color:red;">' . esc_html__( '*New*', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</span> ' . esc_html__( 'Consent message :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
+		add_settings_field( 'contact-consent-msg', esc_html__( 'Consent message :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields'
 		), 'contact-form-settings', 'section_message', array(
 			'contact-consent-msg'
+		) );
+		add_settings_field( 'phone-number', esc_html__( 'Add a phone number field :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
+			$this,
+			'create_fields'
+		), 'contact-form-settings', 'section_message', array(
+			'phone-number'
+		) );
+		add_settings_field( 'phone-number-mandatory', esc_html__( 'Phone number is mandatory :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
+			$this,
+			'create_fields'
+		), 'contact-form-settings', 'section_message', array(
+			'phone-number-mandatory'
 		) );
 		add_settings_field( 'override-from', esc_html__( 'Override \'From\' Address :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
@@ -359,6 +370,16 @@ class cscf_settings {
 				?><input type="text" size="60" id="contact-consent-msg"
                          name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[contact-consent-msg]"
                          value="<?php echo esc_attr( cscf_PluginSettings::ContactConsentMsg() ); ?>"><?php
+				break;
+			case 'phone-number':
+				$checked = cscf_PluginSettings::PhoneNumber() == true ? "checked" : "";
+				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="phone-number"
+                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[phone-number]"><?php
+				break;
+			case 'phone-number-mandatory':
+				$checked = cscf_PluginSettings::PhoneNumberMandatory() == true ? "checked" : "";
+				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="phone-number-mandatory"
+                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[phone-number-mandatory]"><?php
 				break;
 			case 'from-email':
 				$disabled = cscf_PluginSettings::OverrideFrom() === false ? "readonly" : "";
