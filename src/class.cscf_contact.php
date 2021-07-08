@@ -11,6 +11,7 @@ class cscf_Contact {
 	var $Message;
 	var $EmailToSender;
 	var $ErrorMessage;
+	var $PhoneNumber;
 	var $ContactConsent;
 	var $RecaptchaPublicKey;
 	var $RecaptchaPrivateKey;
@@ -45,6 +46,11 @@ class cscf_Contact {
 							break;
 						case 'message':
 							$this->Message = sanitize_textarea_field( $value );
+							break;
+						case 'phone-number':
+							if ( cscf_PluginSettings::PhoneNumber() ) {
+								$this->PhoneNumber = sanitize_text_field( $value );
+							}
 							break;
 						case 'contact-consent':
 							if ( cscf_PluginSettings::ContactConsent() ) {
@@ -113,6 +119,13 @@ class cscf_Contact {
 			$this->Errors['email'] = esc_html__( 'Please enter a valid email address.', 'clean-and-simple-contact-form-by-meg-nicholas' );
 		}
 
+		//mandatory phone number
+		if ( cscf_PluginSettings::PhoneNumber() && cscf_PluginSettings::PhoneNumberMandatory() ) {
+			if ( strlen( $this->PhoneNumber ) == 0 ) {
+				$this->Errors['confirm-email'] = esc_html__( 'Please give your phone number.', 'clean-and-simple-contact-form-by-meg-nicholas' );
+			}
+		}
+
 		//contact consent
 		if ( cscf_PluginSettings::ContactConsent() ) {
 			if ( ! $this->ContactConsent ) {
@@ -159,10 +172,12 @@ class cscf_Contact {
 		//message
 		$message = esc_html__( 'From', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ': ' . esc_attr( $this->Name ) . "\n\n";
 		$message .= esc_html__( 'Email', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ': ' . esc_attr( $this->Email ) . "\n\n";
-		$message .= esc_html__( 'Page URL', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ': ' . get_permalink( $this->PostID ) . "\n\n";
+		if ( cscf_PluginSettings::PhoneNumber() ) {
+			$message .= esc_html__( 'Phone', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ': ' . esc_attr( $this->PhoneNumber ) . "\n\n";
+		}
+    $message .= esc_html__( 'Page URL', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ': ' . get_permalink( $this->PostID ) . "\n\n";
 		$message .= esc_html__( 'Message', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ':\n\n" . esc_html( $this->Message ) . "\n\n";
 		$message .= cscf_PluginSettings::ContactConsentMsg() . ': ' . ( $this->ContactConsent ? esc_html__( 'yes', 'clean-and-simple-contact-form-by-meg-nicholas' ) : esc_html__( 'no', 'clean-and-simple-contact-form-by-meg-nicholas' ) );
-
 
 		$result = ( wp_mail( cscf_PluginSettings::RecipientEmails(), cscf_PluginSettings::Subject(), stripslashes( $message ), $header ) );
 

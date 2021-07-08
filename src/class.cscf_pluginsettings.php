@@ -112,6 +112,7 @@ class cscf_PluginSettings
 
     }
 
+
     static
     function EmailToSender()
     {
@@ -143,7 +144,29 @@ class cscf_PluginSettings
 
     }
 
+
     static
+    function PhoneNumber()
+    {
+
+        $options = get_option(CSCF_OPTIONS_KEY);
+
+        return isset($options['phone-number']) ? true : false;
+
+    }
+
+	static
+    function PhoneNumberMandatory()
+    {
+
+        $options = get_option(CSCF_OPTIONS_KEY);
+
+        return isset($options['phone-number-mandatory']) ? true : false;
+
+    }
+
+
+	static
     function IsJetPackContactFormEnabled()
     {
         //check for jetpack plugin
