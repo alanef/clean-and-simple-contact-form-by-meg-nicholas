@@ -117,8 +117,8 @@ class cscf_Contact {
 
 		//mandatory phone number
 		if ( cscf_PluginSettings::PhoneNumber() && cscf_PluginSettings::PhoneNumberMandatory() ) {
-			if ( strlen( $this->PhoneNumber ) == 0 ) {
-				$this->Errors['confirm-email'] = esc_html__( 'Please give your phone number.', 'clean-and-simple-contact-form-by-meg-nicholas' );
+			if ( strlen( $this->PhoneNumber ) < 8 ) {
+				$this->Errors['confirm-email'] = esc_html__( 'Please enter a valid phone number.', 'clean-and-simple-contact-form-by-meg-nicholas' );
 			}
 		}
 
