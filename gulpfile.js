@@ -49,7 +49,21 @@ gulp.task('sync', () => {
         .on('error', gutil.log);
 });
 
+gulp.task('translate', () => {
+    return gulp.src(['src/**/*.php', '!src/{vendor,vendor/**}'])
+        .pipe(sort())
+        .pipe(wpPot({
+            domain: project,
+            package: project
+        }))
+        .on('error', gutil.log)
+        .pipe(gulp.dest('src/languages/' + project + '.pot'))
+        .pipe(gulp.dest('dist/languages/' + project + '.pot'))
+        .pipe(notify({message: 'TASK: "translate" Completed! 💯', onLast: true}));
+
+});
 
 
-gulp.task('build', gulp.series('sync', 'clean', 'zip'));
+
+gulp.task('build', gulp.series('sync', 'clean', 'translate', 'zip'));
 

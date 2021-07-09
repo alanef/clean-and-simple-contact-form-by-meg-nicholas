@@ -202,6 +202,8 @@ The comments form will never validate due to no supplied reCAPTCHA code.
 * Exclude consent message from email if disabled
 * Fixed spacing and line breaks in email template
 * Fixed minor issues on settings page
+* Added consent & email to copy email if requested
+* Set copy email headers to text
 
 = 4.7.5 =
 * correct a couple of text domain issues introduced at 4.7.2
