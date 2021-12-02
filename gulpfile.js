@@ -26,9 +26,7 @@ gulp.task('zip', (done) => {
 gulp.task('clean', () => {
     return del([
         'dist/composer.*',
-        'dist/vendor/autoload.php',
         'dist/vendor/bin/',
-        'dist/vendor/composer/',
         'dist/vendor/**/.git*',
         'dist/vendor/**/.git*',
         'dist/vendor/**/.travis.yml',

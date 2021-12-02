@@ -13,9 +13,16 @@
   "config": {
     "vendor-dir": "vendor"
   },
+  "repositories": {
+    "plugindonations_lib": {
+      "type": "vcs",
+      "url": "https://github.com/alanef/plugindonation_lib"
+    }
+  },
   "require": {
     "php": ">=5.6.0",
     "composer/installers": "v1.0.12",
-    "wp-coding-standards/wpcs": ">=2.2.0"
+    "wp-coding-standards/wpcs": ">=2.2.0",
+    "alanef/plugindonation_lib": "dev-master"
   }
 }

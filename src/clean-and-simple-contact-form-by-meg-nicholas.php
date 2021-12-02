@@ -5,7 +5,7 @@
 
 /*
 Plugin Name: Clean and Simple Contact Form
-Plugin URI: https://fullworks.net/productsclean-and-simple-contact-form
+Plugin URI: https://fullworks.net/products/clean-and-simple-contact-form
 Description: A clean and simple contact form with Google reCAPTCHA and Twitter Bootstrap markup.
 Version: 4.7.7
 Requires at least: 4.6
@@ -52,6 +52,7 @@ require 'class.cscf_filters.php';
 require 'ajax.php';
 require 'recaptchav2.php';
 
+
 if ( ! defined( 'CSCF_THEME_DIR' ) ) {
 	define( 'CSCF_THEME_DIR', ABSPATH . 'wp-content/themes/' . get_template() );
 }
@@ -73,12 +74,14 @@ if ( ! defined( 'CSCF_VERSION_KEY' ) ) {
 }
 
 if ( ! defined( 'CSCF_VERSION_NUM' ) ) {
-	define( 'CSCF_VERSION_NUM', '4.7.6' );
+	define( 'CSCF_VERSION_NUM', '4.7.7' );
 }
 
 if ( ! defined( 'CSCF_OPTIONS_KEY' ) ) {
 	define( 'CSCF_OPTIONS_KEY', 'cscf_options' );
 }
+
+require_once CSCF_PLUGIN_DIR . '/vendor/autoload.php';
 
 $cscf = new cscf();
 

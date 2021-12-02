@@ -4,6 +4,8 @@
  * creates the settings page for the plugin
 */
 
+use AlanEFPluginDonation\PluginDonation;
+
 class cscf_settings {
 	public function __construct() {
 
@@ -17,6 +19,13 @@ class cscf_settings {
 				'page_init'
 			) );
 		}
+		$this->donation       = new PluginDonation(
+			CSCF_PLUGIN_NAME,
+			'settings_page_contact-form-settings',
+			'clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php',
+			admin_url( 'options-general.php?page=contact-form-settings' ),
+			'Clean and Simple Contact Form'
+		);
 	}
 
 	public function add_plugin_page() {
@@ -37,16 +46,12 @@ class cscf_settings {
 	public function create_admin_page() {
 		?>
         <h2><?php esc_html_e( 'Clean and Simple Contact Form Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></h2>
-        <hr/>
-        <div style="float:left;">
-            <p><?php esc_html_e( 'You are using version', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?> <?php echo esc_attr(CSCF_VERSION_NUM); ?></p>
-            <p><?php esc_html_e( 'If you find this plugin useful please consider', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
-                <a target="_blank"
-                   href="http://wordpress.org/support/view/plugin-reviews/<?php echo esc_attr(CSCF_PLUGIN_NAME); ?>">
-					<?php esc_html_e( 'leaving a review', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
-                </a>
-                . <?php esc_html_e( 'Thank you!', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
-            </p>
+        <div style="float:left;padding:20px; max-width: 1200px;margin-right: 10%;" class="postbox">
+            <table class="form-table">
+                <tbody>
+                <?php $this->donation->display(); ?>
+                </tbody>
+            </table>
 
 			<?php if ( cscf_PluginSettings::IsJetPackContactFormEnabled() ) { ?>
                 <p class="highlight">
