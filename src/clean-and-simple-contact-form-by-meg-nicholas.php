@@ -7,10 +7,10 @@
 Plugin Name: Clean and Simple Contact Form
 Plugin URI: https://fullworks.net/products/clean-and-simple-contact-form
 Description: A clean and simple contact form with Google reCAPTCHA and Twitter Bootstrap markup.
-Version: 4.7.7
+Version: 4.7.8
 Requires at least: 4.6
 Requires PHP: 5.6
-Author: Fullworks
+Author: Alan Fuller
 Author URI: https://fullworks.net
 License: GPLv2 or later
 Text Domain: clean-and-simple-contact-form-by-meg-nicholas
