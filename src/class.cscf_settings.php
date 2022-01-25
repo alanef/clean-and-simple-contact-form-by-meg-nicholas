@@ -33,7 +33,7 @@ class cscf_settings {
 		$strings = array(
 			esc_html__( 'Gift a Donation', 'stop-wp-emails-going-to-spam' ),
 			// 0
-			esc_html__( 'Hi, I\'m Alan and I built this free plugin to solve problems I had, and I hope it solves your problem too.', 'stop-wp-emails-going-to-spam' ),
+			esc_html__( 'Hi, I\'m Alan and I support this free plugin, I hope it works well for you.', 'stop-wp-emails-going-to-spam' ),
 			// 1
 			esc_html__( 'It would really help me know that others find it useful and a great way of doing this is to gift me a small donation', 'stop-wp-emails-going-to-spam' ),
 			// 2
