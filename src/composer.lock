@@ -11,13 +11,13 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/alanef/plugindonation_lib.git",
-                "reference": "c6b39587b00c6ada371d28b8200f050099f3a824"
+                "url": "git@github.com:alanef/plugindonation_lib.git",
+                "reference": "6fe8152ef59ef20616b2828a2b21db5e0b541f8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alanef/plugindonation_lib/zipball/c6b39587b00c6ada371d28b8200f050099f3a824",
-                "reference": "c6b39587b00c6ada371d28b8200f050099f3a824",
+                "url": "https://api.github.com/repos/alanef/plugindonation_lib/zipball/6fe8152ef59ef20616b2828a2b21db5e0b541f8c",
+                "reference": "6fe8152ef59ef20616b2828a2b21db5e0b541f8c",
                 "shasum": ""
             },
             "default-branch": true,
@@ -37,11 +37,7 @@
                 }
             ],
             "description": "Module for adding donation support to free plugins",
-            "support": {
-                "source": "https://github.com/alanef/plugindonation_lib/tree/master",
-                "issues": "https://github.com/alanef/plugindonation_lib/issues"
-            },
-            "time": "2022-01-25T10:06:52+00:00"
+            "time": "2022-03-17T14:01:32+00:00"
         },
         {
             "name": "composer/installers",

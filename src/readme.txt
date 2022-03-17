@@ -1,11 +1,11 @@
 === Contact Form Clean and Simple ===
 Contributors: alanfuller, fullworks
-Donate Link: https://www.paypal.com/donate/?hosted_button_id=UGRBY5CHSD53Q
+Donate Link: https://www.buymeacoffee.com/wpdevalan
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: simple, contact, form, contact button, contact form, contact form plugin, akismet, contacts, contacts form plugin, contact me, feedback form, bootstrap, twitter, google, reCAPTCHA, ajax, secure
 Tested up to: 5.9
-Stable tag: 4.7.9
+Stable tag: 4.7.10
 
 A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup and Akismet spam filtering.
 
@@ -200,6 +200,9 @@ the reCAPTCHA for the contact form will be displayed correctly but not in the co
 The comments form will never validate due to no supplied reCAPTCHA code.
 
 == Changelog ==
+= 4.7.10 =
+* add buy me a coffee donation
+
 = 4.7.9 =
 * update donation lib
 

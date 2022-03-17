@@ -101,135 +101,135 @@ msgstr ""
 msgid "I consent to my contact details being stored"
 msgstr ""
 
-#: src/class.cscf_settings.php:117
+#: src/class.cscf_settings.php:119
 msgid "Contact Form Settings"
 msgstr ""
 
-#: src/class.cscf_settings.php:118
+#: src/class.cscf_settings.php:120
 msgid "Contact Form"
 msgstr ""
 
-#: src/class.cscf_settings.php:130
+#: src/class.cscf_settings.php:132
 msgid "Clean and Simple Contact Form Settings"
 msgstr ""
 
-#: src/class.cscf_settings.php:140
+#: src/class.cscf_settings.php:142
 msgid "NOTICE: You have JetPack's Contact Form enabled please deactivate it or use the shortcode [cscf-contact-form] instead."
 msgstr ""
 
-#: src/class.cscf_settings.php:144
+#: src/class.cscf_settings.php:146
 msgid "Please Note: To add the contact form to your page please add the text"
 msgstr ""
 
-#: src/class.cscf_settings.php:145
+#: src/class.cscf_settings.php:147
 msgid "to your post or page."
 msgstr ""
 
-#: src/class.cscf_settings.php:164
+#: src/class.cscf_settings.php:166
 msgid "ReCAPTCHA Settings"
 msgstr ""
 
-#: src/class.cscf_settings.php:175
+#: src/class.cscf_settings.php:177
 msgid "Use reCAPTCHA :"
 msgstr ""
 
-#: src/class.cscf_settings.php:181
+#: src/class.cscf_settings.php:183
 msgid "reCAPTCHA Theme :"
 msgstr ""
 
-#: src/class.cscf_settings.php:187
+#: src/class.cscf_settings.php:189
 msgid "reCAPTCHA Public Key :"
 msgstr ""
 
-#: src/class.cscf_settings.php:193
+#: src/class.cscf_settings.php:195
 msgid "reCAPTCHA Private Key :"
 msgstr ""
 
-#: src/class.cscf_settings.php:199
+#: src/class.cscf_settings.php:201
 msgid "Message Settings"
 msgstr ""
 
-#: src/class.cscf_settings.php:203
+#: src/class.cscf_settings.php:205
 msgid "Recipient Emails :"
 msgstr ""
 
-#: src/class.cscf_settings.php:209
+#: src/class.cscf_settings.php:211
 msgid "Confirm Email Address :"
 msgstr ""
 
-#: src/class.cscf_settings.php:215
+#: src/class.cscf_settings.php:217
 msgid "Allow users to email themselves a copy :"
 msgstr ""
 
-#: src/class.cscf_settings.php:221
+#: src/class.cscf_settings.php:223
 msgid "Add a consent checkbox :"
 msgstr ""
 
-#: src/class.cscf_settings.php:227
+#: src/class.cscf_settings.php:229
 msgid "Consent message :"
 msgstr ""
 
-#: src/class.cscf_settings.php:233
+#: src/class.cscf_settings.php:235
 msgid "Add a phone number field :"
 msgstr ""
 
-#: src/class.cscf_settings.php:239
+#: src/class.cscf_settings.php:241
 msgid "Phone number is mandatory :"
 msgstr ""
 
-#: src/class.cscf_settings.php:245
+#: src/class.cscf_settings.php:247
 msgid "Override 'From' Address :"
 msgstr ""
 
-#: src/class.cscf_settings.php:251
+#: src/class.cscf_settings.php:253
 msgid "'From' Email Address :"
 msgstr ""
 
-#: src/class.cscf_settings.php:257
+#: src/class.cscf_settings.php:259
 msgid "Email Subject :"
 msgstr ""
 
-#: src/class.cscf_settings.php:263
+#: src/class.cscf_settings.php:265
 msgid "Message :"
 msgstr ""
 
-#: src/class.cscf_settings.php:269
+#: src/class.cscf_settings.php:271
 msgid "Message Sent Heading :"
 msgstr ""
 
-#: src/class.cscf_settings.php:275
+#: src/class.cscf_settings.php:277
 msgid "Message Sent Content :"
 msgstr ""
 
-#: src/class.cscf_settings.php:281
+#: src/class.cscf_settings.php:283
 msgid "Styling and Validation"
 msgstr ""
 
-#: src/class.cscf_settings.php:285
+#: src/class.cscf_settings.php:287
 msgid "Use the plugin default stylesheet (un-tick to use your theme style sheet instead) :"
 msgstr ""
 
-#: src/class.cscf_settings.php:291
+#: src/class.cscf_settings.php:293
 msgid "Use client side validation (AJAX) :"
 msgstr ""
 
-#: src/class.cscf_settings.php:375
+#: src/class.cscf_settings.php:377
 msgid "Enter your reCAPTCHA settings below :"
 msgstr ""
 
-#: src/class.cscf_settings.php:376
+#: src/class.cscf_settings.php:378
 msgid "To use reCAPTCHA you must get an API key from"
 msgstr ""
 
-#: src/class.cscf_settings.php:380
+#: src/class.cscf_settings.php:382
 msgid "Enter your message settings below :"
 msgstr ""
 
-#: src/class.cscf_settings.php:500
+#: src/class.cscf_settings.php:502
 msgid "Light"
 msgstr ""
 
-#: src/class.cscf_settings.php:502
+#: src/class.cscf_settings.php:504
 msgid "Dark"
 msgstr ""
 
