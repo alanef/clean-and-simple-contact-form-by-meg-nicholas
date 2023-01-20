@@ -163,8 +163,8 @@ class cscf_Contact {
 		$filters->add( 'wp_mail_from_name' );
 
 		//headers
-		$header = "Content-Type: text/plain\r\nReply-To: " . $this->Email . "\r\n";
-
+		$header = "Content-Type: text/plain\r\n" . "Reply-To: " . $this->Name . " <" . $this->Email . ">\r\n" . "X-Entity-Ref-ID: " . uniqid() . "\r\n";
+		
 		//message
 		$message = esc_html__( 'From', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ': ' . esc_attr( $this->Name ) . "\n\n";
 		$message .= esc_html__( 'Email', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ': ' . esc_attr( $this->Email ) . "\n\n";
