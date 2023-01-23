@@ -1,4 +1,4 @@
-# Copyright (C) 2022 clean-and-simple-contact-form-by-meg-nicholas
+# Copyright (C) 2023 clean-and-simple-contact-form-by-meg-nicholas
 # This file is distributed under the same license as the clean-and-simple-contact-form-by-meg-nicholas package.
 msgid ""
 msgstr ""
@@ -49,35 +49,35 @@ msgstr ""
 msgid "Please solve the recaptcha to continue."
 msgstr ""
 
-#: src/class.cscf_contact.php:169
+#: src/class.cscf_contact.php:170
 msgid "From"
 msgstr ""
 
-#: src/class.cscf_contact.php:170
+#: src/class.cscf_contact.php:171
 msgid "Email"
 msgstr ""
 
-#: src/class.cscf_contact.php:172, src/class.cscf_contact.php:208
+#: src/class.cscf_contact.php:173, src/class.cscf_contact.php:214
 msgid "Phone"
 msgstr ""
 
-#: src/class.cscf_contact.php:174
+#: src/class.cscf_contact.php:175
 msgid "Page URL"
 msgstr ""
 
-#: src/class.cscf_contact.php:175, src/class.cscf_contact.php:210
+#: src/class.cscf_contact.php:176, src/class.cscf_contact.php:216
 msgid "Message"
 msgstr ""
 
-#: src/class.cscf_contact.php:177, src/class.cscf_contact.php:205
+#: src/class.cscf_contact.php:178, src/class.cscf_contact.php:211
 msgid "yes"
 msgstr ""
 
-#: src/class.cscf_contact.php:177, src/class.cscf_contact.php:205
+#: src/class.cscf_contact.php:178, src/class.cscf_contact.php:211
 msgid "no"
 msgstr ""
 
-#: src/class.cscf_contact.php:203
+#: src/class.cscf_contact.php:209
 msgid "Here is a copy of your message :"
 msgstr ""
 

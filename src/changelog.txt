@@ -1,3 +1,7 @@
+= 4.8.0 =
+* add header to stop chaining ( kudos @kashmiri )
+* add filter pre email sending to add flexibility for developers
+
 = 4.7.10 =
 * add buy me a coffee donation
 

@@ -164,7 +164,8 @@ class cscf_Contact {
 
 		//headers
 		$header = "Content-Type: text/plain\r\n" . "Reply-To: " . $this->Name . " <" . $this->Email . ">\r\n" . "X-Entity-Ref-ID: " . uniqid() . "\r\n";
-		
+
+
 		//message
 		$message = esc_html__( 'From', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ': ' . esc_attr( $this->Name ) . "\n\n";
 		$message .= esc_html__( 'Email', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ': ' . esc_attr( $this->Email ) . "\n\n";
@@ -176,7 +177,12 @@ class cscf_Contact {
 		if ( cscf_PluginSettings::ContactConsent() ) {
 			$message .= cscf_PluginSettings::ContactConsentMsg() . ': ' . ( $this->ContactConsent ? esc_html__( 'yes', 'clean-and-simple-contact-form-by-meg-nicholas' ) : esc_html__( 'no', 'clean-and-simple-contact-form-by-meg-nicholas' ) );
 		}
-		$result = ( wp_mail( cscf_PluginSettings::RecipientEmails(), cscf_PluginSettings::Subject(), stripslashes( $message ), $header ) );
+		$emails  = apply_filters( 'cscf_email_emails', cscf_PluginSettings::RecipientEmails() );
+		$subject = apply_filters( 'cscf_email_subject', cscf_PluginSettings::Subject() );
+		$message = apply_filters( 'cscf_email_message', stripslashes( $message ) );
+		$header  = apply_filters( 'cscf_email_header', $header );
+
+		$result = wp_mail( $emails, $subject, $message, $header );
 
 		//remove filters (play nice)
 		$filters->remove( 'wp_mail_from' );
