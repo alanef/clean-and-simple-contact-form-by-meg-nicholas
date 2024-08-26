@@ -147,7 +147,7 @@
                               data-rule-required="true"
                               data-msg-required="<?php esc_html_e( 'Please give a message.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
                               id="cscf_message" name="cscf[message]" rows="10"
-                              placeholder="<?php esc_html_e( 'Your Message', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"><?php echo esc_textarea( $contact->Message ); ?></textarea>
+                              placeholder="<?php esc_html_e( 'Your Message', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"><?php echo esc_textarea( $contact->Message??'' ); ?></textarea>
                 </div>
 
                 <span for="cscf_message" class="help-inline help-block error"

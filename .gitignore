@@ -2,4 +2,5 @@
 dist/
 zipped/
 node_modules/
-src/vendor/
+clean-and-simple-contact-form-by-meg-nicholas/vendor/
+/vendor/

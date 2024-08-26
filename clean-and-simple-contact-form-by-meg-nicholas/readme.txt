@@ -1,6 +1,8 @@
 === Contact Form Clean and Simple ===
 Contributors: alanfuller, fullworks
 Donate Link: https://www.buymeacoffee.com/wpdevalan
+Requires at least: 5.6
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: simple, contact, form, contact button, contact form, contact form plugin, akismet, contacts, contacts form plugin, contact me, feedback form, bootstrap, twitter, google, reCAPTCHA, ajax, secure
@@ -200,6 +202,10 @@ the reCAPTCHA for the contact form will be displayed correctly but not in the co
 The comments form will never validate due to no supplied reCAPTCHA code.
 
 == Changelog ==
+= 4.9 =
+* add auto integration  of Fulwlorks Anti Spam
+
+
 = 4.8.0 =
 * add header to stop chaining ( kudos @kashmiri )
 * add filter pre email sending to add flexibility for developers

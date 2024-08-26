@@ -144,7 +144,7 @@ class cscf_Contact {
 	public function SendMail() {
 		apply_filters( 'cscf_spamfilter', $this );
 
-		if ( $this->IsSpam === true ) {
+		if ( $this->IsSpam === true  || $this->IsSpam === 'BOT' || $this->IsSpam === 'DENY' ) {
 			return true;
 		}
 
@@ -163,7 +163,7 @@ class cscf_Contact {
 		$filters->add( 'wp_mail_from_name' );
 
 		//headers
-		$header = "Content-Type: text/plain\r\n" . "Reply-To: " . $this->Name . " <" . $this->Email . ">\r\n" . "X-Entity-Ref-ID: " . uniqid() . "\r\n";
+		$header = "Content-Type: text/plain\r\n" . "Reply-To: " . $this->Name . " <" . $this->Email . ">\r\n" . "X-Entity-Ref-ID: " . uniqid() . "\r\nX-Form-CFCS\r\n";
 
 
 		//message

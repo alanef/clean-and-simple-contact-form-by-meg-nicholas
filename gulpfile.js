@@ -43,22 +43,20 @@ gulp.task('clean', () => {
 
 gulp.task('sync', () => {
     return gulp.src('.', {allowEmpty: true})
-        .pipe(dirSync('src', 'dist', {printSummary: true}))
+        .pipe(dirSync('clean-and-simple-contact-form-by-meg-nicholas', 'dist', {printSummary: true}))
         .on('error', gutil.log);
 });
 
 gulp.task('translate', () => {
-    return gulp.src(['src/**/*.php', '!src/{vendor,vendor/**}'])
+    return gulp.src(['clean-and-simple-contact-form-by-meg-nicholas/**/*.php', '!clean-and-simple-contact-form-by-meg-nicholas/includes/{vendor,vendor/**}'])
         .pipe(sort())
         .pipe(wpPot({
             domain: project,
             package: project
         }))
         .on('error', gutil.log)
-        .pipe(gulp.dest('src/languages/' + project + '.pot'))
-        .pipe(gulp.dest('dist/languages/' + project + '.pot'))
-        .pipe(notify({message: 'TASK: "translate" Completed! 💯', onLast: true}));
-
+        .pipe(gulp.dest('clean-and-simple-contact-form-by-meg-nicholas/languages/' + project + '.pot'))
+        .pipe(gulp.dest('dist/languages/' + project + '.pot'));
 });
 
 

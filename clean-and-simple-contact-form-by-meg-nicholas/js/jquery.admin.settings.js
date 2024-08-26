@@ -86,6 +86,10 @@ jQuery(function($) {
 
     $('#override-from').change(function() {
         $('#from-email').attr('readonly', ! this.checked);
-    }); 
+    });
+    $('.expandable-heading').on('click', function() {
+        $(this).toggleClass('active');
+        $('.recaptcha-field').slideToggle();
+    });
     
 });

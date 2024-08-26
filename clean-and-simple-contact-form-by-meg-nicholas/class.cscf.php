@@ -1,6 +1,8 @@
 <?php
 
 class cscf {
+	private \Fullworks_Anti_Spam\Anti_Spam_Api $anti_spam;
+
 	public function __construct() {
 		//allow short codes to be added in the widget area
 		add_filter( 'widget_text', 'do_shortcode' );
@@ -8,20 +10,38 @@ class cscf {
 		//add action for loading js files
 		add_action( 'wp_enqueue_scripts', array(
 			$this,
-			'RegisterScripts'
+			'RegisterScripts',
 		) );
 
 		add_action( 'admin_enqueue_scripts', array(
 			$this,
-			'RegisterAdminScripts'
+			'RegisterAdminScripts',
+		) );
+		add_action( 'admin_enqueue_scripts', array(
+			$this,
+			'RegisterAdminStyles',
 		) );
 
 		add_action( 'plugins_loaded', array(
 			$this,
-			'RegisterTextDomain'
+			'RegisterTextDomain',
 		) );
 
+		add_action( 'plugins_loaded', array(
+			$this,
+			'RegisterForms',
+		) );
+
+
+
 		add_filter( 'cscf_spamfilter', array( $this, 'SpamFilter' ) );
+
+		add_action( 'wp_mail_failed', function ( $wp_error ) {
+			/**  @var $wp_error \WP_Error */
+			if ( defined( 'WP_DEBUG' ) && true == WP_DEBUG && is_wp_error( $wp_error ) ) {
+				trigger_error( 'CSCF Email - wp_mail error msg : ' . esc_html( $wp_error->get_error_message() ), E_USER_WARNING );
+			}
+		}, 10, 1 );
 
 		//create the settings page
 		$settings = new cscf_settings();
@@ -50,7 +70,7 @@ class cscf {
 
 	function RegisterScripts() {
 		wp_register_script( 'jquery-validate', CSCF_PLUGIN_URL . '/js/jquery.validate.min.js', array(
-			'jquery'
+			'jquery',
 		), '1.19.3', true );
 
 		wp_register_script( 'cscf-validate', CSCF_PLUGIN_URL . "/js/jquery.validate.contact.form.js",
@@ -79,6 +99,35 @@ class cscf {
 			), CSCF_VERSION_NUM, false );
 
 		wp_enqueue_script( 'cscf-admin-settings' );
+	}
+
+	function RegisterAdminStyles( $hook ) {
+		if ( $hook != 'settings_page_contact-form-settings' ) {
+			return;
+		}
+
+		wp_add_inline_style(
+			'wp-admin',
+			"
+		.expandable-heading {
+			cursor: pointer;
+			background-color: #f1f1f1;
+			padding: 10px;
+			border: 1px solid #ddd;
+			margin-bottom: 0;
+		}
+		.expandable-heading::after {
+			content: '\\25B6'; /* Unicode character for triangle pointing right */
+			float: right;
+		}
+		.expandable-heading.active::after {
+			content: '\\25BC'; /* Unicode character for triangle pointing down */
+		}
+		.recaptcha-field {
+			display: none;
+		}
+		"
+		);
 	}
 
 	function Upgrade( $oldVersion ) {
@@ -165,7 +214,29 @@ class cscf {
 			$contact->IsSpam = false;
 		}
 
+		//  if false spam  try  Fullworks Anti Spam
+		if ( ! class_exists( '\Fullworks_Anti_Spam\Anti_Spam_Api' ) ) {
+			return $contact;
+		}
+
+		$contact->IsSpam = $this->anti_spam->is_spam( false, 'cscf', $contact->Email, $contact->Message );
+
 		return $contact;
+	}
+
+	public function registerForms() {
+		if ( ! class_exists( '\Fullworks_Anti_Spam\Anti_Spam_Api' ) ) {
+			return;
+		}
+		$this->anti_spam = new \Fullworks_Anti_Spam\Anti_Spam_Api();
+
+		$this->anti_spam->update_registered_form( 'cscf', array(
+			'name'              => 'Clean and Simple Contact Form',
+			'selectors'         => '#frmCSCF',
+			'protection_level'  => 3,
+			'email_log'         => 'registration', // Optional, default is false
+			'email_mail_header' => 'X-Form-CFCS',
+		) );
 	}
 }
 
