@@ -81,6 +81,7 @@ if ( ! defined( 'CSCF_OPTIONS_KEY' ) ) {
 	define( 'CSCF_OPTIONS_KEY', 'cscf_options' );
 }
 
+
 require_once CSCF_PLUGIN_DIR . '/vendor/autoload.php';
 
 $cscf = new cscf();

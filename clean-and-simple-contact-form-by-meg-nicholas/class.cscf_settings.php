@@ -41,7 +41,7 @@ class cscf_settings {
 	public function create_admin_page() {
 		?>
         <h2><?php esc_html_e( 'Clean and Simple Contact Form Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></h2>
-        <div style="float:left;padding:20px; max-width: 1200px;margin-right: 10%;" class="postbox">
+        <div style="float:left;padding:20px; max-width: 1200px;margin-right: 10%;" class="postbox cscf-settings">
             <table class="form-table">
                 <tbody>
                 </tbody>
@@ -52,8 +52,9 @@ class cscf_settings {
 					<?php esc_html_e( 'NOTICE: You have JetPack\'s Contact Form enabled please deactivate it or use the shortcode [cscf-contact-form] instead.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
                     &nbsp; </p>
 			<?php } ?>
+            <h3><?php esc_html_e( 'How to Use', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></h3>
 
-            <p class="howto"><?php esc_html_e( 'Please Note: To add the contact form to your page please add the text', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
+            <p class="howto"><?php esc_html_e( 'To add the contact form to your page please add the text', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
                 <code>[cscf-contact-form]</code> <?php esc_html_e( 'to your post or page.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
             </p>
 
@@ -75,7 +76,7 @@ class cscf_settings {
 		add_settings_section( 'section_message', '<h3>' . esc_html__( 'Message Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</h3>', array(
 			$this,
 			'print_section_info_message',
-		), 'contact-form-settings' );
+		), 'contact-form-settings', array( 'after_section' => $this->anti_spam_notice() ) );
 		add_settings_field( 'recipient_emails', esc_html__( 'Recipient Emails :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields',
@@ -211,6 +212,42 @@ class cscf_settings {
 			'recaptcha_private_key',
 			'class' => 'recaptcha-field',
 		) );
+	}
+
+	public function anti_spam_notice() {
+		global $fwantispam_fs;
+		$output = '<h3>Anti Spam</h3>';
+		if ( null !== $fwantispam_fs && $fwantispam_fs->can_use_premium_code() ) {
+			$output .= '<p>' . esc_html__( 'Congratulations: you are protected by Fullworks Anti Spam', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
+			$output .= '<p>' . esc_html__( 'Configure', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ' <a href="' . esc_url( admin_url( 'options-general.php?page=fullworks-anti-spam-settings' ) ) . '">' . esc_html__( 'Anti Spam Settings here', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</a>';
+		} else {
+			$output .= '<p>' . esc_html__( 'The best way to show your appreciation for this free plugin and keep it maintained is to support it by installing Fullworks Anti Spam Pro', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
+			$output .= '<p>' . esc_html__( 'With a 14 day free trial, you will find it surprisingly affordable when you compare it with Akismet, yet extremely effective.', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
+			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Try it now and support this FREE plugin', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
+                       ' <img src="'.CSCF_PLUGIN_URL.'/images/external_link.svg" >
+</p>
+<p><img src="'.CSCF_PLUGIN_URL.'/images/upsell_banner.svg" ></a></p></p>';
+			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Try it now and support this FREE plugin', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
+			           ' <img src="'.CSCF_PLUGIN_URL.'/images/external_link.svg" >
+</p></a></p>';
+
+		}
+		$output .= '<h3>Message Logging</h3>';
+		if ( null !== $fwantispam_fs && $fwantispam_fs->can_use_premium_code() ) {
+			$output .= '<p>' . esc_html__( 'Message logging is enabled by  Fullworks Anti Spam Pro', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
+			$output .= '<p> <a href="' . esc_url( admin_url( 'options-general.php?page=fullworks-anti-spam-settings' ) ) . '">' .
+                       esc_html__( 'View Logs here', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</a>';
+		} else {
+			$output .= '<p>' . esc_html__( 'Enable message log by installing Fullworks Anti Spam Pro', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
+			$output .= '<p>' . esc_html__( 'With a 14 day free trial, will automatically log all messages from this form.', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
+			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Enable logs now', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
+			           ' <img src="' . CSCF_PLUGIN_URL . '/images/external_link.svg" >
+</p>
+<p>';
+		}
+
+		return $output;
+
 	}
 
 	public function check_form(

@@ -32,6 +32,8 @@ class cscf {
 			'RegisterForms',
 		) );
 
+		add_filter( 'plugin_action_links_clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php', array( $this, 'settings_link' ) );
+
 
 
 		add_filter( 'cscf_spamfilter', array( $this, 'SpamFilter' ) );
@@ -60,6 +62,16 @@ class cscf {
 				error_log( $message );
 			}
 		}
+	}
+
+	public function settings_link( $links ) {
+		$settings_link = '<a href="' . esc_url( admin_url('options-general.php?page=contact-form-settings' ) ) . '">' . esc_html__('Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</a>';
+		array_unshift(
+			$links,
+			$settings_link
+		);
+
+		return $links;
 	}
 
 	function RegisterTextDomain() {
@@ -109,12 +121,17 @@ class cscf {
 		wp_add_inline_style(
 			'wp-admin',
 			"
-		.expandable-heading {
-			cursor: pointer;
-			background-color: #f1f1f1;
+		.cscf-settings h3 {
+		    background-color: #f1f1f1;
 			padding: 10px;
 			border: 1px solid #ddd;
 			margin-bottom: 0;
+		}
+		.cscf-settings img {
+		    max-width: 100%;
+		}
+		.expandable-heading {
+			cursor: pointer;
 		}
 		.expandable-heading::after {
 			content: '\\25B6'; /* Unicode character for triangle pointing right */

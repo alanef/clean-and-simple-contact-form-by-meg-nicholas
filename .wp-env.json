@@ -12,9 +12,6 @@
     "WP_DISABLE_FATAL_ERROR_HANDLER": true,
     "JETPACK_DEV_DEBUG": true
   },
-  "mappings": {
-    ".htaccess": ".htaccess"
-  },
   "env": {
     "development": {
       "mysqlPort": 62500
