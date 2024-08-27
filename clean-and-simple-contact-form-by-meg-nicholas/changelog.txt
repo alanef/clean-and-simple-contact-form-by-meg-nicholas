@@ -1,3 +1,6 @@
+= 4.9 =
+* add auto integration  of Fullworks Anti Spam
+
 = 4.8.0 =
 * add header to stop chaining ( kudos @kashmiri )
 * add filter pre email sending to add flexibility for developers

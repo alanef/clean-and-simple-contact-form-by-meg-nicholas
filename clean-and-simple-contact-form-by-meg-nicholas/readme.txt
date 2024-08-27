@@ -7,7 +7,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: simple, contact, form, contact button, contact form, contact form plugin, akismet, contacts, contacts form plugin, contact me, feedback form, bootstrap, twitter, google, reCAPTCHA, ajax, secure
 Tested up to: 6.4
-Stable tag: 4.8.0
+Stable tag: 4.9
 
 A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup and Akismet spam filtering.
 
@@ -203,7 +203,7 @@ The comments form will never validate due to no supplied reCAPTCHA code.
 
 == Changelog ==
 = 4.9 =
-* add auto integration  of Fulwlorks Anti Spam
+* add auto integration  of Fullworks Anti Spam
 
 
 = 4.8.0 =
