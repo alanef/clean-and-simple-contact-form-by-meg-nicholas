@@ -219,15 +219,14 @@ class cscf_settings {
 		$output = '<h3>Anti Spam</h3>';
 		if ( null !== $fwantispam_fs && $fwantispam_fs->can_use_premium_code() ) {
 			$output .= '<p>' . esc_html__( 'Congratulations: you are protected by Fullworks Anti Spam', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
-			$output .= '<p>' . esc_html__( 'Configure', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ' <a href="' . esc_url( admin_url( 'options-general.php?page=fullworks-anti-spam-settings' ) ) . '">' . esc_html__( 'Anti Spam Settings here', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</a>';
+			$output .= '<p>' . esc_html__( 'Configure', 'clean-and-simple-contact-form-by-meg-nicholas' ) . ' <a href="' . esc_url( admin_url( 'options-general.php?page=fullworks-anti-spam-settings' ) ) . '">' . esc_html__( 'Anti Spam Settings here', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</a></p>';
 		} else {
 			$output .= '<p>' . esc_html__( 'The best way to show your appreciation for this free plugin and keep it maintained is to support it by installing Fullworks Anti Spam Pro', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
 			$output .= '<p>' . esc_html__( 'With a 14 day free trial, you will find it surprisingly affordable when you compare it with Akismet, yet extremely effective.', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
-			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Try it now and support this FREE plugin', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
-                       ' <img src="'.CSCF_PLUGIN_URL.'/images/external_link.svg" >
-</p>
-<p><img src="'.CSCF_PLUGIN_URL.'/images/upsell_banner.svg" ></a></p></p>';
-			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Try it now and support this FREE plugin', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
+			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Try Fullworks Anti Spam Pro now and support the maintenance this FREE contact form plugin', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
+                       ' <img src="'.CSCF_PLUGIN_URL.'/images/external_link.svg" ></p></a></p>
+<p><img src="'.CSCF_PLUGIN_URL.'/images/upsell_banner.svg" ></a></p>';
+			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Try Fullworks Anti Spam Pro now and support the maintenance this FREE contact form plugin', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
 			           ' <img src="'.CSCF_PLUGIN_URL.'/images/external_link.svg" >
 </p></a></p>';
 
@@ -236,14 +235,12 @@ class cscf_settings {
 		if ( null !== $fwantispam_fs && $fwantispam_fs->can_use_premium_code() ) {
 			$output .= '<p>' . esc_html__( 'Message logging is enabled by  Fullworks Anti Spam Pro', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
 			$output .= '<p> <a href="' . esc_url( admin_url( 'options-general.php?page=fullworks-anti-spam-settings' ) ) . '">' .
-                       esc_html__( 'View Logs here', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</a>';
+                       esc_html__( 'View Logs here', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</a></p>';
 		} else {
 			$output .= '<p>' . esc_html__( 'Enable message log by installing Fullworks Anti Spam Pro', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
 			$output .= '<p>' . esc_html__( 'With a 14 day free trial, will automatically log all messages from this form.', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
 			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Enable logs now', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
-			           ' <img src="' . CSCF_PLUGIN_URL . '/images/external_link.svg" >
-</p>
-<p>';
+			           ' <img src="' . CSCF_PLUGIN_URL . '/images/external_link.svg" ></p></a></p>';
 		}
 
 		return $output;

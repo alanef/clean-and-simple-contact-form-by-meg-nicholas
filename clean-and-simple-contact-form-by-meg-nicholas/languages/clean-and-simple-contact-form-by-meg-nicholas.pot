@@ -229,8 +229,8 @@ msgstr ""
 msgid "With a 14 day free trial, you will find it surprisingly affordable when you compare it with Akismet, yet extremely effective."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:226, clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:230
-msgid "Try it now and support this FREE plugin"
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:226, clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:229
+msgid "Try Fullworks Anti Spam Pro now and support the maintenance this FREE contact form plugin"
 msgstr ""
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:221
@@ -245,43 +245,43 @@ msgstr ""
 msgid "Anti Spam Settings here"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:241
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:240
 msgid "Enable message log by installing Fullworks Anti Spam Pro"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:242
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:241
 msgid "With a 14 day free trial, will automatically log all messages from this form."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:243
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:242
 msgid "Enable logs now"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:237
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:236
 msgid "Message logging is enabled by  Fullworks Anti Spam Pro"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:239
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:238
 msgid "View Logs here"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:330
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:327
 msgid "Enter your reCAPTCHA settings below :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:331
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:328
 msgid "To use reCAPTCHA you must get an API key from"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:336
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:333
 msgid "Enter your message settings below :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:457
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:454
 msgid "Light"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:459
+#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:456
 msgid "Dark"
 msgstr ""
 

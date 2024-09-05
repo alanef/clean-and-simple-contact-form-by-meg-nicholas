@@ -5,15 +5,15 @@ Requires at least: 5.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
-Tags: simple, contact, form, contact button, contact form, contact form plugin, akismet, contacts, contacts form plugin, contact me, feedback form, bootstrap, twitter, google, reCAPTCHA, ajax, secure
+Tags: contact, form, contact form, feedback form, bootstrap
 Tested up to: 6.6
-Stable tag: 4.9
+Stable tag: 4.9.1
 
-A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup and Akismet spam filtering.
+A clean and simple contact form with Bootstrap markup.
 
 
 == Description ==
-A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup and Akismet spam filtering.
+A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup and  spam filtering.
 
 *   **Clean**: all user inputs are stripped in order to avoid cross-site scripting (XSS) vulnerabilities.
 
@@ -22,7 +22,6 @@ A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap ma
 *   **Stylish**: Use the included stylesheet or switch it off and use your own for seamless integration with your website.
 Uses **Twitter Bootstrap** classes.
 
-*   **Safe**: All incoming data is scanned for spam with **Akismet**.
 
 This is a straightforward contact form for your WordPress site. There is very minimal set-up
 required. Simply install, activate, and then place the short code **[cscf-contact-form]** on your web page.
@@ -33,9 +32,10 @@ When your user has completed the form an email will be sent to you containing yo
 To reply simply click the ‘reply’ button on your email client.
 The email address used is the one you have set up in WordPress under ‘Settings’ -> ‘General’, so do check this is correct.
 
-To help prevent spam all data is scanned via Akismet.
-For this to work you must have the [Akismet Plugin](http://wordpress.org/plugins/akismet/ "Akismet Plugin") installed and activated.
-All spam will be placed in your 'comments' list which you can then review if you want to,
+To help prevent spam all data is scanned can be scanned with Fullworks Anti Spam Pro.
+For this to work you must have the [Fullworks Anti Spam Pro Plugin](https://fullworksplugins.com/products/anti-spam/ "Fullworks Anti Spam Pro") installed and activated.
+
+Fullworks Anti Spam Pro will also log all your messages, categorized  as spam or not, automatically.
 
 For added piece of mind this plugin also allows you to add a ‘**reCAPTCHA**’.
 This adds a picture of a couple of words to the bottom of the contact form.
@@ -50,8 +50,8 @@ Here’s why:
 
 *   **Safe**. All input entered by your user  is stripped back to minimise as far as possible the likelihood of any
 malicious user attempting to inject a script into your website.
-If the Akismet plugin is activated all form data will be scanned for spam.
-You can turn on reCAPTCHA to avoid your form being abused by bots.
+If the Fullworks Anti Spam Pro plugin is activated all form data will be scanned for spam.
+You can turn on reCAPTCHA to avoid your form being abused by bots, however Fullworks Anti Spam Pro will do this without reCAPTCHA.
 
 *   **Ajax enabled**. You have the option to turn on AJAX (client-side) validation and submission which gives your users an immediate response when completing the form without having to wait for the page to refresh.
 
@@ -69,7 +69,7 @@ Hopefully this plugin will fulfil all your needs.
 
 == PHP 8 Ready ==
 
-Tested on PHP 8.0
+Tested on PHP 8.3
 
 
 == Installation ==
@@ -202,6 +202,9 @@ the reCAPTCHA for the contact form will be displayed correctly but not in the co
 The comments form will never validate due to no supplied reCAPTCHA code.
 
 == Changelog ==
+= 4.9.1 =
+* corrected link markup in settings page
+
 = 4.9 =
 * add auto integration  of Fullworks Anti Spam
 
@@ -209,9 +212,6 @@ The comments form will never validate due to no supplied reCAPTCHA code.
 = 4.8.0 =
 * add header to stop chaining ( kudos @kashmiri )
 * add filter pre email sending to add flexibility for developers
-
-= 4.7.10 =
-* add buy me a coffee donation
 
 
 

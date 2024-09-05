@@ -1,3 +1,6 @@
+= 4.9.1 =
+* corrected link markup in settings pag
+
 = 4.9 =
 * add auto integration  of Fullworks Anti Spam
 
