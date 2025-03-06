@@ -1,350 +1,387 @@
-# Copyright (C) 2024 clean-and-simple-contact-form-by-meg-nicholas
-# This file is distributed under the same license as the clean-and-simple-contact-form-by-meg-nicholas package.
+# Copyright (C) 2025 Alan Fuller
+# This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: clean-and-simple-contact-form-by-meg-nicholas\n"
+"Project-Id-Version: Clean and Simple Contact Form 4.9.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/clean-and-simple-contact-form-by-meg-nicholas\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
-"X-Poedit-SourceCharset: UTF-8\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: 2025-03-04T19:02:13+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.10.0\n"
+"X-Domain: clean-and-simple-contact-form-by-meg-nicholas\n"
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf.php:68
+#. Plugin Name of the plugin
+#: clean-and-simple-contact-form-by-meg-nicholas.php
+msgid "Clean and Simple Contact Form"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: clean-and-simple-contact-form-by-meg-nicholas.php
+msgid "https://fullworks.net/products/clean-and-simple-contact-form"
+msgstr ""
+
+#. Description of the plugin
+#: clean-and-simple-contact-form-by-meg-nicholas.php
+msgid "A clean and simple contact form with Google reCAPTCHA and Twitter Bootstrap markup."
+msgstr ""
+
+#. Author of the plugin
+#: clean-and-simple-contact-form-by-meg-nicholas.php
+msgid "Alan Fuller"
+msgstr ""
+
+#. Author URI of the plugin
+#: clean-and-simple-contact-form-by-meg-nicholas.php
+msgid "https://fullworks.net"
+msgstr ""
+
+#: class.cscf.php:68
 msgid "Settings"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:87
+#: class.cscf_contact.php:87
 msgid "Sorry the email addresses do not match."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:93, clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:63
+#: class.cscf_contact.php:93
+#: views/contact-form.view.php:63
 msgid "Please give your email address."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:99
+#: class.cscf_contact.php:99
 msgid "Please confirm your email address."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:105, clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:34
+#: class.cscf_contact.php:105
+#: views/contact-form.view.php:34
 msgid "Please give your name."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:110
+#: class.cscf_contact.php:110
 msgid "Please enter a message."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:115, clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:64, clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:93
+#: class.cscf_contact.php:115
+#: views/contact-form.view.php:64
+#: views/contact-form.view.php:93
 msgid "Please enter a valid email address."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:121
+#: class.cscf_contact.php:121
 msgid "Please enter a valid phone number."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:128, clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:198
+#: class.cscf_contact.php:128
+#: views/contact-form.view.php:198
 msgid "Please give your consent."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:137
+#: class.cscf_contact.php:137
 msgid "Please solve the recaptcha to continue."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:170
+#: class.cscf_contact.php:170
 msgid "From"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:171
+#: class.cscf_contact.php:171
 msgid "Email"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:173, clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:214
+#: class.cscf_contact.php:173
+#: class.cscf_contact.php:214
 msgid "Phone"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:175
+#: class.cscf_contact.php:175
 msgid "Page URL"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:176, clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:216
+#: class.cscf_contact.php:176
+#: class.cscf_contact.php:216
 msgid "Message"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:178, clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:211
+#: class.cscf_contact.php:178
+#: class.cscf_contact.php:211
 msgid "yes"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:178, clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:211
+#: class.cscf_contact.php:178
+#: class.cscf_contact.php:211
 msgid "no"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:209
+#: class.cscf_contact.php:209
 msgid "Here is a copy of your message :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_pluginsettings.php:44
+#: class.cscf_pluginsettings.php:44
 msgid "Message Sent"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_pluginsettings.php:52
+#: class.cscf_pluginsettings.php:52
 msgid "Thank you for your message, we will be in touch very shortly."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_pluginsettings.php:60
+#: class.cscf_pluginsettings.php:60
 msgid "Please enter your contact details and a short message below and I will try to answer your query as soon as possible."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_pluginsettings.php:94
+#: class.cscf_pluginsettings.php:94
 msgid " -  Web Enquiry"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_pluginsettings.php:143
+#: class.cscf_pluginsettings.php:143
 msgid "I consent to my contact details being stored"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:30
+#: class.cscf_settings.php:30
 msgid "Contact Form Settings"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:31
+#: class.cscf_settings.php:31
 msgid "Contact Form"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:43
+#: class.cscf_settings.php:43
 msgid "Clean and Simple Contact Form Settings"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:52
+#: class.cscf_settings.php:52
 msgid "NOTICE: You have JetPack's Contact Form enabled please deactivate it or use the shortcode [cscf-contact-form] instead."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:55
+#: class.cscf_settings.php:55
 msgid "How to Use"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:57
+#: class.cscf_settings.php:57
 msgid "To add the contact form to your page please add the text"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:58
+#: class.cscf_settings.php:58
 msgid "to your post or page."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:76
+#: class.cscf_settings.php:76
 msgid "Message Settings"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:80
+#: class.cscf_settings.php:80
 msgid "Recipient Emails :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:86
+#: class.cscf_settings.php:86
 msgid "Confirm Email Address :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:92
+#: class.cscf_settings.php:92
 msgid "Allow users to email themselves a copy :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:98
+#: class.cscf_settings.php:98
 msgid "Add a consent checkbox :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:104
+#: class.cscf_settings.php:104
 msgid "Consent message :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:110
+#: class.cscf_settings.php:110
 msgid "Add a phone number field :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:116
+#: class.cscf_settings.php:116
 msgid "Phone number is mandatory :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:122
+#: class.cscf_settings.php:122
 msgid "Override 'From' Address :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:128
+#: class.cscf_settings.php:128
 msgid "'From' Email Address :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:134
+#: class.cscf_settings.php:134
 msgid "Email Subject :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:140
+#: class.cscf_settings.php:140
 msgid "Message :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:146
+#: class.cscf_settings.php:146
 msgid "Message Sent Heading :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:152
+#: class.cscf_settings.php:152
 msgid "Message Sent Content :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:158
+#: class.cscf_settings.php:158
 msgid "Styling and Validation"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:162
+#: class.cscf_settings.php:162
 msgid "Use the plugin default stylesheet (un-tick to use your theme style sheet instead) :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:168
+#: class.cscf_settings.php:168
 msgid "Use client side validation (AJAX) :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:176
+#: class.cscf_settings.php:176
 msgid "ReCAPTCHA Settings"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:187
+#: class.cscf_settings.php:187
 msgid "Use reCAPTCHA :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:194
+#: class.cscf_settings.php:194
 msgid "reCAPTCHA Theme :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:201
+#: class.cscf_settings.php:201
 msgid "reCAPTCHA Public Key :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:208
+#: class.cscf_settings.php:208
 msgid "reCAPTCHA Private Key :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:224
-msgid "The best way to show your appreciation for this free plugin and keep it maintained is to support it by installing Fullworks Anti Spam Pro"
-msgstr ""
-
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:225
-msgid "With a 14 day free trial, you will find it surprisingly affordable when you compare it with Akismet, yet extremely effective."
-msgstr ""
-
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:226, clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:229
-msgid "Try Fullworks Anti Spam Pro now and support the maintenance this FREE contact form plugin"
-msgstr ""
-
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:221
+#: class.cscf_settings.php:221
 msgid "Congratulations: you are protected by Fullworks Anti Spam"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:222
+#: class.cscf_settings.php:222
 msgid "Configure"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:222
+#: class.cscf_settings.php:222
 msgid "Anti Spam Settings here"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:240
-msgid "Enable message log by installing Fullworks Anti Spam Pro"
+#: class.cscf_settings.php:224
+msgid "The best way to show your appreciation for this free plugin and keep it maintained is to support it by installing Fullworks Anti Spam Pro"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:241
-msgid "With a 14 day free trial, will automatically log all messages from this form."
+#: class.cscf_settings.php:225
+msgid "With a 14 day free trial, you will find it surprisingly affordable when you compare it with Akismet, yet extremely effective."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:242
-msgid "Enable logs now"
+#: class.cscf_settings.php:226
+#: class.cscf_settings.php:229
+msgid "Try Fullworks Anti Spam Pro now and support the maintenance this FREE contact form plugin"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:236
+#: class.cscf_settings.php:236
 msgid "Message logging is enabled by  Fullworks Anti Spam Pro"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:238
+#: class.cscf_settings.php:238
 msgid "View Logs here"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:327
+#: class.cscf_settings.php:240
+msgid "Enable message log by installing Fullworks Anti Spam Pro"
+msgstr ""
+
+#: class.cscf_settings.php:241
+msgid "With a 14 day free trial, will automatically log all messages from this form."
+msgstr ""
+
+#: class.cscf_settings.php:242
+msgid "Enable logs now"
+msgstr ""
+
+#: class.cscf_settings.php:327
 msgid "Enter your reCAPTCHA settings below :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:328
+#: class.cscf_settings.php:328
 msgid "To use reCAPTCHA you must get an API key from"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:333
+#: class.cscf_settings.php:333
 msgid "Enter your message settings below :"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:454
+#: class.cscf_settings.php:454
 msgid "Light"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:456
+#: class.cscf_settings.php:456
 msgid "Dark"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:25
+#: views/contact-form.view.php:25
 msgid "Name:"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:37
+#: views/contact-form.view.php:37
 msgid "Your Name"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:54
+#: views/contact-form.view.php:54
 msgid "Email Address:"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:67
+#: views/contact-form.view.php:67
 msgid "Your Email Address"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:83
+#: views/contact-form.view.php:83
 msgid "Confirm Email Address:"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:92, clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:94
+#: views/contact-form.view.php:92
+#: views/contact-form.view.php:94
 msgid "Please enter the same email address again."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:97
+#: views/contact-form.view.php:97
 msgid "Confirm Your Email Address"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:114
+#: views/contact-form.view.php:114
 msgid "Phone Number:"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:121
+#: views/contact-form.view.php:121
 msgid "Please give your phone number."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:124
+#: views/contact-form.view.php:124
 msgid "Your Phone Number"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:141
+#: views/contact-form.view.php:141
 msgid "Message:"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:148
+#: views/contact-form.view.php:148
 msgid "Please give a message."
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:150
+#: views/contact-form.view.php:150
 msgid "Your Message"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:166
+#: views/contact-form.view.php:166
 msgid "Send me a copy:"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:257
+#: views/contact-form.view.php:257
 msgid "Send Message"
 msgstr ""
 
-#: clean-and-simple-contact-form-by-meg-nicholas/views/message-not-sent.view.php:2
+#: views/message-not-sent.view.php:2
 msgid "Sorry, there has been a problem and your message was not sent."
 msgstr ""

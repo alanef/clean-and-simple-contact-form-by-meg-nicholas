@@ -4,7 +4,6 @@
  * creates the settings page for the plugin
 */
 
-use AlanEFPluginDonation\PluginDonation;
 
 class cscf_settings {
 
@@ -247,9 +246,7 @@ class cscf_settings {
 
 	}
 
-	public function check_form(
-		$input
-	) {
+	public function check_form( $input ) {
 
 		//recaptcha theme
 		if ( isset( $input['theme'] ) ) {
@@ -300,14 +297,18 @@ class cscf_settings {
 		if ( empty( $input['subject'] ) ) {
 			unset( $input['subject'] );
 		}
+		if ( check_admin_referer('test_option_group-options', '_wpnonce')) {
+			// The nonce check has passed, safe to process
 
-		if ( isset( $_POST['add_recipient'] ) ) {
-			$input['recipient_emails'][] = "";
-		}
-
-		if ( isset( $_POST['remove_recipient'] ) ) {
-			foreach ( $_POST['remove_recipient'] as $key => $element ) {
-				unset( $input['recipient_emails'][ $key ] );
+			if ( isset( $_POST['add_recipient'] ) ) {
+				$input['recipient_emails'][] = "";
+			}
+            // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- No action, array and not stored
+			if ( isset( $_POST['remove_recipient'] ) ) {
+				// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- No action, array and not stored
+                foreach ( $_POST['remove_recipient'] as $key => $element ) {
+					unset( $input['recipient_emails'][ $key ] );
+				}
 			}
 		}
 
@@ -325,7 +326,7 @@ class cscf_settings {
 	public function print_section_info_recaptcha() {
 		echo '<div class="recaptcha-field">';
 		print esc_html__( 'Enter your reCAPTCHA settings below :', 'clean-and-simple-contact-form-by-meg-nicholas' );
-		print "<p>" . esc_html__( 'To use reCAPTCHA you must get an API key from', 'clean-and-simple-contact-form-by-meg-nicholas' ) . " <a target='_blank' href='" . csf_RecaptchaV2::$signUpUrl . "'>Google reCAPTCHA</a></p>";
+		print "<p>" . esc_html__( 'To use reCAPTCHA you must get an API key from', 'clean-and-simple-contact-form-by-meg-nicholas' ) . " <a target='_blank' href='" . esc_url(csf_RecaptchaV2::$signUpUrl ) . "'>Google reCAPTCHA</a></p>";
 		echo '</div>';
 	}
 

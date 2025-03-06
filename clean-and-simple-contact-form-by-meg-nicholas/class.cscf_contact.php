@@ -26,9 +26,11 @@ class cscf_Contact {
 			$this->RecaptchaPublicKey  = cscf_PluginSettings::PublicKey();
 			$this->RecaptchaPrivateKey = cscf_PluginSettings::PrivateKey();
 		}
-
-		if ( $_SERVER['REQUEST_METHOD'] == 'POST' ) {
+		$request_method = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD']??'' ) );
+		if ( $request_method === 'POST' ) {
+			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- No action, nonce is not required for $_POST['cscf_nonce'] check later, array sanitized
 			if ( isset( $_POST['cscf'] ) ) {
+				// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- No action, nonce is not required for $_POST['cscf_nonce'] check later, array sanitized
 				$cscf = (array) $_POST['cscf'];
 				foreach ( $cscf as $key => $value ) {
 					switch ( $key ) {
@@ -57,9 +59,10 @@ class cscf_Contact {
 							$cscf[ $key ] = null;  // should never get this but just in case.
 					}
 				}
-
+                // phpcs:ignore WordPress.Security.NonceVerification.Missing -- No action, nonce is not required for $_POST['cscf_nonce'] here
 				if ( isset( $_POST['post-id'] ) ) {
-					$this->PostID = sanitize_text_field( $_POST['post-id'] );
+					// phpcs:ignore WordPress.Security.NonceVerification.Missing -- No action, nonce is not required for $_POST['cscf_nonce'] here
+					$this->PostID = sanitize_text_field( (int) $_POST['post-id'] );
 				}
 
 				unset( $_POST['cscf'] );
@@ -71,13 +74,13 @@ class cscf_Contact {
 
 	public function IsValid() {
 		$this->Errors = array();
-
-		if ( $_SERVER['REQUEST_METHOD'] != 'POST' ) {
+        $request_method = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD']??'' ) );
+		if ( $request_method !== 'POST' ) {
 			return false;
 		}
 
 		//check nonce
-		if ( ! wp_verify_nonce( $_POST['cscf_nonce'], 'cscf_contact' ) ) {
+		if ( ! wp_verify_nonce( ['cscf_nonce'] ?? '', 'cscf_contact' ) ) {
 			return false;
 		}
 
@@ -131,7 +134,8 @@ class cscf_Contact {
 
 		//check recaptcha but only if we have keys
 		if ( $this->RecaptchaPublicKey <> '' && $this->RecaptchaPrivateKey <> '' ) {
-			$resp = csf_RecaptchaV2::VerifyResponse( $_SERVER["REMOTE_ADDR"], $this->RecaptchaPrivateKey, $_POST["g-recaptcha-response"] );
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- No action, no form fields are being saved
+            $resp = csf_RecaptchaV2::VerifyResponse( sanitize_text_field($_SERVER["REMOTE_ADDR"]??''), $this->RecaptchaPrivateKey, sanitize_text_field($_POST["g-recaptcha-response"]??''));
 
 			if ( ! $resp->success ) {
 				$this->Errors['recaptcha'] = esc_html__( 'Please solve the recaptcha to continue.', 'clean-and-simple-contact-form-by-meg-nicholas' );

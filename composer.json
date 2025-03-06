@@ -23,8 +23,14 @@
     "phpunit/phpunit": "^10.5"
   },
   "scripts": {
-    "post-update-cmd": [
-      "composer update -d clean-and-simple-contact-form-by-meg-nicholas"
+    "post-update-cmd": ["composer update -d clean-and-simple-contact-form-by-meg-nicholas",
+      "wp i18n make-pot ./clean-and-simple-contact-form-by-meg-nicholas  ./clean-and-simple-contact-form-by-meg-nicholas/languages/clean-and-simple-contact-form-by-meg-nicholas.pot --skip-audit --exclude='./vendor'"
+    ],
+    "build": [
+      "rm -rf zipped",
+      "@composer install -d clean-and-simple-contact-form-by-meg-nicholas --no-dev",
+      "mkdir -p zipped",
+      "zip -r zipped/clean-and-simple-contact-form-by-meg-nicholas-free.zip clean-and-simple-contact-form-by-meg-nicholas"
     ],
     "phpcs": "phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=phpcs_sec.xml --ignore=*/vendor/*  --extensions=php",
     "compat:8.3": "./vendor/bin/phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/*  --extensions=php --runtime-set testVersion 8.3",
