@@ -1,13 +1,13 @@
 === Contact Form Clean and Simple ===
 Contributors: alanfuller, fullworks
-Donate Link: https://www.buymeacoffee.com/wpdevalan
+Donate Link: https://ko-fi.com/wpalan
 Requires at least: 5.6
 Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: contact, form, contact form, feedback form, bootstrap
-Tested up to: 6.6
-Stable tag: 4.9.1
+Tested up to: 6.7
+Stable tag: 4.10
 
 A clean and simple contact form with Bootstrap markup.
 
@@ -202,17 +202,5 @@ the reCAPTCHA for the contact form will be displayed correctly but not in the co
 The comments form will never validate due to no supplied reCAPTCHA code.
 
 == Changelog ==
-= 4.9.1 =
-* corrected link markup in settings page
 
-= 4.9 =
-* add auto integration  of Fullworks Anti Spam
-
-
-= 4.8.0 =
-* add header to stop chaining ( kudos @kashmiri )
-* add filter pre email sending to add flexibility for developers
-
-
-
-[Full Change History](https://plugins.trac.wordpress.org/browser/clean-and-simple-contact-form-by-meg-nicholas/trunk/changelog.txt)
+[Full Change History](https://fullworksplugins.com/docs/clean-and-simple-contact-form/usage-clean-and-simple-contact-form/change-log-3/)

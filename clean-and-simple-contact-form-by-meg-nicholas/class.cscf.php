@@ -22,7 +22,7 @@ class cscf {
 			'RegisterAdminStyles',
 		) );
 
-		add_action( 'plugins_loaded', array(
+		add_action( 'init', array(
 			$this,
 			'RegisterTextDomain',
 		) );
@@ -31,10 +31,6 @@ class cscf {
 			$this,
 			'RegisterForms',
 		) );
-
-		add_filter( 'plugin_action_links_clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php', array( $this, 'settings_link' ) );
-
-
 
 		add_filter( 'cscf_spamfilter', array( $this, 'SpamFilter' ) );
 
@@ -47,32 +43,8 @@ class cscf {
 
 		//create the settings page
 		$settings = new cscf_settings();
-
 	}
 
-	//load text domain
-
-	static function Log( $message ) {
-
-		if ( WP_DEBUG === true ) {
-
-			if ( is_array( $message ) || is_object( $message ) ) {
-				error_log( print_r( $message, true ) );
-			} else {
-				error_log( $message );
-			}
-		}
-	}
-
-	public function settings_link( $links ) {
-		$settings_link = '<a href="' . esc_url( admin_url('options-general.php?page=contact-form-settings' ) ) . '">' . esc_html__('Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</a>';
-		array_unshift(
-			$links,
-			$settings_link
-		);
-
-		return $links;
-	}
 
 	function RegisterTextDomain() {
 		//$path = CSCF_PLUGIN_DIR . '/languages';

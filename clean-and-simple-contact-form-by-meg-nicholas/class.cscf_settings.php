@@ -56,6 +56,10 @@ class cscf_settings {
             <p class="howto"><?php esc_html_e( 'To add the contact form to your page please add the text', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
                 <code>[cscf-contact-form]</code> <?php esc_html_e( 'to your post or page.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
             </p>
+            <h3><?php esc_html_e( 'Support the developer', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></h3>
+            <p>
+                <?php do_action( 'ffpl_ad_display' ); ?>
+            </p>
 
             <form method="post" action="options.php">
 				<?php
@@ -223,10 +227,10 @@ class cscf_settings {
 			$output .= '<p>' . esc_html__( 'The best way to show your appreciation for this free plugin and keep it maintained is to support it by installing Fullworks Anti Spam Pro', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
 			$output .= '<p>' . esc_html__( 'With a 14 day free trial, you will find it surprisingly affordable when you compare it with Akismet, yet extremely effective.', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
 			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Try Fullworks Anti Spam Pro now and support the maintenance this FREE contact form plugin', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
-                       ' <img src="'.CSCF_PLUGIN_URL.'/images/external_link.svg" ></p></a></p>
-<p><img src="'.CSCF_PLUGIN_URL.'/images/upsell_banner.svg" ></a></p>';
+                       ' <img src="'.CSCF_PLUGIN_URL.'/images/external_link.svg" alt="external link"></p></a></p>
+<p><img src="'.CSCF_PLUGIN_URL.'/images/upsell_banner.svg" alt="Anti Spam banner"></a></p>';
 			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Try Fullworks Anti Spam Pro now and support the maintenance this FREE contact form plugin', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
-			           ' <img src="'.CSCF_PLUGIN_URL.'/images/external_link.svg" >
+			           ' <img src="'.CSCF_PLUGIN_URL.'/images/external_link.svg" alt="external link">
 </p></a></p>';
 
 		}
@@ -239,7 +243,7 @@ class cscf_settings {
 			$output .= '<p>' . esc_html__( 'Enable message log by installing Fullworks Anti Spam Pro', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
 			$output .= '<p>' . esc_html__( 'With a 14 day free trial, will automatically log all messages from this form.', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</p>';
 			$output .= '<p><a href="https://fullworksplugins.com/products/anti-spam/?mtm_campaign=clean-and-simple-contact-form"><p>' . esc_html__( 'Enable logs now', 'clean-and-simple-contact-form-by-meg-nicholas' ) .
-			           ' <img src="' . CSCF_PLUGIN_URL . '/images/external_link.svg" ></p></a></p>';
+			           ' <img src="' . CSCF_PLUGIN_URL . '/images/external_link.svg" alt="external link"></p></a></p>';
 		}
 
 		return $output;
@@ -348,23 +352,31 @@ class cscf_settings {
 		switch ( $fieldname ) {
 			case 'use_recaptcha':
 				$checked = cscf_PluginSettings::UseRecaptcha() === true ? 'checked' : '';
-				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="use_recaptcha"
+				?><label for="use_recaptcha" class="screen-reader-text">
+				<?php esc_html_e('use recaptcha', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+            </label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="use_recaptcha"
                          name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[use_recaptcha]"><?php
 				break;
 			case 'load_stylesheet':
 				$checked = cscf_PluginSettings::LoadStyleSheet() === true ? 'checked' : '';
-				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="load_stylesheet"
+				?><label for="load_stylesheet" class="screen-reader-text">
+				<?php esc_html_e('load stylesheet', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="load_stylesheet"
                          name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[load_stylesheet]"><?php
 				break;
 			case 'recaptcha_public_key':
 				$disabled = cscf_PluginSettings::UseRecaptcha() === false ? 'readonly' : '';
-				?><input <?php echo esc_attr( $disabled ); ?> type="text" size="60" id="recaptcha_public_key"
+				?><label for="recaptcha_public_key" class="screen-reader-text">
+				<?php esc_html_e('recaptcha public key', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input <?php echo esc_attr( $disabled ); ?> type="text" size="60" id="recaptcha_public_key"
                                                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[recaptcha_public_key]"
                                                               value="<?php echo esc_attr( cscf_PluginSettings::PublicKey() ); ?>" /><?php
 				break;
 			case 'recaptcha_private_key':
 				$disabled = cscf_PluginSettings::UseRecaptcha() === false ? 'readonly' : '';
-				?><input <?php echo esc_attr( $disabled ); ?> type="text" size="60" id="recaptcha_private_key"
+				?><label for="recaptcha_private_key" class="screen-reader-text">
+				<?php esc_html_e('recaptcha private key', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input <?php echo esc_attr( $disabled ); ?> type="text" size="60" id="recaptcha_private_key"
                                                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[recaptcha_private_key]"
                                                               value="<?php echo esc_attr( cscf_PluginSettings::PrivateKey() ); ?>" /><?php
 				break;
@@ -374,12 +386,24 @@ class cscf_settings {
 				foreach ( cscf_PluginSettings::RecipientEmails() as $key => $recipientEmail ) {
 					?>
                     <li class="recipient_email" data-element="<?php echo esc_attr( $key ); ?>">
+                        <label for="[recipient_emails][<?php echo esc_attr( $key ) ?>]" class="screen-reader-text">
+		                    <?php esc_html_e('recipient email', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                        </label>
                         <input class="enter_recipient" type="email" size="50"
+                               id="[recipient_emails][<?php echo esc_attr( $key ) ?>]"
                                name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[recipient_emails][<?php echo esc_attr( $key ) ?>]"
                                value="<?php echo esc_attr( $recipientEmail ); ?>"/>
-                        <input class="add_recipient" title="Add New Recipient" type="submit" name="add_recipient"
+                        <label for="[add_recipient_emails][<?php echo esc_attr( $key ) ?>]" class="screen-reader-text">
+		                    <?php esc_html_e('add button for new recipient email', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                        </label>
+                        <input id="[add_recipient_emails][<?php echo esc_attr( $key ) ?>]"
+                               class="add_recipient" title="Add New Recipient" type="submit" name="add_recipient"
                                value="+">
-                        <input class="remove_recipient" title="Remove This Recipient" type="submit"
+                        <label for="[remove_recipient_emails][<?php echo esc_attr( $key ) ?>]" class="screen-reader-text">
+		                    <?php esc_html_e('remove button for new recipient email', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                        </label>
+                        <input id="[remove_recipient_emails][<?php echo esc_attr( $key ) ?>]"
+                               class="remove_recipient" title="Remove This Recipient" type="submit"
                                name="remove_recipient[<?php echo esc_attr( $key ); ?>]" value="-">
                     </li>
 
@@ -389,66 +413,92 @@ class cscf_settings {
 				break;
 			case 'confirm-email':
 				$checked = cscf_PluginSettings::ConfirmEmail() == true ? "checked" : "";
-				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="confirm-email"
-                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[confirm-email]"><?php
+				?><label for="confirm-email" class="screen-reader-text">
+				<?php esc_html_e('confirm email', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="confirm-email"
+                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[confirm-email]"><?php
 				break;
 			case 'override-from':
 				$checked = cscf_PluginSettings::OverrideFrom() == true ? "checked" : "";
-				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="override-from"
-                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[override-from]"><?php
+				?><label for="override-from" class="screen-reader-text">
+				<?php esc_html_e('override from address', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="override-from"
+                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[override-from]"><?php
 				break;
 			case 'email-sender':
 				$checked = cscf_PluginSettings::EmailToSender() == true ? "checked" : "";
-				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="email-sender"
-                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[email-sender]"><?php
+				?><label for="email-sender" class="screen-reader-text">
+				<?php esc_html_e('email to sender', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="email-sender"
+                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[email-sender]"><?php
 				break;
 			case 'contact-consent':
 				$checked = cscf_PluginSettings::ContactConsent() == true ? "checked" : "";
-				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="contact-consent"
-                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[contact-consent]"><?php
+				?><label for="contact-consent" class="screen-reader-text">
+				<?php esc_html_e('contact consent', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="contact-consent"
+                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[contact-consent]"><?php
 				break;
 			case 'contact-consent-msg':
-				?><input type="text" size="60" id="contact-consent-msg"
-                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[contact-consent-msg]"
-                         value="<?php echo esc_attr( cscf_PluginSettings::ContactConsentMsg() ); ?>"><?php
+				?><label for="contact-consent-msg" class="screen-reader-text">
+				<?php esc_html_e('contact consent message', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="text" size="60" id="contact-consent-msg"
+                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[contact-consent-msg]"
+                               value="<?php echo esc_attr( cscf_PluginSettings::ContactConsentMsg() ); ?>"><?php
 				break;
 			case 'phone-number':
 				$checked = cscf_PluginSettings::PhoneNumber() == true ? "checked" : "";
-				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="phone-number"
-                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[phone-number]"><?php
+				?><label for="phone-number" class="screen-reader-text">
+				<?php esc_html_e('phone number', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="phone-number"
+                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[phone-number]"><?php
 				break;
 			case 'phone-number-mandatory':
 				$checked = cscf_PluginSettings::PhoneNumberMandatory() == true ? "checked" : "";
-				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="phone-number-mandatory"
-                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[phone-number-mandatory]"><?php
+				?><label for="phone-number-mandatory" class="screen-reader-text">
+				<?php esc_html_e('phone number mandatory', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="phone-number-mandatory"
+                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[phone-number-mandatory]"><?php
 				break;
 			case 'from-email':
 				$disabled = cscf_PluginSettings::OverrideFrom() === false ? "readonly" : "";
-				?><input <?php echo esc_attr( $disabled ); ?> type="text" size="60" id="from-email"
-                                                              name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[from-email]"
-                                                              value="<?php echo esc_attr( cscf_PluginSettings::FromEmail() ); ?>" /><?php
+				?><label for="from-email" class="screen-reader-text">
+				<?php esc_html_e('from email address', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input <?php echo esc_attr( $disabled ); ?> type="text" size="60" id="from-email"
+                                                                    name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[from-email]"
+                                                                    value="<?php echo esc_attr( cscf_PluginSettings::FromEmail() ); ?>" /><?php
 				break;
 			case 'subject':
-				?><input type="text" size="60" id="subject" name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[subject]"
-                         value="<?php echo esc_attr( cscf_PluginSettings::Subject() ); ?>" /><?php
+				?><label for="subject" class="screen-reader-text">
+				<?php esc_html_e('email subject', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="text" size="60" id="subject" name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[subject]"
+                               value="<?php echo esc_attr( cscf_PluginSettings::Subject() ); ?>" /><?php
 				break;
 			case 'sent_message_heading':
-				?><input type="text" size="60" id="sent_message_heading"
-                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[sent_message_heading]"
-                         value="<?php echo esc_attr( cscf_PluginSettings::SentMessageHeading() ); ?>" /><?php
+				?><label for="sent_message_heading" class="screen-reader-text">
+				<?php esc_html_e('sent message heading', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="text" size="60" id="sent_message_heading"
+                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[sent_message_heading]"
+                               value="<?php echo esc_attr( cscf_PluginSettings::SentMessageHeading() ); ?>" /><?php
 				break;
 			case 'sent_message_body':
-				?><textarea cols="63" rows="8"
-                            name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[sent_message_body]"><?php echo esc_attr( cscf_PluginSettings::SentMessageBody() ); ?></textarea><?php
+				?><label for="sent_message_body" class="screen-reader-text">
+				<?php esc_html_e('sent message body', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><textarea id="sent_message_body" cols="63" rows="8"
+                                  name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[sent_message_body]"><?php echo esc_attr( cscf_PluginSettings::SentMessageBody() ); ?></textarea><?php
 				break;
 			case 'message':
-				?><textarea cols="63" rows="8"
-                            name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[message]"><?php echo esc_attr( cscf_PluginSettings::Message() ); ?></textarea><?php
+				?><label for="message" class="screen-reader-text">
+				<?php esc_html_e('message', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><textarea id="message" cols="63" rows="8"
+                                  name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[message]"><?php echo esc_attr( cscf_PluginSettings::Message() ); ?></textarea><?php
 				break;
 			case 'theme':
 				$theme = cscf_PluginSettings::Theme();
 				$disabled = cscf_PluginSettings::UseRecaptcha() == false ? "disabled" : "";
-				?>
+				?><label for="theme" class="screen-reader-text">
+				<?php esc_html_e('recaptcha theme', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label>
                 <select <?php echo esc_attr( $disabled ); ?> id="theme"
                                                              name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[theme]">
                     <option <?php echo ( 'light' == $theme ) ? 'selected' : ''; ?>
@@ -460,8 +510,10 @@ class cscf_settings {
 				break;
 			case 'use_client_validation':
 				$checked = cscf_PluginSettings::UseClientValidation() == true ? "checked" : "";
-				?><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="use_client_validation"
-                         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[use_client_validation]"><?php
+				?><label for="use_client_validation" class="screen-reader-text">
+				<?php esc_html_e('use client validation', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+                </label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="use_client_validation"
+                               name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[use_client_validation]"><?php
 				break;
 			default:
 				break;

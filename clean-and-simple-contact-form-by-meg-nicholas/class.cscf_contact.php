@@ -80,7 +80,8 @@ class cscf_Contact {
 		}
 
 		//check nonce
-		if ( ! wp_verify_nonce( ['cscf_nonce'] ?? '', 'cscf_contact' ) ) {
+		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- No action, not stored just a nonce check
+		if ( ! wp_verify_nonce( $_POST['cscf_nonce'] ?? '', 'cscf_contact' ) ) {
 			return false;
 		}
 
