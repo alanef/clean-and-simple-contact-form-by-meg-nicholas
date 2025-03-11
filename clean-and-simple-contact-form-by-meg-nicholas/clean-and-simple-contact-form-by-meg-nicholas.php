@@ -4,7 +4,7 @@
  */
 
 /*
-Plugin Name: Clean and Simple Contact Form
+Plugin Name: Contact Form Clean and Simple
 Plugin URI: https://fullworks.net/products/clean-and-simple-contact-form
 Description: A clean and simple contact form with Google reCAPTCHA and Twitter Bootstrap markup.
 Version: 4.10

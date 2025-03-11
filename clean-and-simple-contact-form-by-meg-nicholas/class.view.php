@@ -21,7 +21,7 @@ class CSCF_View {
 		if ( file_exists( CSCF_PLUGIN_DIR . '/views/' . $view . '.view.php' ) ) {
 			$this->view = CSCF_PLUGIN_DIR . '/views/' . $view . '.view.php';
 		} else {
-			wp_die( esc_html__( 'View ' . CSCF_PLUGIN_URL . '/views/' . $view . '.view.php' . ' not found' ) );
+			wp_die( sprintf( esc_html__( 'View %s not found', 'clean-and-simple-contact-form-by-meg-nicholas' ), esc_html( CSCF_PLUGIN_URL . '/views/' . $view . '.view.php' ) ) );
 		}
 	}
 
