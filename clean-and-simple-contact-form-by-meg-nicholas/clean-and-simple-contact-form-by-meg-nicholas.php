@@ -74,7 +74,7 @@ if ( ! defined( 'CSCF_VERSION_KEY' ) ) {
 }
 
 if ( ! defined( 'CSCF_VERSION_NUM' ) ) {
-	define( 'CSCF_VERSION_NUM', '4.9' );
+	define( 'CSCF_VERSION_NUM', '4.10' );
 }
 
 if ( ! defined( 'CSCF_OPTIONS_KEY' ) ) {

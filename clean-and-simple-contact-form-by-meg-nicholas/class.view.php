@@ -4,11 +4,11 @@ class CSCF_View {
 	/**
 	 * Path of the view to render
 	 */
-	var $view = '';
+	var string $view = '';
 	/**
 	 * Variables for the view
 	 */
-	var $vars = array();
+	var array $vars = array();
 
 	/**
 	 * Construct a view from a file in the
