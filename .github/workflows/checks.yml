@@ -2,10 +2,7 @@ name: Plugin Check
 
 on:
   push:
-    #
-
   pull_request:
-    #
   workflow_call:
 
 permissions:
@@ -57,13 +54,20 @@ jobs:
           # Get versions from different files
           PLUGIN_VERSION=$(grep "Version:" clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php | awk '{print $2}')
           README_VERSION=$(grep "Stable tag:" clean-and-simple-contact-form-by-meg-nicholas/readme.txt | awk '{print $3}')
+          CONSTANT_VERSION=$(grep "define.*STOP_USER_ENUMERATION_PLUGIN_VERSION" clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php | sed -E "s/.*'([0-9.]+)'.*/\1/")
           
           echo "Plugin header version: $PLUGIN_VERSION"
           echo "Readme stable tag: $README_VERSION"
+          echo "Plugin constant version: $CONSTANT_VERSION"
           
           # Check if all versions match
           if [ "$PLUGIN_VERSION" != "$README_VERSION" ]; then
             echo "❌ ERROR: Version mismatch between plugin header ($PLUGIN_VERSION) and readme.txt ($README_VERSION)"
+            exit 1
+          fi
+          
+          if [ "$PLUGIN_VERSION" != "$CONSTANT_VERSION" ]; then
+            echo "❌ ERROR: Version mismatch between plugin header ($PLUGIN_VERSION) and version constant ($CONSTANT_VERSION)"
             exit 1
           fi
           
@@ -80,7 +84,6 @@ jobs:
           unzip clean-and-simple-contact-form-by-meg-nicholas.zip -d tmp-build
 
       - name: Run plugin check
-        uses: wordpress/plugin-check-action@v1.1.2
+        uses: wordpress/plugin-check-action@v1
         with:
           build-dir: './tmp-build/clean-and-simple-contact-form-by-meg-nicholas'
-          
