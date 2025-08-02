@@ -6,7 +6,7 @@ msgstr ""
 "POT-Creation-Date: \n"
 "PO-Revision-Date: 2024-08-27 12:26+0100\n"
 "Last-Translator: \n"
-"Language-Team: Kacper Ruciński <kacper.rucinski@gmail.com>\n"
+"Language-Team: Kacper Ruciński\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -41,21 +41,21 @@ msgstr "Prosimy potwierdzić podany adres e-mail."
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:105,
 #: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:34
 msgid "Please give your name."
-msgstr "Prosimy wpisać imię i nazwisko."
+msgstr "Prosimy się przedstawić."
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:110
 msgid "Please enter a message."
-msgstr "Prosimy wpisać wiadomość."
+msgstr "Prosimy wprowadzić wiadomość."
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:115,
 #: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:64,
 #: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:93
 msgid "Please enter a valid email address."
-msgstr "Prosimy wpisać poprawny adres e-mail."
+msgstr "Prosimy wprowadzić poprawny adres e-mail."
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:121
 msgid "Please enter a valid phone number."
-msgstr "Proszę wprowadzić poprawny numer telefonu."
+msgstr "Prosimy wprowadzić poprawny numer telefonu."
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:128,
 #: clean-and-simple-contact-form-by-meg-nicholas/views/contact-form.view.php:198
@@ -64,7 +64,7 @@ msgstr "Prosimy o wyrażenie zgody."
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:137
 msgid "Please solve the recaptcha to continue."
-msgstr "Proszę rozwiązać recaptcha, aby kontynuować."
+msgstr "Prosimy rozwiązać reCAPTCHA, aby kontynuować."
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:170
 msgid "From"
@@ -81,7 +81,7 @@ msgstr "Telefon"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:175
 msgid "Page URL"
-msgstr "Strona URL"
+msgstr "URL strony"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:176,
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_contact.php:216
@@ -128,15 +128,15 @@ msgstr "Wyrażam zgodę na przechowywanie moich danych kontaktowych"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:30
 msgid "Contact Form Settings"
-msgstr "Ustawienia Contact Form"
+msgstr "Ustawienia formularza kontaktowego"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:31
 msgid "Contact Form"
-msgstr "Contact Form"
+msgstr "Formularz kontaktowy"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:43
 msgid "Clean and Simple Contact Form Settings"
-msgstr "Ustawienia Clean and Simple Contact Form"
+msgstr "Ustawienia wtyczki Przejrzysty i prosty formularz kontaktowy"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:52
 msgid ""
@@ -222,7 +222,7 @@ msgstr "Wygląd i weryfikacja"
 msgid ""
 "Use the plugin default stylesheet (un-tick to use your theme style sheet "
 "instead) :"
-msgstr "Użyj domyślnego stylu wtyczki (odznacz, aby użyć stylów motywu "
+msgstr "Użyj domyślnego stylu wtyczki (odznacz, aby użyć stylów motywu):"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:168
 msgid "Use client side validation (AJAX) :"
@@ -234,7 +234,7 @@ msgstr "Ustawienia reCAPTCHA"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:187
 msgid "Use reCAPTCHA :"
-msgstr "Użyj reCAPTCHA :"
+msgstr "Użyj reCAPTCHA:"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:194
 msgid "reCAPTCHA Theme :"
@@ -254,7 +254,7 @@ msgid ""
 "maintained is to support it by installing Fullworks Anti Spam Pro"
 msgstr ""
 "Najlepszym sposobem na okazanie uznania dla tej darmowej wtyczki i "
-"utrzymanie jej jest wsparcie jej poprzez zainstalowanie Fullworks Anti Spam "
+"jej utrzymanie jest wsparcie jej poprzez zainstalowanie Fullworks Anti Spam "
 "Pro"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:225
@@ -262,8 +262,8 @@ msgid ""
 "With a 14 day free trial, you will find it surprisingly affordable when you "
 "compare it with Akismet, yet extremely effective."
 msgstr ""
-"Dzięki 14-dniowemu bezpłatnemu okresowi próbnemu jest on zaskakująco "
-"przystępny cenowo w porównaniu z Akismet, a jednocześnie niezwykle skuteczny."
+"Oferując darmowy 14-dniowy okres próbny, jest on zaskakująco przystępny "
+"cenowo w porównaniu z Akismet, a jednocześnie niezwykle skuteczny."
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:226,
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:230
@@ -272,11 +272,11 @@ msgstr "Wypróbuj teraz i wesprzyj tę DARMOWĄ wtyczkę"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:221
 msgid "Congratulations: you are protected by Fullworks Anti Spam"
-msgstr "Gratulacje: jesteś chroniony przez Fullworks Anti Spam"
+msgstr "Gratulacje! Ochronę zapewnia Ci Fullworks Anti Spam"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:222
 msgid "Configure"
-msgstr "Konfiguracja"
+msgstr "Skonfiguruj"
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:222
 msgid "Anti Spam Settings here"
@@ -290,8 +290,8 @@ msgstr "Włącz dziennik wiadomości instalując Fullworks Anti Spam Pro"
 msgid ""
 "With a 14 day free trial, will automatically log all messages from this form."
 msgstr ""
-"Dzięki 14-dniowemu bezpłatnemu okresowi próbnemu automatycznie rejestruje "
-"wszystkie wiadomości z tego formularza."
+"Oferując darmowy 14-dniowy okres próbny, automatycznie rejestruje wszystkie "
+"wiadomości z tego formularza."
 
 #: clean-and-simple-contact-form-by-meg-nicholas/class.cscf_settings.php:243
 msgid "Enable logs now"
@@ -401,7 +401,7 @@ msgstr "Przepraszamy, wystąpił błąd i wiadomość nie została wysłana."
 #~ "utrzymanie:"
 
 #~ msgid "Clean and Simple Contact Form!"
-#~ msgstr "Clean and Simple Contact Form!"
+#~ msgstr "Przejrzysty i prosty formularz kontaktowy!"
 
 #~ msgid "You are using version"
 #~ msgstr "Używasz wersji"
@@ -419,10 +419,10 @@ msgstr "Przepraszamy, wystąpił błąd i wiadomość nie została wysłana."
 #~ msgstr "Czytaj więcej"
 
 #~ msgid "*New*"
-#~ msgstr "*Nowe*"
+#~ msgstr "*Nowość*"
 
 #~ msgid "Clean and Simple Contact Form"
-#~ msgstr "Czyste i proste Formularz kontaktowy"
+#~ msgstr "Przejrzysty i prosty formularz kontaktowy"
 
 #~ msgid ""
 #~ "http://www.megnicholas.co.uk/wordpress-plugins/clean-and-simple-contact-"
@@ -435,8 +435,8 @@ msgstr "Przepraszamy, wystąpił błąd i wiadomość nie została wysłana."
 #~ "A clean and simple contact form with Google reCAPTCHA and Twitter "
 #~ "Bootstrap markup."
 #~ msgstr ""
-#~ "Czysty i prosty formularz kontaktowy z Google i Twitter Bootstrap "
-#~ "reCAPTCHA znaczników."
+#~ "Przejrzysty i prosty formularz kontaktowy z Google reCAPTCHA i znacznikami "
+#~ Twitter Bootstrap."
 
 #~ msgid "Meghan Nicholas"
 #~ msgstr "Meghan Nicholas"
@@ -445,8 +445,7 @@ msgstr "Przepraszamy, wystąpił błąd i wiadomość nie została wysłana."
 #~ msgstr "http://www.megnicholas.co.uk"
 
 #~ msgid "Sorry the code wasn't entered correctly please try again."
-#~ msgstr ""
-#~ "Przepraszamy, kod nie został wprowadzony poprawnie. Spróbuj ponownie."
+#~ msgstr "Przepraszamy, kod nie został wprowadzony poprawnie. Spróbuj ponownie."
 
 #~ msgid "Red"
 #~ msgstr "Czerwony"
