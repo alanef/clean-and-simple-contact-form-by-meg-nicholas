@@ -80,7 +80,7 @@ jobs:
           unzip clean-and-simple-contact-form-by-meg-nicholas.zip -d tmp-build
 
       - name: Run plugin check
-        uses: wordpress/plugin-check-action@v1
+        uses: wordpress/plugin-check-action@v1.1.2
         with:
           build-dir: './tmp-build/clean-and-simple-contact-form-by-meg-nicholas'
           
