@@ -54,7 +54,7 @@ jobs:
           # Get versions from different files
           PLUGIN_VERSION=$(grep "Version:" clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php | awk '{print $2}')
           README_VERSION=$(grep "Stable tag:" clean-and-simple-contact-form-by-meg-nicholas/readme.txt | awk '{print $3}')
-          CONSTANT_VERSION=$(grep "define.*CSCF_VERSION_NUM" clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php | sed -E "s/.*'([0-9.]+)'.*/\1/")
+          CONSTANT_VERSION=$(grep -A1 "CSCF_VERSION_NUM" clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php | grep "define" | sed -E "s/.*'([0-9.]+)'.*/\1/")
           
           echo "Plugin header version: $PLUGIN_VERSION"
           echo "Readme stable tag: $README_VERSION"
