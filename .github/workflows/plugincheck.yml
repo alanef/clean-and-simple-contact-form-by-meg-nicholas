@@ -1,4 +1,4 @@
-name: PHP Composer
+name: Plugin Check
 
 on:
   push:
@@ -17,7 +17,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          coverage: none
+          tools: composer, wp-cli
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
@@ -34,15 +42,21 @@ jobs:
       - name: Install dependencies
         run: composer install --prefer-dist --no-progress
 
-      - name: Run phpcs suit
+      - name: Run phpcs checks
         run: composer run-script check
 
-      - name: Composer install
-        run: composer install -d  clean-and-simple-contact-form-by-meg-nicholas --no-dev
+      - name: Install WP-CLI dist-archive command
+        run: wp package install wp-cli/dist-archive-command
+
+      - name: Build plugin
+        run: |
+          cd clean-and-simple-contact-form-by-meg-nicholas && composer install --no-dev && cd ..
+          wp dist-archive ./clean-and-simple-contact-form-by-meg-nicholas ./clean-and-simple-contact-form-by-meg-nicholas.zip
+          mkdir tmp-build
+          unzip clean-and-simple-contact-form-by-meg-nicholas.zip -d tmp-build
+
       - name: Run plugin check
         uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: './clean-and-simple-contact-form-by-meg-nicholas'
-          exclude-directories: |
-            'vendor'
+          build-dir: './tmp-build/clean-and-simple-contact-form-by-meg-nicholas'
           
