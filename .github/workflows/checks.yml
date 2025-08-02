@@ -83,6 +83,12 @@ jobs:
           mkdir tmp-build
           unzip clean-and-simple-contact-form-by-meg-nicholas.zip -d tmp-build
 
+      - name: Remove wp-env files to prevent interference with plugin check
+        run: |
+          # The plugin-check-action incorrectly uses wp-env files if present
+          # Remove them to ensure clean CI environment
+          rm -f .wp-env.json .wp-env.override.json || true
+
       - name: Run plugin check
         uses: wordpress/plugin-check-action@v1
         with:
