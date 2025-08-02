@@ -73,17 +73,11 @@ jobs:
           
           echo "✅ All version numbers match: $PLUGIN_VERSION"
 
-      - name: Install WP-CLI dist-archive command
-        run: wp package install wp-cli/dist-archive-command
-
       - name: Build plugin
         run: |
           cd clean-and-simple-contact-form-by-meg-nicholas && composer install --no-dev && cd ..
-          wp dist-archive ./clean-and-simple-contact-form-by-meg-nicholas ./clean-and-simple-contact-form-by-meg-nicholas.zip
-          mkdir tmp-build
-          unzip clean-and-simple-contact-form-by-meg-nicholas.zip -d tmp-build
 
       - name: Run plugin check
         uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: './tmp-build/clean-and-simple-contact-form-by-meg-nicholas'
+          build-dir: './clean-and-simple-contact-form-by-meg-nicholas'
