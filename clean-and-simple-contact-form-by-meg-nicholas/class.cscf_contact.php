@@ -18,6 +18,7 @@ class cscf_Contact {
 	var $Errors;
 	var $PostID;
 	var $IsSpam;
+	var $IsRestApi = false;
 
 	function __construct() {
 		$this->Errors = array();
@@ -27,7 +28,7 @@ class cscf_Contact {
 			$this->RecaptchaPrivateKey = cscf_PluginSettings::PrivateKey();
 		}
 		$request_method = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD']??'' ) );
-		if ( $request_method === 'POST' ) {
+		if ( $request_method === 'POST' && ! $this->IsRestApi ) {
 			// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- No action, nonce is not required for $_POST['cscf_nonce'] check later, array sanitized
 			if ( isset( $_POST['cscf'] ) ) {
 				// phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- No action, nonce is not required for $_POST['cscf_nonce'] check later, array sanitized
@@ -72,17 +73,55 @@ class cscf_Contact {
 		$this->IsSpam = false;
 	}
 
+	/**
+	 * Set contact data from array (used by REST API)
+	 *
+	 * @param array $data Contact form data
+	 * @param int $post_id Post ID where form was submitted from
+	 * @param bool $is_rest_api Whether this is a REST API request
+	 */
+	public function set_from_array( $data, $post_id = null, $is_rest_api = false ) {
+		$this->IsRestApi = $is_rest_api;
+		
+		if ( isset( $data['name'] ) ) {
+			$this->Name = sanitize_text_field( $data['name'] );
+		}
+		if ( isset( $data['email'] ) ) {
+			$this->Email = sanitize_email( $data['email'] );
+		}
+		if ( isset( $data['confirm-email'] ) ) {
+			$this->ConfirmEmail = sanitize_email( $data['confirm-email'] );
+		}
+		if ( isset( $data['email-sender'] ) ) {
+			$this->EmailToSender = $data['email-sender'] ? true : false;
+		}
+		if ( isset( $data['message'] ) ) {
+			$this->Message = sanitize_textarea_field( $data['message'] );
+		}
+		if ( isset( $data['phone-number'] ) ) {
+			$this->PhoneNumber = sanitize_text_field( $data['phone-number'] );
+		}
+		if ( isset( $data['contact-consent'] ) ) {
+			$this->ContactConsent = $data['contact-consent'] ? true : false;
+		}
+		if ( $post_id !== null ) {
+			$this->PostID = absint( $post_id );
+		}
+	}
+
 	public function IsValid() {
 		$this->Errors = array();
         $request_method = sanitize_text_field( wp_unslash( $_SERVER['REQUEST_METHOD']??'' ) );
-		if ( $request_method !== 'POST' ) {
+		if ( $request_method !== 'POST' && ! $this->IsRestApi ) {
 			return false;
 		}
 
-		//check nonce
-		// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- No action, not stored just a nonce check
-		if ( ! wp_verify_nonce( $_POST['cscf_nonce'] ?? '', 'cscf_contact' ) ) {
-			return false;
+		//check nonce (skip for REST API as it uses WordPress authentication)
+		if ( ! $this->IsRestApi ) {
+			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- No action, not stored just a nonce check
+			if ( ! wp_verify_nonce( $_POST['cscf_nonce'] ?? '', 'cscf_contact' ) ) {
+				return false;
+			}
 		}
 
 		// email and confirm email are the same
@@ -133,8 +172,8 @@ class cscf_Contact {
 			}
 		}
 
-		//check recaptcha but only if we have keys
-		if ( $this->RecaptchaPublicKey <> '' && $this->RecaptchaPrivateKey <> '' ) {
+		//check recaptcha but only if we have keys and not REST API (REST API uses WordPress auth instead)
+		if ( $this->RecaptchaPublicKey <> '' && $this->RecaptchaPrivateKey <> '' && ! $this->IsRestApi ) {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- No action, no form fields are being saved
             $resp = csf_RecaptchaV2::VerifyResponse( sanitize_text_field($_SERVER["REMOTE_ADDR"]??''), $this->RecaptchaPrivateKey, sanitize_text_field($_POST["g-recaptcha-response"]??''));
 

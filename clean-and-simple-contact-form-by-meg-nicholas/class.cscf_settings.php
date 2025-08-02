@@ -215,6 +215,29 @@ class cscf_settings {
 			'recaptcha_private_key',
 			'class' => 'recaptcha-field',
 		) );
+		
+		// REST API Settings
+		add_settings_section(
+			'section_rest_api',
+			'<h3>' . esc_html__( 'REST API Settings', 'clean-and-simple-contact-form-by-meg-nicholas' ) . '</h3>',
+			array(
+				$this,
+				'print_section_info_rest_api',
+			),
+			'contact-form-settings'
+		);
+		add_settings_field( 'enable_rest_api', esc_html__( 'Enable REST API :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
+			$this,
+			'create_fields',
+		), 'contact-form-settings', 'section_rest_api', array(
+			'enable_rest_api',
+		) );
+		add_settings_field( 'rest_api_capability', esc_html__( 'Required User Capability :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
+			$this,
+			'create_fields',
+		), 'contact-form-settings', 'section_rest_api', array(
+			'rest_api_capability',
+		) );
 	}
 
 	public function anti_spam_notice() {
@@ -316,6 +339,15 @@ class cscf_settings {
 			}
 		}
 
+		// REST API settings
+		if ( isset( $input['rest_api_capability'] ) ) {
+			$input['rest_api_capability'] = sanitize_text_field( $input['rest_api_capability'] );
+			// Validate capability exists
+			if ( empty( $input['rest_api_capability'] ) ) {
+				$input['rest_api_capability'] = 'edit_posts';
+			}
+		}
+
 		//tidy up the keys
 		$tidiedRecipients = array();
 		foreach ( $input['recipient_emails'] as $recipient ) {
@@ -342,6 +374,14 @@ class cscf_settings {
 
 		//print 'Enter your styling settings below:';
 
+	}
+
+	public function print_section_info_rest_api() {
+		echo '<p>';
+		print esc_html__( 'Enable REST API support for headless WordPress implementations.', 'clean-and-simple-contact-form-by-meg-nicholas' );
+		echo '</p><p>';
+		print esc_html__( 'When enabled, authenticated users can submit the form via: POST /wp-json/cscf/v1/submit', 'clean-and-simple-contact-form-by-meg-nicholas' );
+		echo '</p>';
 	}
 
 	public function create_fields(
@@ -514,6 +554,22 @@ class cscf_settings {
 				<?php esc_html_e('use client validation', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
                 </label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="use_client_validation"
                                name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[use_client_validation]"><?php
+				break;
+			case 'enable_rest_api':
+				$checked = cscf_PluginSettings::RestApiEnabled() === true ? 'checked' : '';
+				?><label for="enable_rest_api" class="screen-reader-text">
+				<?php esc_html_e('enable REST API', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+				</label><input type="checkbox" <?php echo esc_attr( $checked ); ?>  id="enable_rest_api"
+				         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[enable_rest_api]"><?php
+				break;
+			case 'rest_api_capability':
+				$capability = cscf_PluginSettings::RestApiCapability();
+				?><label for="rest_api_capability" class="screen-reader-text">
+				<?php esc_html_e('REST API required capability', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+				</label><input type="text" size="40" id="rest_api_capability"
+				         name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[rest_api_capability]"
+				         value="<?php echo esc_attr( $capability ); ?>" />
+				<p class="description"><?php esc_html_e( 'Default: edit_posts. Common capabilities: edit_posts, publish_posts, manage_options', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></p><?php
 				break;
 			default:
 				break;

@@ -49,6 +49,7 @@ require 'class.cscf_settings.php';
 require 'class.cscf_contact.php';
 require 'class.view.php';
 require 'class.cscf_filters.php';
+require 'class.cscf_rest_api.php';
 require 'ajax.php';
 require 'recaptchav2.php';
 
@@ -90,6 +91,58 @@ new \Fullworks_Free_Plugin_Lib\Main('clean-and-simple-contact-form-by-meg-nichol
 	'Clean and Simple Contact Form',);
 
 $cscf = new cscf();
+$cscf_rest_api = new cscf_rest_api();
+
+// Configure SMTP if constants are defined
+if ( defined( 'CSCF_USE_SMTP' ) && CSCF_USE_SMTP ) {
+	add_action( 'phpmailer_init', function( $phpmailer ) {
+		$phpmailer->isSMTP();
+		
+		// Required settings
+		if ( defined( 'CSCF_SMTP_HOST' ) ) {
+			$phpmailer->Host = CSCF_SMTP_HOST;
+		}
+		
+		if ( defined( 'CSCF_SMTP_PORT' ) ) {
+			$phpmailer->Port = (int) CSCF_SMTP_PORT;
+		}
+		
+		// Authentication settings
+		if ( defined( 'CSCF_SMTP_AUTH' ) && CSCF_SMTP_AUTH ) {
+			$phpmailer->SMTPAuth = true;
+			
+			if ( defined( 'CSCF_SMTP_USER' ) ) {
+				$phpmailer->Username = CSCF_SMTP_USER;
+			}
+			
+			if ( defined( 'CSCF_SMTP_PASS' ) ) {
+				$phpmailer->Password = CSCF_SMTP_PASS;
+			}
+		} else {
+			$phpmailer->SMTPAuth = false;
+		}
+		
+		// Security settings
+		if ( defined( 'CSCF_SMTP_SECURE' ) ) {
+			$phpmailer->SMTPSecure = CSCF_SMTP_SECURE; // 'tls' or 'ssl' or empty string
+		}
+		
+		// Optional: From email override
+		if ( defined( 'CSCF_SMTP_FROM' ) ) {
+			$phpmailer->From = CSCF_SMTP_FROM;
+		}
+		
+		// Optional: From name override
+		if ( defined( 'CSCF_SMTP_FROM_NAME' ) ) {
+			$phpmailer->FromName = CSCF_SMTP_FROM_NAME;
+		}
+		
+		// Debug mode
+		if ( defined( 'CSCF_SMTP_DEBUG' ) && CSCF_SMTP_DEBUG ) {
+			$phpmailer->SMTPDebug = 2;
+		}
+	});
+}
 
 /*get the current version and update options to the new option*/
 $old_version = get_option( CSCF_VERSION_KEY );

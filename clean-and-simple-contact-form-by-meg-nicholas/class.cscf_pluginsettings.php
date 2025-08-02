@@ -192,5 +192,17 @@ class cscf_PluginSettings
         $options = get_option(CSCF_OPTIONS_KEY);
         return isset($options['confirm-email']) ? true : false;
     }
+
+    static function RestApiEnabled()
+    {
+        $options = get_option(CSCF_OPTIONS_KEY);
+        return isset($options['enable_rest_api']) ? true : false;
+    }
+
+    static function RestApiCapability()
+    {
+        $options = get_option(CSCF_OPTIONS_KEY);
+        return isset($options['rest_api_capability']) ? $options['rest_api_capability'] : 'edit_posts';
+    }
 }
 
