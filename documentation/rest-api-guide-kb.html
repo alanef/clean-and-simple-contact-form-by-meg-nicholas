@@ -1,0 +1,688 @@
+<p>This guide explains how to use the REST API endpoint to submit
+contact forms programmatically, perfect for headless WordPress
+implementations, mobile apps, and external integrations.</p>
+<h2 id="overview">Overview</h2>
+<p>The REST API allows authenticated users to submit contact forms
+without using the traditional web interface. This is ideal for:</p>
+<ul>
+<li>Headless WordPress implementations</li>
+<li>Mobile applications</li>
+<li>External websites</li>
+<li>Automated systems</li>
+<li>Single Page Applications (SPAs)</li>
+</ul>
+<p><strong>Key Features:</strong> - Secure authentication required - All
+form validations apply (except reCAPTCHA) - Same email delivery as
+regular forms - Full integration with hooks and filters - JSON
+request/response format</p>
+<hr />
+<h2 id="enabling-the-rest-api">Enabling the REST API</h2>
+<p>The REST API is disabled by default for security. To enable it:</p>
+<ol type="1">
+<li>Navigate to <strong>Settings → Contact Form</strong> in WordPress
+admin</li>
+<li>Find the <strong>REST API Settings</strong> section</li>
+<li>Check <strong>Enable REST API</strong></li>
+<li>Set the <strong>Required User Capability</strong> (default:
+<code>edit_posts</code>)</li>
+<li>Click <strong>Save Changes</strong></li>
+</ol>
+<h3 id="security-considerations">Security Considerations</h3>
+<ul>
+<li>Only authenticated users with the specified capability can submit
+forms</li>
+<li>Consider using a custom capability for better control</li>
+<li>Monitor API usage through hooks</li>
+<li>Use HTTPS in production</li>
+</ul>
+<hr />
+<h2 id="authentication">Authentication</h2>
+<p>The REST API requires WordPress authentication. Several methods are
+available:</p>
+<h3 id="application-passwords-recommended-for-wordpress-5.6">Application
+Passwords (Recommended for WordPress 5.6+)</h3>
+<ol type="1">
+<li>Go to <strong>Users → Profile</strong> in WordPress admin</li>
+<li>Scroll to <strong>Application Passwords</strong></li>
+<li>Enter a name and click <strong>Add New Application
+Password</strong></li>
+<li>Save the generated password (shown only once)</li>
+</ol>
+<p><strong>Usage:</strong></p>
+<pre class="bash"><code>curl -u &quot;username:application-password&quot; https://site.com/wp-json/cscf/v1/submit</code></pre>
+<h3 id="basic-authentication-development-only">Basic Authentication
+(Development Only)</h3>
+<p>For local development, you can use regular WordPress credentials:</p>
+<pre class="bash"><code>curl -u &quot;username:password&quot; http://localhost/wp-json/cscf/v1/submit</code></pre>
+<p><strong>Warning:</strong> Never use basic auth with regular passwords
+in production!</p>
+<h3 id="jwt-authentication-via-plugin">JWT Authentication (via
+Plugin)</h3>
+<p>Install a JWT plugin like “JWT Authentication for WP REST API”:</p>
+<pre class="javascript"><code>// First, get a token
+const response = await fetch(&#39;https://site.com/wp-json/jwt-auth/v1/token&#39;, {
+  method: &#39;POST&#39;,
+  headers: { &#39;Content-Type&#39;: &#39;application/json&#39; },
+  body: JSON.stringify({
+    username: &#39;your-username&#39;,
+    password: &#39;your-password&#39;
+  })
+});
+
+const { token } = await response.json();
+
+// Then use the token
+const formResponse = await fetch(&#39;https://site.com/wp-json/cscf/v1/submit&#39;, {
+  method: &#39;POST&#39;,
+  headers: {
+    &#39;Content-Type&#39;: &#39;application/json&#39;,
+    &#39;Authorization&#39;: `Bearer ${token}`
+  },
+  body: JSON.stringify(formData)
+});</code></pre>
+<hr />
+<h2 id="api-endpoint">API Endpoint</h2>
+<h3 id="endpoint-url">Endpoint URL</h3>
+<pre><code>POST /wp-json/cscf/v1/submit</code></pre>
+<h3 id="full-url-example">Full URL Example</h3>
+<pre><code>https://yoursite.com/wp-json/cscf/v1/submit</code></pre>
+<h3 id="http-method">HTTP Method</h3>
+<p>Only <code>POST</code> requests are accepted.</p>
+<hr />
+<h2 id="request-format">Request Format</h2>
+<p>Send a JSON object with the following fields:</p>
+<h3 id="required-fields">Required Fields</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>name</code></td>
+<td>string</td>
+<td>Sender’s name</td>
+</tr>
+<tr class="even">
+<td><code>email</code></td>
+<td>string</td>
+<td>Valid email address</td>
+</tr>
+<tr class="odd">
+<td><code>message</code></td>
+<td>string</td>
+<td>Message content</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conditional-fields">Conditional Fields</h3>
+<table>
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 14%" />
+<col style="width: 36%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Required When</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>confirm_email</code></td>
+<td>string</td>
+<td>Email confirmation enabled</td>
+<td>Must match <code>email</code> field</td>
+</tr>
+<tr class="even">
+<td><code>phone_number</code></td>
+<td>string</td>
+<td>Phone field is mandatory</td>
+<td>Contact phone number</td>
+</tr>
+<tr class="odd">
+<td><code>contact_consent</code></td>
+<td>boolean</td>
+<td>Consent checkbox enabled</td>
+<td>GDPR consent</td>
+</tr>
+</tbody>
+</table>
+<h3 id="optional-fields">Optional Fields</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>email_sender</code></td>
+<td>boolean</td>
+<td>Send copy to sender (default: false)</td>
+</tr>
+<tr class="even">
+<td><code>post_id</code></td>
+<td>integer</td>
+<td>Source page/post ID</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-request">Example Request</h3>
+<pre class="json"><code>{
+  &quot;name&quot;: &quot;John Doe&quot;,
+  &quot;email&quot;: &quot;john@example.com&quot;,
+  &quot;confirm_email&quot;: &quot;john@example.com&quot;,
+  &quot;message&quot;: &quot;I would like more information about your services.&quot;,
+  &quot;phone_number&quot;: &quot;+1-555-123-4567&quot;,
+  &quot;contact_consent&quot;: true,
+  &quot;email_sender&quot;: true,
+  &quot;post_id&quot;: 42
+}</code></pre>
+<hr />
+<h2 id="response-format">Response Format</h2>
+<h3 id="success-response">Success Response</h3>
+<p><strong>HTTP Status:</strong> 200 OK</p>
+<pre class="json"><code>{
+  &quot;success&quot;: true,
+  &quot;message&quot;: &quot;Message Sent&quot;
+}</code></pre>
+<h3 id="validation-error-response">Validation Error Response</h3>
+<p><strong>HTTP Status:</strong> 400 Bad Request</p>
+<pre class="json"><code>{
+  &quot;code&quot;: &quot;validation_failed&quot;,
+  &quot;message&quot;: &quot;Validation failed.&quot;,
+  &quot;data&quot;: {
+    &quot;status&quot;: 400,
+    &quot;errors&quot;: {
+      &quot;email&quot;: &quot;Please enter a valid email address.&quot;,
+      &quot;message&quot;: &quot;Please enter a message.&quot;,
+      &quot;confirm-email&quot;: &quot;Sorry the email addresses do not match.&quot;
+    }
+  }
+}</code></pre>
+<h3 id="authentication-error-response">Authentication Error
+Response</h3>
+<p><strong>HTTP Status:</strong> 401 Unauthorized</p>
+<pre class="json"><code>{
+  &quot;code&quot;: &quot;rest_forbidden&quot;,
+  &quot;message&quot;: &quot;Authentication required.&quot;,
+  &quot;data&quot;: {
+    &quot;status&quot;: 401
+  }
+}</code></pre>
+<h3 id="permission-error-response">Permission Error Response</h3>
+<p><strong>HTTP Status:</strong> 403 Forbidden</p>
+<pre class="json"><code>{
+  &quot;code&quot;: &quot;rest_forbidden&quot;,
+  &quot;message&quot;: &quot;Insufficient permissions.&quot;,
+  &quot;data&quot;: {
+    &quot;status&quot;: 403
+  }
+}</code></pre>
+<h3 id="server-error-response">Server Error Response</h3>
+<p><strong>HTTP Status:</strong> 500 Internal Server Error</p>
+<pre class="json"><code>{
+  &quot;code&quot;: &quot;email_failed&quot;,
+  &quot;message&quot;: &quot;Failed to send email.&quot;,
+  &quot;data&quot;: {
+    &quot;status&quot;: 500
+  }
+}</code></pre>
+<hr />
+<h2 id="code-examples">Code Examples</h2>
+<h3 id="javascript-fetch-api">JavaScript (Fetch API)</h3>
+<pre class="javascript"><code>async function submitContactForm(formData) {
+  const username = &#39;your-username&#39;;
+  const appPassword = &#39;xxxx xxxx xxxx xxxx xxxx xxxx&#39;; // Application password
+  
+  try {
+    const response = await fetch(&#39;https://yoursite.com/wp-json/cscf/v1/submit&#39;, {
+      method: &#39;POST&#39;,
+      headers: {
+        &#39;Content-Type&#39;: &#39;application/json&#39;,
+        &#39;Authorization&#39;: &#39;Basic &#39; + btoa(username + &#39;:&#39; + appPassword)
+      },
+      body: JSON.stringify({
+        name: formData.name,
+        email: formData.email,
+        confirm_email: formData.email,
+        message: formData.message,
+        contact_consent: true
+      })
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      console.log(&#39;Success:&#39;, result.message);
+      return { success: true, message: result.message };
+    } else {
+      console.error(&#39;Error:&#39;, result);
+      return { success: false, errors: result.data.errors };
+    }
+  } catch (error) {
+    console.error(&#39;Network error:&#39;, error);
+    return { success: false, error: &#39;Network error&#39; };
+  }
+}
+
+// Usage
+submitContactForm({
+  name: &#39;Jane Smith&#39;,
+  email: &#39;jane@example.com&#39;,
+  message: &#39;Testing the REST API&#39;
+}).then(result =&gt; {
+  if (result.success) {
+    alert(&#39;Message sent successfully!&#39;);
+  } else {
+    alert(&#39;Error sending message&#39;);
+  }
+});</code></pre>
+<h3 id="php">PHP</h3>
+<pre class="php"><code>function submit_contact_form($data) {
+    $username = &#39;your-username&#39;;
+    $app_password = &#39;xxxx xxxx xxxx xxxx xxxx xxxx&#39;;
+    
+    $args = [
+        &#39;body&#39; =&gt; json_encode([
+            &#39;name&#39; =&gt; $data[&#39;name&#39;],
+            &#39;email&#39; =&gt; $data[&#39;email&#39;],
+            &#39;confirm_email&#39; =&gt; $data[&#39;email&#39;],
+            &#39;message&#39; =&gt; $data[&#39;message&#39;],
+            &#39;contact_consent&#39; =&gt; true
+        ]),
+        &#39;headers&#39; =&gt; [
+            &#39;Content-Type&#39; =&gt; &#39;application/json&#39;,
+            &#39;Authorization&#39; =&gt; &#39;Basic &#39; . base64_encode($username . &#39;:&#39; . $app_password)
+        ],
+        &#39;timeout&#39; =&gt; 30
+    ];
+    
+    $response = wp_remote_post(&#39;https://yoursite.com/wp-json/cscf/v1/submit&#39;, $args);
+    
+    if (is_wp_error($response)) {
+        return [&#39;error&#39; =&gt; $response-&gt;get_error_message()];
+    }
+    
+    $body = wp_remote_retrieve_body($response);
+    return json_decode($body, true);
+}
+
+// Usage
+$result = submit_contact_form([
+    &#39;name&#39; =&gt; &#39;Test User&#39;,
+    &#39;email&#39; =&gt; &#39;test@example.com&#39;,
+    &#39;message&#39; =&gt; &#39;This is a test message&#39;
+]);
+
+if ($result[&#39;success&#39;]) {
+    echo &#39;Message sent!&#39;;
+} else {
+    echo &#39;Error: &#39; . print_r($result[&#39;data&#39;][&#39;errors&#39;], true);
+}</code></pre>
+<h3 id="python">Python</h3>
+<pre class="python"><code>import requests
+import base64
+import json
+
+def submit_contact_form(form_data):
+    url = &#39;https://yoursite.com/wp-json/cscf/v1/submit&#39;
+    username = &#39;your-username&#39;
+    app_password = &#39;xxxx xxxx xxxx xxxx xxxx xxxx&#39;
+    
+    # Create auth header
+    credentials = f&quot;{username}:{app_password}&quot;
+    auth_header = base64.b64encode(credentials.encode()).decode()
+    
+    headers = {
+        &#39;Content-Type&#39;: &#39;application/json&#39;,
+        &#39;Authorization&#39;: f&#39;Basic {auth_header}&#39;
+    }
+    
+    data = {
+        &#39;name&#39;: form_data[&#39;name&#39;],
+        &#39;email&#39;: form_data[&#39;email&#39;],
+        &#39;confirm_email&#39;: form_data[&#39;email&#39;],
+        &#39;message&#39;: form_data[&#39;message&#39;],
+        &#39;contact_consent&#39;: True
+    }
+    
+    try:
+        response = requests.post(url, json=data, headers=headers)
+        result = response.json()
+        
+        if response.status_code == 200:
+            return {&#39;success&#39;: True, &#39;message&#39;: result[&#39;message&#39;]}
+        else:
+            return {&#39;success&#39;: False, &#39;errors&#39;: result.get(&#39;data&#39;, {}).get(&#39;errors&#39;, {})}
+    except requests.exceptions.RequestException as e:
+        return {&#39;success&#39;: False, &#39;error&#39;: str(e)}
+
+# Usage
+result = submit_contact_form({
+    &#39;name&#39;: &#39;Python Test&#39;,
+    &#39;email&#39;: &#39;python@example.com&#39;,
+    &#39;message&#39;: &#39;Testing from Python&#39;
+})
+
+if result[&#39;success&#39;]:
+    print(f&quot;Success: {result[&#39;message&#39;]}&quot;)
+else:
+    print(f&quot;Error: {result}&quot;)</code></pre>
+<h3 id="curl">cURL</h3>
+<pre class="bash"><code># Using application password
+curl -X POST https://yoursite.com/wp-json/cscf/v1/submit \
+  -u &quot;username:xxxx xxxx xxxx xxxx xxxx xxxx&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{
+    &quot;name&quot;: &quot;cURL Test&quot;,
+    &quot;email&quot;: &quot;test@example.com&quot;,
+    &quot;confirm_email&quot;: &quot;test@example.com&quot;,
+    &quot;message&quot;: &quot;Testing from command line&quot;,
+    &quot;contact_consent&quot;: true
+  }&#39;
+
+# Using base64 encoded credentials
+AUTH=$(echo -n &quot;username:password&quot; | base64)
+curl -X POST https://yoursite.com/wp-json/cscf/v1/submit \
+  -H &quot;Authorization: Basic $AUTH&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d &#39;{
+    &quot;name&quot;: &quot;cURL Test&quot;,
+    &quot;email&quot;: &quot;test@example.com&quot;,
+    &quot;confirm_email&quot;: &quot;test@example.com&quot;,
+    &quot;message&quot;: &quot;Testing from command line&quot;
+  }&#39;</code></pre>
+<h3 id="react-example">React Example</h3>
+<pre class="jsx"><code>import React, { useState } from &#39;react&#39;;
+
+function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: &#39;&#39;,
+    email: &#39;&#39;,
+    message: &#39;&#39;
+  });
+  const [status, setStatus] = useState(&#39;&#39;);
+  const [errors, setErrors] = useState({});
+
+  const handleSubmit = async (e) =&gt; {
+    e.preventDefault();
+    setStatus(&#39;sending&#39;);
+    setErrors({});
+
+    const username = process.env.REACT_APP_WP_USERNAME;
+    const appPassword = process.env.REACT_APP_WP_APP_PASSWORD;
+
+    try {
+      const response = await fetch(`${process.env.REACT_APP_WP_URL}/wp-json/cscf/v1/submit`, {
+        method: &#39;POST&#39;,
+        headers: {
+          &#39;Content-Type&#39;: &#39;application/json&#39;,
+          &#39;Authorization&#39;: &#39;Basic &#39; + btoa(username + &#39;:&#39; + appPassword)
+        },
+        body: JSON.stringify({
+          ...formData,
+          confirm_email: formData.email,
+          contact_consent: true
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus(&#39;success&#39;);
+        setFormData({ name: &#39;&#39;, email: &#39;&#39;, message: &#39;&#39; });
+      } else {
+        setStatus(&#39;error&#39;);
+        setErrors(result.data?.errors || {});
+      }
+    } catch (error) {
+      setStatus(&#39;error&#39;);
+      setErrors({ general: &#39;Network error. Please try again.&#39; });
+    }
+  };
+
+  return (
+    &lt;form onSubmit={handleSubmit}&gt;
+      &lt;div&gt;
+        &lt;label&gt;Name:&lt;/label&gt;
+        &lt;input
+          type=&quot;text&quot;
+          value={formData.name}
+          onChange={(e) =&gt; setFormData({...formData, name: e.target.value})}
+          required
+        /&gt;
+        {errors.name &amp;&amp; &lt;span className=&quot;error&quot;&gt;{errors.name}&lt;/span&gt;}
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;label&gt;Email:&lt;/label&gt;
+        &lt;input
+          type=&quot;email&quot;
+          value={formData.email}
+          onChange={(e) =&gt; setFormData({...formData, email: e.target.value})}
+          required
+        /&gt;
+        {errors.email &amp;&amp; &lt;span className=&quot;error&quot;&gt;{errors.email}&lt;/span&gt;}
+      &lt;/div&gt;
+
+      &lt;div&gt;
+        &lt;label&gt;Message:&lt;/label&gt;
+        &lt;textarea
+          value={formData.message}
+          onChange={(e) =&gt; setFormData({...formData, message: e.target.value})}
+          required
+        /&gt;
+        {errors.message &amp;&amp; &lt;span className=&quot;error&quot;&gt;{errors.message}&lt;/span&gt;}
+      &lt;/div&gt;
+
+      &lt;button type=&quot;submit&quot; disabled={status === &#39;sending&#39;}&gt;
+        {status === &#39;sending&#39; ? &#39;Sending...&#39; : &#39;Send Message&#39;}
+      &lt;/button&gt;
+
+      {status === &#39;success&#39; &amp;&amp; &lt;p className=&quot;success&quot;&gt;Message sent successfully!&lt;/p&gt;}
+      {status === &#39;error&#39; &amp;&amp; errors.general &amp;&amp; &lt;p className=&quot;error&quot;&gt;{errors.general}&lt;/p&gt;}
+    &lt;/form&gt;
+  );
+}
+
+export default ContactForm;</code></pre>
+<hr />
+<h2 id="use-cases">Use Cases</h2>
+<h3 id="headless-wordpress-with-next.js">Headless WordPress with
+Next.js</h3>
+<pre class="javascript"><code>// pages/api/contact.js
+export default async function handler(req, res) {
+  if (req.method !== &#39;POST&#39;) {
+    return res.status(405).json({ error: &#39;Method not allowed&#39; });
+  }
+
+  const response = await fetch(process.env.WP_API_URL + &#39;/cscf/v1/submit&#39;, {
+    method: &#39;POST&#39;,
+    headers: {
+      &#39;Content-Type&#39;: &#39;application/json&#39;,
+      &#39;Authorization&#39;: `Basic ${process.env.WP_API_AUTH}`
+    },
+    body: JSON.stringify(req.body)
+  });
+
+  const data = await response.json();
+  res.status(response.status).json(data);
+}</code></pre>
+<h3 id="mobile-app-integration">Mobile App Integration</h3>
+<pre class="swift"><code>// Swift example for iOS
+func submitContactForm(name: String, email: String, message: String) {
+    let url = URL(string: &quot;https://yoursite.com/wp-json/cscf/v1/submit&quot;)!
+    var request = URLRequest(url: url)
+    request.httpMethod = &quot;POST&quot;
+    request.setValue(&quot;application/json&quot;, forHTTPHeaderField: &quot;Content-Type&quot;)
+    
+    let authString = &quot;\(username):\(appPassword)&quot;
+    let authData = authString.data(using: .utf8)!.base64EncodedString()
+    request.setValue(&quot;Basic \(authData)&quot;, forHTTPHeaderField: &quot;Authorization&quot;)
+    
+    let body = [
+        &quot;name&quot;: name,
+        &quot;email&quot;: email,
+        &quot;confirm_email&quot;: email,
+        &quot;message&quot;: message,
+        &quot;contact_consent&quot;: true
+    ] as [String : Any]
+    
+    request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+    
+    URLSession.shared.dataTask(with: request) { data, response, error in
+        // Handle response
+    }.resume()
+}</code></pre>
+<h3 id="automated-testing">Automated Testing</h3>
+<pre class="javascript"><code>// Jest test example
+describe(&#39;Contact Form API&#39;, () =&gt; {
+  test(&#39;should submit form successfully&#39;, async () =&gt; {
+    const formData = {
+      name: &#39;Test User&#39;,
+      email: &#39;test@example.com&#39;,
+      confirm_email: &#39;test@example.com&#39;,
+      message: &#39;Automated test message&#39;,
+      contact_consent: true
+    };
+
+    const response = await fetch(&#39;https://yoursite.com/wp-json/cscf/v1/submit&#39;, {
+      method: &#39;POST&#39;,
+      headers: {
+        &#39;Content-Type&#39;: &#39;application/json&#39;,
+        &#39;Authorization&#39;: `Basic ${process.env.TEST_AUTH}`
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const result = await response.json();
+    
+    expect(response.status).toBe(200);
+    expect(result.success).toBe(true);
+    expect(result.message).toBe(&#39;Message Sent&#39;);
+  });
+});</code></pre>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<h4 id="not-found">404 Not Found</h4>
+<ul>
+<li><strong>Cause</strong>: REST API not enabled or permalinks not
+set</li>
+<li><strong>Solution</strong>:
+<ol type="1">
+<li>Enable REST API in plugin settings</li>
+<li>Go to Settings → Permalinks and save (even without changes)</li>
+<li>Ensure pretty permalinks are enabled (not “Plain”)</li>
+</ol></li>
+</ul>
+<h4 id="unauthorized">401 Unauthorized</h4>
+<ul>
+<li><strong>Cause</strong>: Missing or invalid authentication</li>
+<li><strong>Solution</strong>:
+<ol type="1">
+<li>Verify credentials are correct</li>
+<li>Check application password is properly formatted</li>
+<li>Ensure user exists and is active</li>
+</ol></li>
+</ul>
+<h4 id="forbidden">403 Forbidden</h4>
+<ul>
+<li><strong>Cause</strong>: User lacks required capability</li>
+<li><strong>Solution</strong>:
+<ol type="1">
+<li>Check user has the capability set in plugin settings</li>
+<li>Default is <code>edit_posts</code> - verify user role has this</li>
+<li>Consider using a custom capability for better control</li>
+</ol></li>
+</ul>
+<h4 id="bad-request">400 Bad Request</h4>
+<ul>
+<li><strong>Cause</strong>: Invalid JSON or missing required fields</li>
+<li><strong>Solution</strong>:
+<ol type="1">
+<li>Validate JSON syntax</li>
+<li>Ensure all required fields are included</li>
+<li>Check field names match exactly (case-sensitive)</li>
+</ol></li>
+</ul>
+<h4 id="internal-server-error">500 Internal Server Error</h4>
+<ul>
+<li><strong>Cause</strong>: Email sending failure</li>
+<li><strong>Solution</strong>:
+<ol type="1">
+<li>Check WordPress email configuration</li>
+<li>Verify SMTP settings if configured</li>
+<li>Check server email logs</li>
+<li>Test with wp_mail() directly</li>
+</ol></li>
+</ul>
+<h3 id="debug-mode">Debug Mode</h3>
+<p>Enable WordPress debug mode to get more detailed error
+information:</p>
+<pre class="php"><code>// In wp-config.php
+define(&#39;WP_DEBUG&#39;, true);
+define(&#39;WP_DEBUG_LOG&#39;, true);
+define(&#39;WP_DEBUG_DISPLAY&#39;, false);</code></pre>
+<h3 id="testing-tools">Testing Tools</h3>
+<h4 id="postman">Postman</h4>
+<ol type="1">
+<li>Create a new POST request</li>
+<li>Set URL to
+<code>https://yoursite.com/wp-json/cscf/v1/submit</code></li>
+<li>In Authorization tab, select “Basic Auth”</li>
+<li>Enter username and application password</li>
+<li>In Body tab, select “raw” and “JSON”</li>
+<li>Enter your JSON data</li>
+</ol>
+<h4 id="browser-console">Browser Console</h4>
+<pre class="javascript"><code>// Quick test in browser console
+fetch(&#39;/wp-json/cscf/v1/submit&#39;, {
+  method: &#39;POST&#39;,
+  headers: {
+    &#39;Content-Type&#39;: &#39;application/json&#39;,
+    &#39;Authorization&#39;: &#39;Basic &#39; + btoa(&#39;username:password&#39;)
+  },
+  body: JSON.stringify({
+    name: &#39;Console Test&#39;,
+    email: &#39;test@example.com&#39;,
+    confirm_email: &#39;test@example.com&#39;,
+    message: &#39;Testing from browser console&#39;
+  })
+}).then(r =&gt; r.json()).then(console.log);</code></pre>
+<h3 id="rate-limiting">Rate Limiting</h3>
+<p>Consider implementing rate limiting to prevent abuse:</p>
+<pre class="php"><code>// Example using transients
+add_action(&#39;cscf_before_send_email&#39;, function($contact) {
+    $ip = $_SERVER[&#39;REMOTE_ADDR&#39;];
+    $key = &#39;cscf_rate_limit_&#39; . md5($ip);
+    $count = get_transient($key) ?: 0;
+    
+    if ($count &gt;= 10) { // 10 submissions per hour
+        wp_die(&#39;Rate limit exceeded&#39;, 429);
+    }
+    
+    set_transient($key, $count + 1, HOUR_IN_SECONDS);
+});</code></pre>
+<h3 id="security-best-practices">Security Best Practices</h3>
+<ol type="1">
+<li><strong>Always use HTTPS</strong> in production</li>
+<li><strong>Never expose</strong> regular passwords</li>
+<li><strong>Use application passwords</strong> or JWT tokens</li>
+<li><strong>Implement rate limiting</strong> to prevent abuse</li>
+<li><strong>Monitor usage</strong> through logging</li>
+<li><strong>Restrict capabilities</strong> to minimum needed</li>
+<li><strong>Validate and sanitize</strong> all inputs</li>
+<li><strong>Keep WordPress and plugins</strong> updated</li>
+</ol>

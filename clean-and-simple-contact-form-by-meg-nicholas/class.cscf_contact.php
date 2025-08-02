@@ -83,6 +83,9 @@ class cscf_Contact {
 	public function set_from_array( $data, $post_id = null, $is_rest_api = false ) {
 		$this->IsRestApi = $is_rest_api;
 		
+		// Filter to allow modification of form data before processing
+		$data = apply_filters( 'cscf_form_data', $data, $post_id, $is_rest_api );
+		
 		if ( isset( $data['name'] ) ) {
 			$this->Name = sanitize_text_field( $data['name'] );
 		}
@@ -192,6 +195,9 @@ class cscf_Contact {
 			return true;
 		}
 
+		// Action hook before sending email
+		do_action( 'cscf_before_send_email', $this );
+
 		$filters = new cscf_Filters;
 
 		if ( cscf_PluginSettings::OverrideFrom() & cscf_PluginSettings::FromEmail() != "" ) {
@@ -232,6 +238,9 @@ class cscf_Contact {
 		$filters->remove( 'wp_mail_from' );
 		$filters->remove( 'wp_mail_from_name' );
 
+		// Action hook after sending email
+		do_action( 'cscf_after_send_email', $this, $result );
+
 		//send an email to the form-filler
 		if ( $this->EmailToSender ) {
 			$recipients = cscf_PluginSettings::RecipientEmails();
@@ -264,6 +273,11 @@ class cscf_Contact {
 			//remove filters (play nice)
 			$filters->remove( 'wp_mail_from' );
 			$filters->remove( 'wp_mail_from_name' );
+		}
+
+		// Action hook for successful form submission
+		if ( $result ) {
+			do_action( 'cscf_form_submitted', $this );
 		}
 
 		return $result;

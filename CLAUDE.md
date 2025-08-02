@@ -114,3 +114,18 @@ The REST API uses WordPress's built-in authentication. Users must be logged in a
 - Email recipient is set in WordPress Settings > General
 - Text domain: `clean-and-simple-contact-form-by-meg-nicholas`
 - REST API is disabled by default and must be enabled in settings
+
+# Update the Changelog:
+
+After updating changelog.txt, run:
+update-changelog.sh
+The script (update-changelog.sh) is available globally in PATH from the dev_scripts project.
+
+The script will:
+
+Load credentials from .env.wordpress
+Convert changelog.txt to HTML (uses pandoc if available)
+Update the BasePress article via custom API
+Display the URL to view changes
+Note: The script uses the BasePress custom API endpoint (/wp-json/basepress/v1/article/) which is configured in the BasePress API plugin on the site.
+

@@ -6,8 +6,8 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: contact, form, contact form, feedback form, bootstrap
-Tested up to: 6.7
-Stable tag: 4.10
+Tested up to: 6.8
+Stable tag: 4.11
 
 A clean and simple contact form with Bootstrap markup.
 

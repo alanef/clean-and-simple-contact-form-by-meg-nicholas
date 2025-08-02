@@ -1,0 +1,434 @@
+<h1 id="clean-and-simple-contact-form---smtp-configuration-guide">Clean
+and Simple Contact Form - SMTP Configuration Guide</h1>
+<p>This guide explains how to configure SMTP settings for reliable email
+delivery with the Clean and Simple Contact Form plugin.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#configuration-via-constants">Configuration via
+Constants</a></li>
+<li><a href="#available-constants">Available Constants</a></li>
+<li><a href="#popular-email-service-configurations">Popular Email
+Service Configurations</a></li>
+<li><a href="#local-development-with-mailpit">Local Development with
+Mailpit</a></li>
+<li><a href="#testing-your-configuration">Testing Your
+Configuration</a></li>
+<li><a href="#troubleshooting">Troubleshooting</a></li>
+<li><a href="#security-best-practices">Security Best Practices</a></li>
+</ul>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>By default, WordPress uses the PHP <code>mail()</code> function which
+can be unreliable. SMTP (Simple Mail Transfer Protocol) configuration
+ensures better email deliverability by using authenticated email
+servers.</p>
+<p>The Clean and Simple Contact Form plugin supports SMTP configuration
+through WordPress constants, allowing you to:</p>
+<ul>
+<li>Configure SMTP settings at the server level</li>
+<li>Keep sensitive credentials out of the database</li>
+<li>Use different settings for different environments</li>
+<li>Integrate with any SMTP service</li>
+</ul>
+<hr />
+<h2 id="configuration-via-constants">Configuration via Constants</h2>
+<p>SMTP settings are configured by adding constants to your
+<code>wp-config.php</code> file. This approach is:</p>
+<ul>
+<li><strong>Secure</strong>: Credentials aren’t stored in the
+database</li>
+<li><strong>Environment-specific</strong>: Different settings for
+dev/staging/production</li>
+<li><strong>Version-controlled</strong>: Can be included in deployment
+scripts</li>
+<li><strong>Plugin-agnostic</strong>: Works alongside other SMTP
+plugins</li>
+</ul>
+<h3 id="basic-setup">Basic Setup</h3>
+<p>Add these lines to your <code>wp-config.php</code> file (above the
+<code>/* That's all, stop editing! */</code> line):</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Enable SMTP</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_USE_SMTP&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">// SMTP Server Settings</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_HOST&#39;</span><span class="ot">,</span> <span class="st">&#39;smtp.example.com&#39;</span>)<span class="ot">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PORT&#39;</span><span class="ot">,</span> <span class="dv">587</span>)<span class="ot">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Authentication</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_AUTH&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_USER&#39;</span><span class="ot">,</span> <span class="st">&#39;your-email@example.com&#39;</span>)<span class="ot">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PASS&#39;</span><span class="ot">,</span> <span class="st">&#39;your-password&#39;</span>)<span class="ot">;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">// Security</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_SECURE&#39;</span><span class="ot">,</span> <span class="st">&#39;tls&#39;</span>)<span class="ot">;</span> <span class="co">// &#39;tls&#39; or &#39;ssl&#39;</span></span></code></pre></div>
+<hr />
+<h2 id="available-constants">Available Constants</h2>
+<h3 id="core-settings">Core Settings</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Constant</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>CSCF_USE_SMTP</code></td>
+<td>boolean</td>
+<td>Enable SMTP configuration</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><code>CSCF_SMTP_HOST</code></td>
+<td>string</td>
+<td>SMTP server hostname</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><code>CSCF_SMTP_PORT</code></td>
+<td>integer</td>
+<td>SMTP server port</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="authentication">Authentication</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Constant</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>CSCF_SMTP_AUTH</code></td>
+<td>boolean</td>
+<td>Enable SMTP authentication</td>
+<td>false</td>
+</tr>
+<tr class="even">
+<td><code>CSCF_SMTP_USER</code></td>
+<td>string</td>
+<td>SMTP username</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td><code>CSCF_SMTP_PASS</code></td>
+<td>string</td>
+<td>SMTP password</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-advanced">Security &amp; Advanced</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Constant</th>
+<th>Type</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>CSCF_SMTP_SECURE</code></td>
+<td>string</td>
+<td>Encryption method</td>
+<td>’‘, ’ssl’, ‘tls’</td>
+</tr>
+<tr class="even">
+<td><code>CSCF_SMTP_FROM</code></td>
+<td>string</td>
+<td>Override sender email</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td><code>CSCF_SMTP_FROM_NAME</code></td>
+<td>string</td>
+<td>Override sender name</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><code>CSCF_SMTP_DEBUG</code></td>
+<td>boolean</td>
+<td>Enable debug output</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="popular-email-service-configurations">Popular Email Service
+Configurations</h2>
+<h3 id="gmail-google-workspace">Gmail / Google Workspace</h3>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_USE_SMTP&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_HOST&#39;</span><span class="ot">,</span> <span class="st">&#39;smtp.gmail.com&#39;</span>)<span class="ot">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PORT&#39;</span><span class="ot">,</span> <span class="dv">587</span>)<span class="ot">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_AUTH&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_USER&#39;</span><span class="ot">,</span> <span class="st">&#39;your-email@gmail.com&#39;</span>)<span class="ot">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PASS&#39;</span><span class="ot">,</span> <span class="st">&#39;your-app-password&#39;</span>)<span class="ot">;</span> <span class="co">// Use App Password, not regular password!</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_SECURE&#39;</span><span class="ot">,</span> <span class="st">&#39;tls&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<p><strong>Important</strong>: Gmail requires an <a
+href="https://support.google.com/accounts/answer/185833">App
+Password</a> instead of your regular password.</p>
+<h3 id="sendgrid">SendGrid</h3>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_USE_SMTP&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_HOST&#39;</span><span class="ot">,</span> <span class="st">&#39;smtp.sendgrid.net&#39;</span>)<span class="ot">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PORT&#39;</span><span class="ot">,</span> <span class="dv">587</span>)<span class="ot">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_AUTH&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_USER&#39;</span><span class="ot">,</span> <span class="st">&#39;apikey&#39;</span>)<span class="ot">;</span> <span class="co">// Always &#39;apikey&#39; for SendGrid</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PASS&#39;</span><span class="ot">,</span> <span class="st">&#39;your-sendgrid-api-key&#39;</span>)<span class="ot">;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_SECURE&#39;</span><span class="ot">,</span> <span class="st">&#39;tls&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="mailgun">Mailgun</h3>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_USE_SMTP&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_HOST&#39;</span><span class="ot">,</span> <span class="st">&#39;smtp.mailgun.org&#39;</span>)<span class="ot">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PORT&#39;</span><span class="ot">,</span> <span class="dv">587</span>)<span class="ot">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_AUTH&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_USER&#39;</span><span class="ot">,</span> <span class="st">&#39;postmaster@your-domain.mailgun.org&#39;</span>)<span class="ot">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PASS&#39;</span><span class="ot">,</span> <span class="st">&#39;your-mailgun-password&#39;</span>)<span class="ot">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_SECURE&#39;</span><span class="ot">,</span> <span class="st">&#39;tls&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="amazon-ses">Amazon SES</h3>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_USE_SMTP&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_HOST&#39;</span><span class="ot">,</span> <span class="st">&#39;email-smtp.us-east-1.amazonaws.com&#39;</span>)<span class="ot">;</span> <span class="co">// Change region as needed</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PORT&#39;</span><span class="ot">,</span> <span class="dv">587</span>)<span class="ot">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_AUTH&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_USER&#39;</span><span class="ot">,</span> <span class="st">&#39;your-ses-smtp-username&#39;</span>)<span class="ot">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PASS&#39;</span><span class="ot">,</span> <span class="st">&#39;your-ses-smtp-password&#39;</span>)<span class="ot">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_SECURE&#39;</span><span class="ot">,</span> <span class="st">&#39;tls&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="office-365-outlook.com">Office 365 / Outlook.com</h3>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_USE_SMTP&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_HOST&#39;</span><span class="ot">,</span> <span class="st">&#39;smtp.office365.com&#39;</span>)<span class="ot">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PORT&#39;</span><span class="ot">,</span> <span class="dv">587</span>)<span class="ot">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_AUTH&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_USER&#39;</span><span class="ot">,</span> <span class="st">&#39;your-email@domain.com&#39;</span>)<span class="ot">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PASS&#39;</span><span class="ot">,</span> <span class="st">&#39;your-password&#39;</span>)<span class="ot">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_SECURE&#39;</span><span class="ot">,</span> <span class="st">&#39;tls&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="postmark">Postmark</h3>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_USE_SMTP&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_HOST&#39;</span><span class="ot">,</span> <span class="st">&#39;smtp.postmarkapp.com&#39;</span>)<span class="ot">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PORT&#39;</span><span class="ot">,</span> <span class="dv">587</span>)<span class="ot">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_AUTH&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_USER&#39;</span><span class="ot">,</span> <span class="st">&#39;your-postmark-server-token&#39;</span>)<span class="ot">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PASS&#39;</span><span class="ot">,</span> <span class="st">&#39;your-postmark-server-token&#39;</span>)<span class="ot">;</span> <span class="co">// Same as username</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_SECURE&#39;</span><span class="ot">,</span> <span class="st">&#39;tls&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="sparkpost">SparkPost</h3>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_USE_SMTP&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_HOST&#39;</span><span class="ot">,</span> <span class="st">&#39;smtp.sparkpostmail.com&#39;</span>)<span class="ot">;</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PORT&#39;</span><span class="ot">,</span> <span class="dv">587</span>)<span class="ot">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_AUTH&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_USER&#39;</span><span class="ot">,</span> <span class="st">&#39;SMTP_Injection&#39;</span>)<span class="ot">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PASS&#39;</span><span class="ot">,</span> <span class="st">&#39;your-sparkpost-api-key&#39;</span>)<span class="ot">;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_SECURE&#39;</span><span class="ot">,</span> <span class="st">&#39;tls&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<hr />
+<h2 id="local-development-with-mailpit">Local Development with
+Mailpit</h2>
+<p>Mailpit is perfect for catching emails during development without
+sending real emails.</p>
+<h3 id="docker-setup">Docker Setup</h3>
+<ol type="1">
+<li>Create <code>docker-compose.mailpit.yml</code>:</li>
+</ol>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&#39;3.8&#39;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="fu">services</span><span class="kw">:</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">mailpit</span><span class="kw">:</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">image</span><span class="kw">:</span><span class="at"> axllent/mailpit:latest</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">container_name</span><span class="kw">:</span><span class="at"> mailpit</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">ports</span><span class="kw">:</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;1025:1025&quot;</span><span class="co">  # SMTP port</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> </span><span class="st">&quot;8025:8025&quot;</span><span class="co">  # Web UI port</span></span></code></pre></div>
+<ol start="2" type="1">
+<li>Start Mailpit:</li>
+</ol>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose <span class="at">-f</span> docker-compose.mailpit.yml up <span class="at">-d</span></span></code></pre></div>
+<ol start="3" type="1">
+<li>Configure WordPress:</li>
+</ol>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_USE_SMTP&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_HOST&#39;</span><span class="ot">,</span> <span class="st">&#39;localhost&#39;</span>)<span class="ot">;</span> <span class="co">// or &#39;host.docker.internal&#39; if WP is in Docker</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PORT&#39;</span><span class="ot">,</span> <span class="dv">1025</span>)<span class="ot">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_AUTH&#39;</span><span class="ot">,</span> <span class="kw">false</span>)<span class="ot">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_SECURE&#39;</span><span class="ot">,</span> <span class="st">&#39;&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<ol start="4" type="1">
+<li>View emails at: http://localhost:8025</li>
+</ol>
+<h3 id="using-with-wp-env">Using with wp-env</h3>
+<p>If using wp-env for development, add to
+<code>.wp-env.override.json</code>:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;config&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;CSCF_USE_SMTP&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;CSCF_SMTP_HOST&quot;</span><span class="fu">:</span> <span class="st">&quot;host.docker.internal&quot;</span><span class="fu">,</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;CSCF_SMTP_PORT&quot;</span><span class="fu">:</span> <span class="dv">1025</span><span class="fu">,</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;CSCF_SMTP_AUTH&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;CSCF_SMTP_SECURE&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">}</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<hr />
+<h2 id="testing-your-configuration">Testing Your Configuration</h2>
+<h3 id="method-1-debug-mode">Method 1: Debug Mode</h3>
+<p>Enable debug mode to see SMTP communication:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_DEBUG&#39;</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span></code></pre></div>
+<p>This will output detailed SMTP logs when sending emails.</p>
+<h3 id="method-2-test-email-script">Method 2: Test Email Script</h3>
+<p>Create a test file in your WordPress root:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">// test-smtp.php</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">require_once</span>(<span class="st">&#39;wp-load.php&#39;</span>)<span class="ot">;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Test email</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="va">$to</span> <span class="op">=</span> <span class="st">&#39;test@example.com&#39;</span><span class="ot">;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="va">$subject</span> <span class="op">=</span> <span class="st">&#39;SMTP Test&#39;</span><span class="ot">;</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="va">$message</span> <span class="op">=</span> <span class="st">&#39;This is a test email from Clean and Simple Contact Form.&#39;</span><span class="ot">;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="va">$headers</span> <span class="op">=</span> <span class="dt">array</span>(<span class="st">&#39;Content-Type: text/plain; charset=UTF-8&#39;</span>)<span class="ot">;</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="va">$result</span> <span class="op">=</span> wp_mail(<span class="va">$to</span><span class="ot">,</span> <span class="va">$subject</span><span class="ot">,</span> <span class="va">$message</span><span class="ot">,</span> <span class="va">$headers</span>)<span class="ot">;</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$result</span>) {</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;Email sent successfully!&quot;</span><span class="ot">;</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;Email failed to send.&quot;</span><span class="ot">;</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Check for errors</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">global</span> <span class="va">$phpmailer</span><span class="ot">;</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">isset</span>(<span class="va">$phpmailer</span>-&gt;<span class="cn">E</span>rrorInfo)) {</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="kw">echo</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">Error: &quot;</span> <span class="op">.</span> <span class="va">$phpmailer</span>-&gt;<span class="cn">E</span>rrorInfo<span class="ot">;</span></span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="method-3-use-the-contact-form">Method 3: Use the Contact
+Form</h3>
+<p>Simply submit a test message through the contact form and check if
+it’s delivered.</p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<h4 id="could-not-connect-to-smtp-host">“Could not connect to SMTP
+host”</h4>
+<ul>
+<li><strong>Check</strong>: Firewall settings, port numbers</li>
+<li><strong>Try</strong>: Different ports (25, 587, 465, 2525)</li>
+<li><strong>Verify</strong>: Host name is correct</li>
+</ul>
+<h4 id="smtp-authentication-failed">“SMTP authentication failed”</h4>
+<ul>
+<li><strong>Check</strong>: Username and password</li>
+<li><strong>Note</strong>: Some services require app passwords</li>
+<li><strong>Verify</strong>: Account isn’t locked or requires 2FA</li>
+</ul>
+<h4 id="connection-timeout">“Connection timeout”</h4>
+<ul>
+<li><strong>Check</strong>: Server allows outbound SMTP</li>
+<li><strong>Try</strong>: Increasing timeout in code</li>
+<li><strong>Consider</strong>: Using a different port</li>
+</ul>
+<h4 id="emails-marked-as-spam">Emails marked as spam</h4>
+<ul>
+<li><strong>Set</strong>: Proper FROM address</li>
+<li><strong>Use</strong>: SPF, DKIM records</li>
+<li><strong>Avoid</strong>: Spam trigger words</li>
+</ul>
+<h3 id="debug-output">Debug Output</h3>
+<p>When <code>CSCF_SMTP_DEBUG</code> is enabled, look for output
+like:</p>
+<pre><code>SMTP -&gt; FROM SERVER: 220 smtp.gmail.com ESMTP
+SMTP -&gt; FROM SERVER: 250 smtp.gmail.com at your service
+SMTP -&gt; FROM SERVER: 334 VXNlcm5hbWU6
+SMTP -&gt; FROM SERVER: 334 UGFzc3dvcmQ6
+SMTP -&gt; FROM SERVER: 235 2.7.0 Accepted</code></pre>
+<h3 id="server-requirements">Server Requirements</h3>
+<p>Ensure your server: - Allows outbound SMTP connections - Has required
+PHP extensions (openssl for TLS/SSL) - Isn’t blocking SMTP ports - Has
+correct DNS resolution</p>
+<h3 id="testing-commands">Testing Commands</h3>
+<p>Test connectivity:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test connection</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="ex">telnet</span> smtp.gmail.com 587</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Test with OpenSSL</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="ex">openssl</span> s_client <span class="at">-connect</span> smtp.gmail.com:587 <span class="at">-starttls</span> smtp</span></code></pre></div>
+<hr />
+<h2 id="security-best-practices">Security Best Practices</h2>
+<h3 id="use-environment-variables">1. Use Environment Variables</h3>
+<p>Instead of hardcoding credentials:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_USER&#39;</span><span class="ot">,</span> <span class="fu">getenv</span>(<span class="st">&#39;SMTP_USERNAME&#39;</span>))<span class="ot">;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_PASS&#39;</span><span class="ot">,</span> <span class="fu">getenv</span>(<span class="st">&#39;SMTP_PASSWORD&#39;</span>))<span class="ot">;</span></span></code></pre></div>
+<h3 id="restrict-file-permissions">2. Restrict File Permissions</h3>
+<p>Ensure <code>wp-config.php</code> has proper permissions:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 wp-config.php</span></code></pre></div>
+<h3 id="use-encrypted-connections">3. Use Encrypted Connections</h3>
+<p>Always use TLS or SSL when available:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">define</span>(<span class="st">&#39;CSCF_SMTP_SECURE&#39;</span><span class="ot">,</span> <span class="st">&#39;tls&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="implement-rate-limiting">4. Implement Rate Limiting</h3>
+<p>Prevent abuse by limiting emails:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>add_action(<span class="st">&#39;cscf_before_send_email&#39;</span><span class="ot">,</span> <span class="kw">function</span>(<span class="va">$contact</span>) {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">$count</span> <span class="op">=</span> get_transient(<span class="st">&#39;cscf_email_count_&#39;</span> <span class="op">.</span> <span class="fu">date</span>(<span class="st">&#39;YmdH&#39;</span>))<span class="ot">;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="va">$count</span> <span class="op">&gt;</span> <span class="dv">100</span>) { <span class="co">// 100 emails per hour</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>        wp_die(<span class="st">&#39;Rate limit exceeded&#39;</span><span class="ot">,</span> <span class="dv">429</span>)<span class="ot">;</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    set_transient(<span class="st">&#39;cscf_email_count_&#39;</span> <span class="op">.</span> <span class="fu">date</span>(<span class="st">&#39;YmdH&#39;</span>)<span class="ot">,</span> <span class="va">$count</span> <span class="op">+</span> <span class="dv">1</span><span class="ot">,</span> <span class="cn">HOUR_IN_SECONDS</span>)<span class="ot">;</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>})<span class="ot">;</span></span></code></pre></div>
+<h3 id="monitor-email-logs">5. Monitor Email Logs</h3>
+<p>Keep track of sent emails:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>add_action(<span class="st">&#39;cscf_after_send_email&#39;</span><span class="ot">,</span> <span class="kw">function</span>(<span class="va">$contact</span><span class="ot">,</span> <span class="va">$result</span>) {</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="va">$result</span>) {</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">error_log</span>(<span class="fu">sprintf</span>(</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">&#39;[CSCF] Email sent to %s from %s at %s&#39;</span><span class="ot">,</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">implode</span>(<span class="st">&#39;, &#39;</span><span class="ot">,</span> cscf_PluginSettings::<span class="cn">R</span>ecipientEmails())<span class="ot">,</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>            <span class="va">$contact</span>-&gt;<span class="cn">E</span>mail<span class="ot">,</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>            current_time(<span class="st">&#39;mysql&#39;</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        ))<span class="ot">;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>}<span class="ot">,</span> <span class="dv">10</span><span class="ot">,</span> <span class="dv">2</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="use-application-passwords">6. Use Application Passwords</h3>
+<p>For services that support it, use application-specific passwords
+instead of your main account password.</p>
+<h3 id="regular-updates">7. Regular Updates</h3>
+<p>Keep WordPress, plugins, and server software updated for security
+patches.</p>
+<h3 id="backup-configuration">8. Backup Configuration</h3>
+<p>Document your SMTP settings securely for disaster recovery.</p>
+<hr />
+<h2 id="alternative-solutions">Alternative Solutions</h2>
+<p>If you need more advanced features, consider dedicated SMTP
+plugins:</p>
+<ul>
+<li><strong>WP Mail SMTP</strong>: User-friendly interface with
+logging</li>
+<li><strong>Post SMTP</strong>: Advanced diagnostics and OAuth
+support</li>
+<li><strong>Easy WP SMTP</strong>: Simple configuration with test
+features</li>
+<li><strong>FluentSMTP</strong>: Modern interface with email
+logging</li>
+</ul>
+<p>These plugins work alongside Clean and Simple Contact Form and
+provide: - GUI configuration - Email logging - Advanced authentication
+(OAuth) - Detailed error reporting - Multiple mailer options</p>
+<p>The constant-based approach in Clean and Simple Contact Form is
+designed to complement these solutions, not replace them.</p>

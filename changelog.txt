@@ -1,0 +1,43 @@
+# Changelog
+
+## Version 4.11 (Upcoming)
+
+### New Features
+- **REST API Support**: Added REST API endpoint for headless WordPress implementations
+  - POST endpoint at `/wp-json/cscf/v1/submit`
+  - Configurable authentication requirements
+  - Full form validation (excluding reCAPTCHA)
+  - Comprehensive documentation included
+
+- **SMTP Configuration**: Added support for SMTP configuration via wp-config constants
+  - Configure email delivery without additional plugins
+  - Support for all major email services
+  - Useful for development with tools like Mailpit
+  - Security-focused implementation
+
+### Developer Features
+- **New Action Hooks**:
+  - `cscf_before_send_email` - Fires before sending email
+  - `cscf_after_send_email` - Fires after email send attempt
+  - `cscf_form_submitted` - Fires after successful submission (all types)
+  - `cscf_form_submitted_standard` - Standard form submission only
+  - `cscf_form_submitted_ajax` - AJAX submission only
+  - `cscf_form_submitted_rest` - REST API submission only
+
+- **New Filter Hooks**:
+  - `cscf_form_data` - Filter form data before processing (REST API)
+
+### Documentation
+- Added comprehensive developer documentation for hooks and filters
+- Added REST API implementation guide with examples
+- Added SMTP configuration guide for popular services
+- All documentation available in HTML and Markdown formats
+
+### Improvements
+- Enhanced extensibility for third-party integrations
+- Better support for headless WordPress architectures
+- Improved developer experience with clear hook points
+
+## Previous Versions
+
+See readme.txt for earlier version history.

@@ -112,6 +112,9 @@ class cscf_rest_api {
 			);
 		}
 
+		// Action hook for REST API form submission
+		do_action( 'cscf_form_submitted_rest', $contact );
+
 		// Return success response
 		return new WP_REST_Response(
 			array(
