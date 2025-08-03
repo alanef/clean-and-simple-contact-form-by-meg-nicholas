@@ -22,11 +22,6 @@ class cscf {
 			'RegisterAdminStyles',
 		) );
 
-		add_action( 'init', array(
-			$this,
-			'RegisterTextDomain',
-		) );
-
 		add_action( 'plugins_loaded', array(
 			$this,
 			'RegisterForms',
@@ -43,13 +38,6 @@ class cscf {
 
 		//create the settings page
 		$settings = new cscf_settings();
-	}
-
-
-	function RegisterTextDomain() {
-		//$path = CSCF_PLUGIN_DIR . '/languages';
-		$path = '/' . CSCF_PLUGIN_NAME . '/languages';
-		load_plugin_textdomain( 'clean-and-simple-contact-form-by-meg-nicholas', false, $path );
 	}
 
 	function RegisterScripts() {

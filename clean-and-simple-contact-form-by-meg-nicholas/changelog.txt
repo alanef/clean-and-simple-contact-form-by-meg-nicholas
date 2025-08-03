@@ -15,6 +15,7 @@
   - REST API implementation guide
   - SMTP configuration guide
 * Improved extensibility for third-party integrations (CRMs, webhooks, mailing lists)
+* Removed deprecated load_plugin_textdomain() function - WordPress handles translations automatically since v4.6
 
 = 4.10 =
 * Added opt in
