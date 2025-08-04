@@ -49,6 +49,8 @@
       "@compat:8.0",
       "@compat:7.4",
       "@phpcs"
-    ]
+    ],
+    "test": "phpunit",
+    "test-verbose": "phpunit --testdox"
   }
 }

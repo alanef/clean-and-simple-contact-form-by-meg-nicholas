@@ -5,3 +5,4 @@ node_modules/
 clean-and-simple-contact-form-by-meg-nicholas/vendor/
 /vendor/
 /.env.wordpress
+.phpunit.result.cache
