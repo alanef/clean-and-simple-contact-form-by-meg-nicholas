@@ -161,11 +161,20 @@ class cscf_Contact {
 			$this->Errors['email'] = esc_html__( 'Please enter a valid email address.', 'clean-and-simple-contact-form-by-meg-nicholas' );
 		}
 
-		//mandatory phone number
-		if ( cscf_PluginSettings::PhoneNumber() && cscf_PluginSettings::PhoneNumberMandatory() ) {
-			if ( strlen( $this->PhoneNumber ) < 8 ) {
-				$this->Errors['confirm-email'] = esc_html__( 'Please enter a valid phone number.', 'clean-and-simple-contact-form-by-meg-nicholas' );
+		//phone number validation
+		if ( cscf_PluginSettings::PhoneNumber() && strlen( $this->PhoneNumber ) > 0 ) {
+			// Validate format - only allow digits, +, (), -, and spaces
+			if ( ! preg_match( '/^[0-9\+\(\)\-\s]+$/', $this->PhoneNumber ) ) {
+				$this->Errors['phone-number'] = esc_html__( 'Phone number can only contain numbers, +, (), - and spaces.', 'clean-and-simple-contact-form-by-meg-nicholas' );
 			}
+			// Check length for mandatory fields
+			elseif ( cscf_PluginSettings::PhoneNumberMandatory() && strlen( $this->PhoneNumber ) < 8 ) {
+				$this->Errors['phone-number'] = esc_html__( 'Please enter a valid phone number (minimum 8 characters).', 'clean-and-simple-contact-form-by-meg-nicholas' );
+			}
+		}
+		// Check if phone is mandatory but not provided
+		elseif ( cscf_PluginSettings::PhoneNumber() && cscf_PluginSettings::PhoneNumberMandatory() && strlen( $this->PhoneNumber ) == 0 ) {
+			$this->Errors['phone-number'] = esc_html__( 'Please enter your phone number.', 'clean-and-simple-contact-form-by-meg-nicholas' );
 		}
 
 		//contact consent
@@ -175,8 +184,9 @@ class cscf_Contact {
 			}
 		}
 
-		//check recaptcha but only if we have keys and not REST API (REST API uses WordPress auth instead)
-		if ( $this->RecaptchaPublicKey <> '' && $this->RecaptchaPrivateKey <> '' && ! $this->IsRestApi ) {
+		//check recaptcha but only if we have keys, not REST API, and no other validation errors
+		//This prevents reCAPTCHA from blocking users who need to fix other form errors
+		if ( $this->RecaptchaPublicKey <> '' && $this->RecaptchaPrivateKey <> '' && ! $this->IsRestApi && count( $this->Errors ) == 0 ) {
 			// phpcs:ignore WordPress.Security.ValidatedSanitizedInput.MissingUnslash -- No action, no form fields are being saved
             $resp = csf_RecaptchaV2::VerifyResponse( sanitize_text_field($_SERVER["REMOTE_ADDR"]??''), $this->RecaptchaPrivateKey, sanitize_text_field($_POST["g-recaptcha-response"]??''));
 

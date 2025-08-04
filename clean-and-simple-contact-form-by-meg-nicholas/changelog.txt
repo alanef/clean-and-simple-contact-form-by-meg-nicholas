@@ -15,6 +15,18 @@
   - REST API implementation guide
   - SMTP configuration guide
 * Improved extensibility for third-party integrations (CRMs, webhooks, mailing lists)
+* Improved phone number validation
+  - Now validates format (only allows digits, +, (), -, and spaces)
+  - Format validation applies even when phone field is optional
+  - Fixed bug where phone validation error used wrong error key
+* Improved form validation user experience
+  - reCAPTCHA validation now skipped if other form errors exist
+  - Prevents users from being blocked by reCAPTCHA when fixing validation errors
+* Fixed JavaScript bugs
+  - Fixed server-side validation errors not displaying when using AJAX submission
+  - Fixed jQuery selector looking for div instead of span elements for error display
+  - Fixed deprecated jQuery .selector usage for jQuery 3.0+ compatibility
+* Added comprehensive unit tests for form validation
 * Removed deprecated load_plugin_textdomain() function - WordPress handles translations automatically since v4.6
 
 = 4.10 =

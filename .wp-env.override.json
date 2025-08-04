@@ -1,6 +1,6 @@
 {
   "plugins": [
-    "./clean-and-simple-contact-form-by-meg-nicholas"3
+    "./clean-and-simple-contact-form-by-meg-nicholas"
   ],
   "port": 8500,
   "testsPort": 8501,
