@@ -34,7 +34,7 @@
       "rm -rf zipped",
       "@composer install -d clean-and-simple-contact-form-by-meg-nicholas --no-dev",
       "mkdir -p zipped",
-      "zip -r zipped/clean-and-simple-contact-form-by-meg-nicholas-free.zip clean-and-simple-contact-form-by-meg-nicholas"
+      "zip -r zipped/clean-and-simple-contact-form-by-meg-nicholas.zip clean-and-simple-contact-form-by-meg-nicholas"
     ],
     "phpcs": "phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=phpcs_sec.xml --ignore=*/vendor/*  --extensions=php",
     "compat:8.3": "./vendor/bin/phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/*  --extensions=php --runtime-set testVersion 8.3",

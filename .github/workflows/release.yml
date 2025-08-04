@@ -1,4 +1,4 @@
-name: Build Release
+name: Build and Deploy Release
 
 on:
   push:
@@ -102,7 +102,7 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ./zipped/clean-and-simple-contact-form-by-meg-nicholas-free.zip#clean-and-simple-contact-form-${{ steps.get_version.outputs.VERSION }}.zip
+            ./zipped/clean-and-simple-contact-form-by-meg-nicholas.zip
           
       - name: Deploy to WordPress.org
         env:
@@ -116,7 +116,7 @@ jobs:
           # Extract plugin to temporary directory
           mkdir -p svn-tmp
           cd svn-tmp
-          unzip ../zipped/clean-and-simple-contact-form-by-meg-nicholas-free.zip
+          unzip ../zipped/clean-and-simple-contact-form-by-meg-nicholas.zip
           
           # Checkout SVN repository
           svn checkout https://plugins.svn.wordpress.org/clean-and-simple-contact-form-by-meg-nicholas/ svn-repo --username "$SVN_USERNAME" --password "$SVN_PASSWORD" --no-auth-cache
