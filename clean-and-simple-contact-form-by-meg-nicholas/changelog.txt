@@ -1,0 +1,204 @@
+= 4.11 =
+* Added REST API support for headless WordPress implementations
+  - New endpoint at /wp-json/cscf/v1/submit with authentication
+  - Configurable user capability requirements
+  - Full form validation (excluding reCAPTCHA for authenticated requests)
+* Added SMTP configuration via wp-config constants
+  - Support for all major email services (Gmail, SendGrid, Mailgun, etc.)
+  - Useful for development with tools like Mailpit
+  - No UI needed - server-level configuration
+* Added developer hooks for extensibility
+  - Action hooks: cscf_before_send_email, cscf_after_send_email, cscf_form_submitted (plus type-specific variants)
+  - Filter hook: cscf_form_data for REST API data modification
+* Added comprehensive developer documentation
+  - Hooks and filters guide with examples
+  - REST API implementation guide
+  - SMTP configuration guide
+* Improved extensibility for third-party integrations (CRMs, webhooks, mailing lists)
+* Improved phone number validation
+  - Now validates format (only allows digits, +, (), -, and spaces)
+  - Format validation applies even when phone field is optional
+  - Fixed bug where phone validation error used wrong error key
+* Improved form validation user experience
+  - reCAPTCHA validation now skipped if other form errors exist
+  - Prevents users from being blocked by reCAPTCHA when fixing validation errors
+* Fixed JavaScript bugs
+  - Fixed server-side validation errors not displaying when using AJAX submission
+  - Fixed jQuery selector looking for div instead of span elements for error display
+  - Fixed deprecated jQuery .selector usage for jQuery 3.0+ compatibility
+* Added comprehensive unit tests for form validation
+* Removed deprecated load_plugin_textdomain() function - WordPress handles translations automatically since v4.6
+
+= 4.10 =
+* Added opt in
+* Added code to comply with current plugin guidelines
+
+= 4.9.1 =
+* corrected link markup in settings page
+
+= 4.9 =
+* add auto integration  of Fullworks Anti Spam
+
+= 4.8.0 =
+* add header to stop chaining ( kudos @kashmiri )
+* add filter pre email sending to add flexibility for developers
+
+= 4.7.10 =
+* add buy me a coffee donation
+
+= 4.7.9 =
+* update donation lib
+
+= 4.7.8 =
+* Add donatation and contribution information
+
+= 4.7.7 =
+* update readme
+* tested PHP 8.0
+
+= 4.7.6 =
+* Introduced optional input field for phone number
+* Exclude consent message from email if disabled
+* Fixed spacing and line breaks in email template
+* Fixed minor issues on settings page
+* Added consent & email to copy email if requested
+* Set copy email headers to text
+
+= 4.7.5 =
+* correct a couple of text domain issues introduced at 4.7.2
+
+= 4.7.4 =
+* correct santization
+
+= 4.7.3 =
+* correct from email in certain circumstances
+
+= 4.7.2 =
+* Updated santization and escaping to current plugin directory recommendations
+* add email header to specify text to improve formatting
+* tested up to 5.8 beta 2 and PHP 8.0
+
+= 4.7.1 =
+* Tested with WordPress version 5.3
+Fixed XSS vulnerability in GDPR consent message
+= 4.7.0 =
+* Tested with WordPress version 4.9.6
+* Added consent to contact checkbox for GDPR compliance
+= 4.6.2 =
+* Turkish translation update. Thanks to Abdullah Manaz! Tested up to WordPress 4.6.1.
+= 4.6.1 =
+* Fixed untranslated strings. Thanks to Abdullah Manaz!
+= 4.6.0 =
+* Prevent multiple 'send message' clicks.
+* Changed text domain to plugin slug to allow for WP translation system import
+* Removed advertising from settings screen
+* Added Korean translation thanks to Lee Dae-yeop
+* Added Romanian translation. Thanks to Marius Pruna.
+* Update French translation thanks to Steph
+* Added Hungarian translation. Thanks to János Sánta.
+= 4.5.1 =
+* Updated Polish translations thanks to Kacper
+* Updated French translation
+= 4.5.0 =
+* Added support for google recaptcha2. Replaces recaptcha version 1
+* Update to Italian translation thanks to Silvano
+* Added back the DIV to the contact form view as this introduced a display issue
+* Updated German translation thanks to schasoli
+* Polish translation update thanks to Kacper Rucinski
+= 4.4.4 =
+* Added Serbian translation thanks to [Borisa Djuraskovic](http://www.webhostinghub.com "Borisa Djuraskovic")
+* Added Slovenian translation thanks to Bekim Lutolli
+* Fixed some 'notice' errors
+* Recaptcha styling workaround for twenty fifteen theme
+* Remove empty divs from view
+= 4.4.3 =
+* Remove branding
+= 4.4.2 =
+* Akismet tweak only log as spam if akismet_result = 'true'
+* Updated Turkish translations thanks again to [Abdullah Manaz](http://manaz.net "Abdullah Manaz")
+* Added Indonesian translations thanks to Beny Hirmansyah
+= 4.4.0 =
+* Fixed XSS issue
+= 4.4.1 =
+* Add option for enquiry to email themselves a copy of the message
+* Update to Polish translation thanks to Radosław “Robaczek” Rak
+= 4.3.4 =
+* Added the wordpress page of contact form to the email
+* Removed link in main contact form view
+= 4.3.3 =
+* Before overriding the from address, check that another plugin has not done it first.
+Any plugin that overrides 'from email address' and 'from name' such as wp-mail-smtp plugin will take precedence over the settings in this plugin.
+* Added 'reply-to' to the email header
+* Moved the Name field before Email field
+* Added Hebrew translation thanks to Shay Cohen
+= 4.3.2 =
+* Added Norwegian Bokmål translation thanks to Jann Vestby
+* Added Brazilian Portugese translation originally a Portugese translation by Ricardo Santos aka BogasoBogolha
+= 4.3.1 =
+* Polish translation has been updated thanks to Arkadiusz Baron
+* Updated Turkish translations thanks again to [Abdullah Manaz](http://manaz.net "Abdullah Manaz")
+* New installations now have default stylesheet, ajax, and confirm-email options turned on
+* Compatibility with WordPress 3.8
+* Tested with twentyfourteen theme
+= 4.3.0 =
+* Contact form is now filtered for spam when the Akisturkishturkishturkmet plugin is present.
+[Learn more](http://www.megnicholas.co.uk/articles/contact-form-plugin-can-detect-spam/ "Learn More").
+= 4.2.5 =
+* Fixed bug that caused a PHP notice to be generated when 'Confirm Email Message' option is switched off.
+Thanks to MarrsAttax
+= 4.2.4 =
+* The requirement for users to confirm their email address is now optional.
+  When turned off users only need to enter their email address once.
+* Added Arabic translation thanks to [Omar AlQabandi](http://www.PlusOmar.com "Omar AlQabandi")
+= 4.2.3 =
+* Added ability to specify multiple recipient email addresses
+* Fix settings gui - there was a problem enabling 'From' Address option when javascript is not enabled.
+= 4.2.2 =
+* Recaptcha library has now been namespaced to 'cscf' to remove ALL possibility of conflicts with other plugins that also include this library.
+= 4.2.1 =
+* Fixed potential conflict with other themes or plugins that use Google reCAPTCHA. reCAPTCHA library is not loaded if it already loaded by another plugin or theme.
+* Recaptcha library function is now used to generate the sign up url on the settings page. The site domain is passed into the url for convenience.
+* Options subject, message, heading, and body text are now translated when they are retrieved from the the database. Previously only the default messages were translated when no values were found in the database.
+* Improved housekeeping: generic name for settings array has been changed from 'array_key' to 'cscf-options'
+= 4.2.0 =
+* Updated Turkish translations thanks again to [Abdullah Manaz](http://manaz.net "Abdullah Manaz")
+* Fixed a problem where certain texts on the settings screen were not being translated
+thanks to [Abdullah Manaz](http://manaz.net "Abdullah Manaz") again for finding this
+* Updates to FAQ section
+* The settings link on the plugin page may now be translated
+* The text 'Contact Form' on the admin screen menu may now be translated
+* Added Greek translations thanks to Georgios Diamantopoulos
+= 4.1.9 =
+* Added support for Bootstrap 3.0.0. Plugin is still compatible with Bootstrap 2.3.2, but if your theme uses this version
+please do not use the plugin's default style sheet (uncheck the box in the settings screen)
+[more information here](http://www.megnicholas.co.uk/articles/version-4-1-9-supports-bootstrap-3/ "more information").
+= 4.1.8 =
+* Added Russian Translation thanks to Oleg
+* Correct character encoding in Estonian translation thanks to [Marko Punnar](http://aretaja.org "Marko Punnar")
+* Correct some Spanish translation errors thanks to rowanda
+= 4.1.7 =
+* Added a note about the short code to use on the settings screen.
+* Added Estonian Translation thanks to [Marko Punnar](http://aretaja.org "Marko Punnar")
+* Added Japanese language thanks to Nikhil Khullar
+* Updated Turkish translation thanks again to Abdullah Manaz http://manaz.net
+= 4.1.6 =
+* Added ability to specify a 'from' address. When supplied the email will come from that address instead of the form filler's email address.
+* Changed type of email input boxes to "email"
+* Added Turkish translation thanks to Abdullah Manaz http://manaz.net
+= 4.1.5 =
+* Removed all carriage returns from views to avoid problems with wptexturize
+* Fixed typo in Dutch translation.
+= 4.1.4 =
+* Added Slovak translation file - thanks to Peter Gašparík
+* Added Catalan translation file - thanks to Llorenç
+= 4.1.3 =
+* Fixed escaped characters.
+* Added more translation files
+* Forms now submit via ajax.
+* Upgraded jquery-validate.js to 1.11. Removed jquery metadata plugin, form validation is now built with data attributes instead of json in classes.
+* Improved view html.
+* Added translations: Dutch thanks to Daniel Tetteroo, Armenian thanks to [Artak Kolyan](http://ablog.gratun.am "Artak Kolyan"),
+Polish thanks to Patryk Peas
+= 4.1.2 =
+* Added some FAQs
+* Added alternative shortcode

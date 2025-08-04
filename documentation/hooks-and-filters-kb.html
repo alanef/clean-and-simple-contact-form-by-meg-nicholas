@@ -1,0 +1,322 @@
+<p>This document describes all available hooks and filters in the Clean
+and Simple Contact Form plugin for developers who want to extend its
+functionality.</p>
+<h2 id="form-submission-hooks">Form Submission Hooks</h2>
+<p>These action hooks fire at different stages of form submission,
+allowing you to perform custom actions like logging, CRM integration, or
+analytics tracking.</p>
+<h3 id="cscf_form_submitted"><code>cscf_form_submitted</code></h3>
+<p>Fires after any successful form submission (standard, AJAX, or REST
+API).</p>
+<p><strong>Parameters:</strong> - <code>$contact</code> (object) - The
+cscf_Contact object containing all form data</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_action(&#39;cscf_form_submitted&#39;, function($contact) {
+    // Log all submissions
+    error_log(&#39;Form submitted from: &#39; . $contact-&gt;Email);
+});</code></pre>
+<h3
+id="cscf_form_submitted_standard"><code>cscf_form_submitted_standard</code></h3>
+<p>Fires only after successful standard (non-AJAX) form submission.</p>
+<p><strong>Parameters:</strong> - <code>$contact</code> (object) - The
+cscf_Contact object</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_action(&#39;cscf_form_submitted_standard&#39;, function($contact) {
+    // Track standard form submissions
+    do_action(&#39;my_analytics_event&#39;, &#39;contact_form&#39;, &#39;standard_submit&#39;);
+});</code></pre>
+<h3
+id="cscf_form_submitted_ajax"><code>cscf_form_submitted_ajax</code></h3>
+<p>Fires only after successful AJAX form submission.</p>
+<p><strong>Parameters:</strong> - <code>$contact</code> (object) - The
+cscf_Contact object</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_action(&#39;cscf_form_submitted_ajax&#39;, function($contact) {
+    // Handle AJAX-specific logic
+    update_option(&#39;last_ajax_submission&#39;, current_time(&#39;mysql&#39;));
+});</code></pre>
+<h3
+id="cscf_form_submitted_rest"><code>cscf_form_submitted_rest</code></h3>
+<p>Fires only after successful REST API form submission.</p>
+<p><strong>Parameters:</strong> - <code>$contact</code> (object) - The
+cscf_Contact object</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_action(&#39;cscf_form_submitted_rest&#39;, function($contact) {
+    // Log REST API submissions
+    $log_entry = [
+        &#39;type&#39; =&gt; &#39;rest_api&#39;,
+        &#39;email&#39; =&gt; $contact-&gt;Email,
+        &#39;timestamp&#39; =&gt; current_time(&#39;mysql&#39;)
+    ];
+    update_option(&#39;cscf_api_log&#39;, $log_entry);
+});</code></pre>
+<hr />
+<h2 id="email-processing-hooks">Email Processing Hooks</h2>
+<p>These hooks allow you to perform actions before and after email
+sending.</p>
+<h3 id="cscf_before_send_email"><code>cscf_before_send_email</code></h3>
+<p>Fires immediately before attempting to send the email.</p>
+<p><strong>Parameters:</strong> - <code>$contact</code> (object) - The
+cscf_Contact object</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_action(&#39;cscf_before_send_email&#39;, function($contact) {
+    // Add to queue for batch processing
+    $queue = get_option(&#39;email_queue&#39;, []);
+    $queue[] = [
+        &#39;to&#39; =&gt; $contact-&gt;Email,
+        &#39;subject&#39; =&gt; &#39;Contact Form Submission&#39;,
+        &#39;time&#39; =&gt; current_time(&#39;mysql&#39;)
+    ];
+    update_option(&#39;email_queue&#39;, $queue);
+});</code></pre>
+<h3 id="cscf_after_send_email"><code>cscf_after_send_email</code></h3>
+<p>Fires immediately after attempting to send the email.</p>
+<p><strong>Parameters:</strong> - <code>$contact</code> (object) - The
+cscf_Contact object - <code>$result</code> (boolean) - Whether the email
+was sent successfully</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_action(&#39;cscf_after_send_email&#39;, function($contact, $result) {
+    if (!$result) {
+        // Handle failed email
+        error_log(&#39;Failed to send email to: &#39; . implode(&#39;, &#39;, cscf_PluginSettings::RecipientEmails()));
+        
+        // Maybe try alternative method
+        wp_mail_alternative($contact);
+    }
+}, 10, 2);</code></pre>
+<hr />
+<h2 id="data-filtering-hooks">Data Filtering Hooks</h2>
+<p>These filters allow you to modify form data before processing.</p>
+<h3 id="cscf_form_data"><code>cscf_form_data</code></h3>
+<p>Filters form data before it’s processed (REST API only).</p>
+<p><strong>Parameters:</strong> - <code>$data</code> (array) - The form
+data array - <code>$post_id</code> (int|null) - The post ID where form
+was submitted - <code>$is_rest_api</code> (boolean) - Whether this is a
+REST API request</p>
+<p><strong>Returns:</strong> Modified data array</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_filter(&#39;cscf_form_data&#39;, function($data, $post_id, $is_rest_api) {
+    // Add tracking information
+    $data[&#39;source_post_id&#39;] = $post_id;
+    $data[&#39;submission_ip&#39;] = $_SERVER[&#39;REMOTE_ADDR&#39;];
+    
+    // Normalize phone numbers
+    if (isset($data[&#39;phone-number&#39;])) {
+        $data[&#39;phone-number&#39;] = preg_replace(&#39;/[^0-9+]/&#39;, &#39;&#39;, $data[&#39;phone-number&#39;]);
+    }
+    
+    return $data;
+}, 10, 3);</code></pre>
+<hr />
+<h2 id="email-content-filters">Email Content Filters</h2>
+<p>These filters allow you to modify the email content before
+sending.</p>
+<h3 id="cscf_email_emails"><code>cscf_email_emails</code></h3>
+<p>Filters the recipient email addresses.</p>
+<p><strong>Parameters:</strong> - <code>$emails</code> (array) - Array
+of recipient email addresses</p>
+<p><strong>Returns:</strong> Modified array of email addresses</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_filter(&#39;cscf_email_emails&#39;, function($emails) {
+    // Add CC based on form content
+    if (strpos($_POST[&#39;cscf&#39;][&#39;message&#39;], &#39;urgent&#39;) !== false) {
+        $emails[] = &#39;priority@example.com&#39;;
+    }
+    return $emails;
+});</code></pre>
+<h3 id="cscf_email_subject"><code>cscf_email_subject</code></h3>
+<p>Filters the email subject line.</p>
+<p><strong>Parameters:</strong> - <code>$subject</code> (string) - The
+email subject</p>
+<p><strong>Returns:</strong> Modified subject string</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_filter(&#39;cscf_email_subject&#39;, function($subject) {
+    // Add ticket number
+    $ticket_num = get_option(&#39;cscf_ticket_counter&#39;, 1000) + 1;
+    update_option(&#39;cscf_ticket_counter&#39;, $ticket_num);
+    return sprintf(&#39;[Ticket #%d] %s&#39;, $ticket_num, $subject);
+});</code></pre>
+<h3 id="cscf_email_message"><code>cscf_email_message</code></h3>
+<p>Filters the email message body.</p>
+<p><strong>Parameters:</strong> - <code>$message</code> (string) - The
+email message body</p>
+<p><strong>Returns:</strong> Modified message string</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_filter(&#39;cscf_email_message&#39;, function($message) {
+    // Add footer
+    $footer = &quot;\n\n---\nThis message was sent from the contact form on &quot; . get_bloginfo(&#39;name&#39;);
+    return $message . $footer;
+});</code></pre>
+<h3 id="cscf_email_header"><code>cscf_email_header</code></h3>
+<p>Filters the email headers.</p>
+<p><strong>Parameters:</strong> - <code>$header</code> (string) - The
+email headers</p>
+<p><strong>Returns:</strong> Modified header string</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_filter(&#39;cscf_email_header&#39;, function($header) {
+    // Add custom headers
+    $header .= &quot;X-Mailer: CSCF Plugin\r\n&quot;;
+    $header .= &quot;X-Priority: 3\r\n&quot;;
+    return $header;
+});</code></pre>
+<hr />
+<h2 id="spam-filtering">Spam Filtering</h2>
+<h3 id="cscf_spamfilter"><code>cscf_spamfilter</code></h3>
+<p>Allows custom spam filtering logic.</p>
+<p><strong>Parameters:</strong> - <code>$contact</code> (object) - The
+cscf_Contact object (passed by reference)</p>
+<p><strong>Note:</strong> Set <code>$contact-&gt;IsSpam = true</code> to
+mark as spam</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_filter(&#39;cscf_spamfilter&#39;, function($contact) {
+    // Check for common spam patterns
+    $spam_words = [&#39;viagra&#39;, &#39;cialis&#39;, &#39;casino&#39;, &#39;lottery&#39;];
+    $message_lower = strtolower($contact-&gt;Message);
+    
+    foreach ($spam_words as $word) {
+        if (strpos($message_lower, $word) !== false) {
+            $contact-&gt;IsSpam = true;
+            break;
+        }
+    }
+    
+    // Check for too many links
+    if (substr_count($contact-&gt;Message, &#39;http&#39;) &gt; 3) {
+        $contact-&gt;IsSpam = true;
+    }
+});</code></pre>
+<hr />
+<h2 id="code-examples">Code Examples</h2>
+<h3 id="example-1-crm-integration">Example 1: CRM Integration</h3>
+<pre class="php"><code>// Send form data to HubSpot
+add_action(&#39;cscf_form_submitted&#39;, function($contact) {
+    $hubspot_api_key = &#39;your-api-key&#39;;
+    $portal_id = &#39;your-portal-id&#39;;
+    $form_guid = &#39;your-form-guid&#39;;
+    
+    $endpoint = &quot;https://api.hsforms.com/submissions/v3/integration/submit/{$portal_id}/{$form_guid}&quot;;
+    
+    $data = [
+        &#39;fields&#39; =&gt; [
+            [&#39;name&#39; =&gt; &#39;email&#39;, &#39;value&#39; =&gt; $contact-&gt;Email],
+            [&#39;name&#39; =&gt; &#39;firstname&#39;, &#39;value&#39; =&gt; $contact-&gt;Name],
+            [&#39;name&#39; =&gt; &#39;message&#39;, &#39;value&#39; =&gt; $contact-&gt;Message]
+        ],
+        &#39;context&#39; =&gt; [
+            &#39;pageUri&#39; =&gt; get_permalink($contact-&gt;PostID),
+            &#39;pageName&#39; =&gt; get_the_title($contact-&gt;PostID)
+        ]
+    ];
+    
+    wp_remote_post($endpoint, [
+        &#39;headers&#39; =&gt; [
+            &#39;Content-Type&#39; =&gt; &#39;application/json&#39;,
+            &#39;Authorization&#39; =&gt; &#39;Bearer &#39; . $hubspot_api_key
+        ],
+        &#39;body&#39; =&gt; json_encode($data)
+    ]);
+});</code></pre>
+<h3 id="example-2-webhook-integration">Example 2: Webhook
+Integration</h3>
+<pre class="php"><code>// Send to Zapier webhook
+add_action(&#39;cscf_form_submitted&#39;, function($contact) {
+    $webhook_url = &#39;https://hooks.zapier.com/hooks/catch/123456/abcdef/&#39;;
+    
+    $data = [
+        &#39;name&#39; =&gt; $contact-&gt;Name,
+        &#39;email&#39; =&gt; $contact-&gt;Email,
+        &#39;message&#39; =&gt; $contact-&gt;Message,
+        &#39;phone&#39; =&gt; $contact-&gt;PhoneNumber,
+        &#39;consent&#39; =&gt; $contact-&gt;ContactConsent,
+        &#39;timestamp&#39; =&gt; current_time(&#39;c&#39;),
+        &#39;source_url&#39; =&gt; get_permalink($contact-&gt;PostID)
+    ];
+    
+    wp_remote_post($webhook_url, [
+        &#39;headers&#39; =&gt; [&#39;Content-Type&#39; =&gt; &#39;application/json&#39;],
+        &#39;body&#39; =&gt; json_encode($data),
+        &#39;timeout&#39; =&gt; 5
+    ]);
+});</code></pre>
+<h3 id="example-3-custom-logging">Example 3: Custom Logging</h3>
+<pre class="php"><code>// Create custom log table and log all submissions
+add_action(&#39;cscf_form_submitted&#39;, function($contact) {
+    global $wpdb;
+    $table_name = $wpdb-&gt;prefix . &#39;cscf_submissions&#39;;
+    
+    $wpdb-&gt;insert($table_name, [
+        &#39;email&#39; =&gt; $contact-&gt;Email,
+        &#39;name&#39; =&gt; $contact-&gt;Name,
+        &#39;message&#39; =&gt; $contact-&gt;Message,
+        &#39;phone&#39; =&gt; $contact-&gt;PhoneNumber,
+        &#39;consent&#39; =&gt; $contact-&gt;ContactConsent ? 1 : 0,
+        &#39;post_id&#39; =&gt; $contact-&gt;PostID,
+        &#39;spam_status&#39; =&gt; $contact-&gt;IsSpam,
+        &#39;submitted_at&#39; =&gt; current_time(&#39;mysql&#39;)
+    ]);
+});</code></pre>
+<h3 id="example-4-dynamic-email-routing">Example 4: Dynamic Email
+Routing</h3>
+<pre class="php"><code>// Route emails based on message content
+add_filter(&#39;cscf_email_emails&#39;, function($emails) {
+    $message = $_POST[&#39;cscf&#39;][&#39;message&#39;] ?? &#39;&#39;;
+    
+    // Route to different departments
+    if (stripos($message, &#39;support&#39;) !== false) {
+        return [&#39;support@example.com&#39;];
+    } elseif (stripos($message, &#39;sales&#39;) !== false) {
+        return [&#39;sales@example.com&#39;];
+    } elseif (stripos($message, &#39;billing&#39;) !== false) {
+        return [&#39;billing@example.com&#39;];
+    }
+    
+    return $emails; // Default recipients
+});</code></pre>
+<h3 id="example-5-add-to-mailing-list">Example 5: Add to Mailing
+List</h3>
+<pre class="php"><code>// Add to Mailchimp
+add_action(&#39;cscf_form_submitted&#39;, function($contact) {
+    if (!$contact-&gt;ContactConsent) {
+        return; // Only add if consent given
+    }
+    
+    $api_key = &#39;your-mailchimp-api-key&#39;;
+    $list_id = &#39;your-list-id&#39;;
+    $data_center = &#39;us1&#39;; // From your API key
+    
+    $url = &quot;https://{$data_center}.api.mailchimp.com/3.0/lists/{$list_id}/members&quot;;
+    
+    $data = [
+        &#39;email_address&#39; =&gt; $contact-&gt;Email,
+        &#39;status&#39; =&gt; &#39;subscribed&#39;,
+        &#39;merge_fields&#39; =&gt; [
+            &#39;FNAME&#39; =&gt; $contact-&gt;Name
+        ]
+    ];
+    
+    wp_remote_post($url, [
+        &#39;headers&#39; =&gt; [
+            &#39;Content-Type&#39; =&gt; &#39;application/json&#39;,
+            &#39;Authorization&#39; =&gt; &#39;Basic &#39; . base64_encode(&#39;anystring:&#39; . $api_key)
+        ],
+        &#39;body&#39; =&gt; json_encode($data)
+    ]);
+});</code></pre>
+<hr />
+<h2 id="contact-object-properties">Contact Object Properties</h2>
+<p>The <code>$contact</code> object passed to hooks contains these
+properties:</p>
+<ul>
+<li><code>Name</code> - Sender’s name</li>
+<li><code>Email</code> - Sender’s email address</li>
+<li><code>ConfirmEmail</code> - Confirmed email address</li>
+<li><code>Message</code> - The message content</li>
+<li><code>EmailToSender</code> - Whether to send copy to sender</li>
+<li><code>PhoneNumber</code> - Phone number (if enabled)</li>
+<li><code>ContactConsent</code> - Consent checkbox value</li>
+<li><code>PostID</code> - ID of the post/page containing the form</li>
+<li><code>IsSpam</code> - Spam status</li>
+<li><code>Errors</code> - Array of validation errors</li>
+<li><code>RecaptchaPublicKey</code> - reCAPTCHA public key</li>
+<li><code>RecaptchaPrivateKey</code> - reCAPTCHA private key</li>
+</ul>

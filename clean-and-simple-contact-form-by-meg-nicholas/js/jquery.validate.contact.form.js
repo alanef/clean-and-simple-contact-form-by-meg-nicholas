@@ -6,7 +6,7 @@ jQuery(document).ready(function ($) {
 
     $form.find("#recaptcha_response_field").focus(function () {
 
-        $errele = $form.find("div[for='cscf_recaptcha']");
+        $errele = $form.find("span[for='cscf_recaptcha']");
         $errele.html('');
 
     });
@@ -55,18 +55,32 @@ jQuery(document).ready(function ($) {
                         if (isScrolledIntoView($div) == false) {
                             jQuery('html,body')
                                 .animate({
-                                    scrollTop: jQuery($div.selector)
-                                        .offset().top
+                                    scrollTop: $div.offset().top
                                 }, 'slow');
                         }
                     }
 
                     else {
+                        // Clear any previous errors first
+                        $form.find("span.help-inline.help-block.error").html('').css('display', 'none');
+                        $form.find('.form-group').removeClass('has-error').addClass('has-success');
+                        $form.find('.control-group').removeClass('error').addClass('success');
+                        
                         $.each(response.errorlist, function (name, value) {
-                            $errele = $form.find("div[for='cscf_" + name + "']");
-                            $errele.html(value);
-                            $errele.closest('.form-group').removeClass('has-success').addClass('has-error');
-                            $errele.closest('.control-group').removeClass('success').addClass('error'); // support for bootstrap 2
+                            // Debug logging
+                            if (window.console) {
+                                console.log("Error for field: " + name + ", message: " + value);
+                            }
+                            
+                            $errele = $form.find("span[for='cscf_" + name + "']");
+                            if ($errele.length > 0) {
+                                $errele.html(value);
+                                $errele.css('display', 'block');
+                                $errele.closest('.form-group').removeClass('has-success').addClass('has-error');
+                                $errele.closest('.control-group').removeClass('success').addClass('error'); // support for bootstrap 2
+                            } else if (window.console) {
+                                console.log("Could not find error element for: cscf_" + name);
+                            }
                         });
                         $button.removeAttr("disabled");
                     }

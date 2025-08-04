@@ -8,6 +8,9 @@ function cscf_ContactForm() {
 
 	if ( $contact->IsValid() ) {
 		if ( $contact->SendMail() ) {
+			// Action hook for standard form submission
+			do_action( 'cscf_form_submitted_standard', $contact );
+			
 			$view = new CSCF_View( 'message-sent' );
 			$view->Set( 'heading', cscf_PluginSettings::SentMessageHeading() );
 			$view->Set( 'message', cscf_PluginSettings::SentMessageBody() );

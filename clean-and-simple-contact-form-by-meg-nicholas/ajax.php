@@ -13,6 +13,11 @@ function cscfsubmitform() {
 
 	if ( $result['valid'] ) {
 		$result['sent'] = $contact->SendMail();
+		
+		// Action hook for AJAX form submission
+		if ( $result['sent'] ) {
+			do_action( 'cscf_form_submitted_ajax', $contact );
+		}
 	}
 
 	header( 'Content-type: application/json' );

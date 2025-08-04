@@ -1,0 +1,101 @@
+name: Plugin Check
+
+on:
+  push:
+    branches: 
+      - main
+      - master
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get required PHP version
+        id: php_version
+        run: |
+          PHP_VERSION=$(grep "Requires PHP:" clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php | awk '{print $3}')
+          echo "PHP_VERSION=$PHP_VERSION" >> $GITHUB_OUTPUT
+          echo "Plugin requires PHP $PHP_VERSION"
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ steps.php_version.outputs.PHP_VERSION }}
+          coverage: none
+          tools: composer, wp-cli
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Cache Composer packages
+        id: composer-cache
+        uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-php-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Run phpcs checks
+        run: composer run-script check
+
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit
+
+      - name: Verify version consistency
+        run: |
+          # Get versions from different files
+          PLUGIN_VERSION=$(grep "Version:" clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php | awk '{print $2}')
+          README_VERSION=$(grep "Stable tag:" clean-and-simple-contact-form-by-meg-nicholas/readme.txt | awk '{print $3}')
+          CONSTANT_VERSION=$(grep "define.*CSCF_VERSION_NUM" clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php | grep -oE "'[0-9.]+'|\"[0-9.]+\"" | tr -d "'\"" | head -1)
+          
+          echo "Plugin header version: $PLUGIN_VERSION"
+          echo "Readme stable tag: $README_VERSION"
+          echo "Plugin constant version: $CONSTANT_VERSION"
+          
+          # Check if all versions match
+          if [ "$PLUGIN_VERSION" != "$README_VERSION" ]; then
+            echo "❌ ERROR: Version mismatch between plugin header ($PLUGIN_VERSION) and readme.txt ($README_VERSION)"
+            exit 1
+          fi
+          
+          if [ "$PLUGIN_VERSION" != "$CONSTANT_VERSION" ]; then
+            echo "❌ ERROR: Version mismatch between plugin header ($PLUGIN_VERSION) and version constant ($CONSTANT_VERSION)"
+            exit 1
+          fi
+          
+          echo "✅ All version numbers match: $PLUGIN_VERSION"
+
+      - name: Install WP-CLI dist-archive command
+        run: wp package install wp-cli/dist-archive-command
+
+      - name: Build plugin
+        run: |
+          cd clean-and-simple-contact-form-by-meg-nicholas && composer install --no-dev && cd ..
+          wp dist-archive ./clean-and-simple-contact-form-by-meg-nicholas ./clean-and-simple-contact-form-by-meg-nicholas.zip
+          mkdir tmp-build
+          unzip clean-and-simple-contact-form-by-meg-nicholas.zip -d tmp-build
+
+      - name: Remove wp-env files to prevent interference with plugin check
+        run: |
+          # The plugin-check-action incorrectly uses wp-env files if present
+          # Remove them to ensure clean CI environment
+          rm -f .wp-env.json .wp-env.override.json || true
+
+      - name: Run plugin check
+        uses: wordpress/plugin-check-action@v1
+        with:
+          build-dir: './tmp-build/clean-and-simple-contact-form-by-meg-nicholas'

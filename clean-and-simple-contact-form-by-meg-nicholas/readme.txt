@@ -6,14 +6,14 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: contact, form, contact form, feedback form, bootstrap
-Tested up to: 6.7
-Stable tag: 4.10
+Tested up to: 6.8
+Stable tag: 4.11
 
 A clean and simple contact form with Bootstrap markup.
 
 
 == Description ==
-A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup and  spam filtering.
+A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup, spam filtering, and REST API support for headless WordPress implementations.
 
 *   **Clean**: all user inputs are stripped in order to avoid cross-site scripting (XSS) vulnerabilities.
 
@@ -21,6 +21,8 @@ A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap ma
 
 *   **Stylish**: Use the included stylesheet or switch it off and use your own for seamless integration with your website.
 Uses **Twitter Bootstrap** classes.
+
+*   **REST API Support**: Enable headless WordPress implementations to submit forms via authenticated REST API endpoints.
 
 
 This is a straightforward contact form for your WordPress site. There is very minimal set-up
@@ -64,6 +66,8 @@ You can turn on reCAPTCHA to avoid your form being abused by bots, however Fullw
 *   Works with the **latest version of WordPress**.
 
 *   Original plugin written by an **experienced PHP programmer**, Megan Nicholas, the code is rock solid, safe, and rigorously tested as standard practice.
+
+*   **Headless WordPress ready**. REST API support allows you to submit forms from decoupled frontends, mobile apps, or any external application with proper authentication.
 
 Hopefully this plugin will fulfil all your needs.
 
@@ -135,6 +139,139 @@ Here is a list of things that you can change
 *   **Option to allow enquiry to email themselves a copy of the message.
 
 *   **Contact consent**: This option allows you to be GDPR compliant by adding a 'Consent to contact' check box at the bottom of the form.
+
+*   **Enable REST API**: Turn on REST API support to allow headless WordPress implementations to submit forms.
+
+*   **Required User Capability**: Set the minimum WordPress user capability required to use the REST API (default: edit_posts).
+
+
+== REST API for Headless WordPress ==
+
+This plugin includes REST API support, making it perfect for headless WordPress implementations, mobile applications, and decoupled frontend frameworks like React, Vue.js, or Angular.
+
+= Enabling REST API =
+
+1. Go to the plugin settings page
+2. Find the "REST API Settings" section
+3. Check "Enable REST API"
+4. Set the required user capability (default: edit_posts)
+5. Save your settings
+
+= API Endpoint =
+
+**POST** `/wp-json/cscf/v1/submit`
+
+= Authentication =
+
+The REST API requires WordPress user authentication. Users must be logged in and have the capability specified in settings (default: edit_posts).
+
+For headless implementations, you can use:
+- Application Passwords (WordPress 5.6+)
+- JWT Authentication plugins
+- OAuth plugins
+- Basic Authentication (development only)
+
+= Request Format =
+
+Send a POST request with JSON body:
+
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "confirm_email": "john@example.com",
+  "message": "Your message here",
+  "phone_number": "+1234567890",
+  "contact_consent": true,
+  "email_sender": false,
+  "post_id": 123
+}
+```
+
+**Required fields:**
+- `name`: Sender's name
+- `email`: Sender's email address
+- `message`: The message content
+
+**Optional fields:**
+- `confirm_email`: Required if email confirmation is enabled in settings
+- `phone_number`: Required if phone number is set as mandatory in settings
+- `contact_consent`: Required if contact consent is enabled in settings
+- `email_sender`: Set to true to send a copy to the sender
+- `post_id`: The ID of the page/post where the form would normally be displayed
+
+= Response Format =
+
+**Success Response (200):**
+```json
+{
+  "success": true,
+  "message": "Message Sent"
+}
+```
+
+**Validation Error Response (400):**
+```json
+{
+  "code": "validation_failed",
+  "message": "Validation failed.",
+  "data": {
+    "status": 400,
+    "errors": {
+      "email": "Please enter a valid email address.",
+      "message": "Please enter a message."
+    }
+  }
+}
+```
+
+**Authentication Error Response (401):**
+```json
+{
+  "code": "rest_forbidden",
+  "message": "Authentication required.",
+  "data": {
+    "status": 401
+  }
+}
+```
+
+= Example Implementation =
+
+**JavaScript (fetch API):**
+```javascript
+const formData = {
+  name: "John Doe",
+  email: "john@example.com",
+  confirm_email: "john@example.com",
+  message: "This is a test message from the REST API"
+};
+
+fetch('https://yoursite.com/wp-json/cscf/v1/submit', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer YOUR_AUTH_TOKEN'
+  },
+  body: JSON.stringify(formData)
+})
+.then(response => response.json())
+.then(data => {
+  if (data.success) {
+    console.log('Message sent successfully!');
+  } else {
+    console.error('Validation errors:', data.data.errors);
+  }
+});
+```
+
+= Important Notes =
+
+- REST API is disabled by default for security
+- reCAPTCHA is bypassed for REST API submissions (authentication provides security)
+- All other form validations and spam filtering still apply
+- Form submissions via REST API are processed identically to regular submissions
+- Email notifications work the same way as standard form submissions
 
 
 == Screenshots ==

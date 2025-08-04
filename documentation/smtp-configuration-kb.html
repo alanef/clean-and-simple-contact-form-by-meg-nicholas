@@ -1,0 +1,396 @@
+<p>This guide explains how to configure SMTP settings for reliable email
+delivery with the Clean and Simple Contact Form plugin.</p>
+<h2 id="overview">Overview</h2>
+<p>By default, WordPress uses the PHP <code>mail()</code> function which
+can be unreliable. SMTP (Simple Mail Transfer Protocol) configuration
+ensures better email deliverability by using authenticated email
+servers.</p>
+<p>The Clean and Simple Contact Form plugin supports SMTP configuration
+through WordPress constants, allowing you to:</p>
+<ul>
+<li>Configure SMTP settings at the server level</li>
+<li>Keep sensitive credentials out of the database</li>
+<li>Use different settings for different environments</li>
+<li>Integrate with any SMTP service</li>
+</ul>
+<hr />
+<h2 id="configuration-via-constants">Configuration via Constants</h2>
+<p>SMTP settings are configured by adding constants to your
+<code>wp-config.php</code> file. This approach is:</p>
+<ul>
+<li><strong>Secure</strong>: Credentials aren’t stored in the
+database</li>
+<li><strong>Environment-specific</strong>: Different settings for
+dev/staging/production</li>
+<li><strong>Version-controlled</strong>: Can be included in deployment
+scripts</li>
+<li><strong>Plugin-agnostic</strong>: Works alongside other SMTP
+plugins</li>
+</ul>
+<h3 id="basic-setup">Basic Setup</h3>
+<p>Add these lines to your <code>wp-config.php</code> file (above the
+<code>/* That's all, stop editing! */</code> line):</p>
+<pre class="php"><code>// Enable SMTP
+define(&#39;CSCF_USE_SMTP&#39;, true);
+
+// SMTP Server Settings
+define(&#39;CSCF_SMTP_HOST&#39;, &#39;smtp.example.com&#39;);
+define(&#39;CSCF_SMTP_PORT&#39;, 587);
+
+// Authentication
+define(&#39;CSCF_SMTP_AUTH&#39;, true);
+define(&#39;CSCF_SMTP_USER&#39;, &#39;your-email@example.com&#39;);
+define(&#39;CSCF_SMTP_PASS&#39;, &#39;your-password&#39;);
+
+// Security
+define(&#39;CSCF_SMTP_SECURE&#39;, &#39;tls&#39;); // &#39;tls&#39; or &#39;ssl&#39;</code></pre>
+<hr />
+<h2 id="available-constants">Available Constants</h2>
+<h3 id="core-settings">Core Settings</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Constant</th>
+<th>Type</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>CSCF_USE_SMTP</code></td>
+<td>boolean</td>
+<td>Enable SMTP configuration</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td><code>CSCF_SMTP_HOST</code></td>
+<td>string</td>
+<td>SMTP server hostname</td>
+<td>Yes</td>
+</tr>
+<tr class="odd">
+<td><code>CSCF_SMTP_PORT</code></td>
+<td>integer</td>
+<td>SMTP server port</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h3 id="authentication">Authentication</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Constant</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>CSCF_SMTP_AUTH</code></td>
+<td>boolean</td>
+<td>Enable SMTP authentication</td>
+<td>false</td>
+</tr>
+<tr class="even">
+<td><code>CSCF_SMTP_USER</code></td>
+<td>string</td>
+<td>SMTP username</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td><code>CSCF_SMTP_PASS</code></td>
+<td>string</td>
+<td>SMTP password</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="security-advanced">Security &amp; Advanced</h3>
+<table>
+<thead>
+<tr class="header">
+<th>Constant</th>
+<th>Type</th>
+<th>Description</th>
+<th>Options</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>CSCF_SMTP_SECURE</code></td>
+<td>string</td>
+<td>Encryption method</td>
+<td>’‘, ’ssl’, ‘tls’</td>
+</tr>
+<tr class="even">
+<td><code>CSCF_SMTP_FROM</code></td>
+<td>string</td>
+<td>Override sender email</td>
+<td>-</td>
+</tr>
+<tr class="odd">
+<td><code>CSCF_SMTP_FROM_NAME</code></td>
+<td>string</td>
+<td>Override sender name</td>
+<td>-</td>
+</tr>
+<tr class="even">
+<td><code>CSCF_SMTP_DEBUG</code></td>
+<td>boolean</td>
+<td>Enable debug output</td>
+<td>false</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="popular-email-service-configurations">Popular Email Service
+Configurations</h2>
+<h3 id="gmail-google-workspace">Gmail / Google Workspace</h3>
+<pre class="php"><code>define(&#39;CSCF_USE_SMTP&#39;, true);
+define(&#39;CSCF_SMTP_HOST&#39;, &#39;smtp.gmail.com&#39;);
+define(&#39;CSCF_SMTP_PORT&#39;, 587);
+define(&#39;CSCF_SMTP_AUTH&#39;, true);
+define(&#39;CSCF_SMTP_USER&#39;, &#39;your-email@gmail.com&#39;);
+define(&#39;CSCF_SMTP_PASS&#39;, &#39;your-app-password&#39;); // Use App Password, not regular password!
+define(&#39;CSCF_SMTP_SECURE&#39;, &#39;tls&#39;);</code></pre>
+<p><strong>Important</strong>: Gmail requires an <a
+href="https://support.google.com/accounts/answer/185833">App
+Password</a> instead of your regular password.</p>
+<h3 id="sendgrid">SendGrid</h3>
+<pre class="php"><code>define(&#39;CSCF_USE_SMTP&#39;, true);
+define(&#39;CSCF_SMTP_HOST&#39;, &#39;smtp.sendgrid.net&#39;);
+define(&#39;CSCF_SMTP_PORT&#39;, 587);
+define(&#39;CSCF_SMTP_AUTH&#39;, true);
+define(&#39;CSCF_SMTP_USER&#39;, &#39;apikey&#39;); // Always &#39;apikey&#39; for SendGrid
+define(&#39;CSCF_SMTP_PASS&#39;, &#39;your-sendgrid-api-key&#39;);
+define(&#39;CSCF_SMTP_SECURE&#39;, &#39;tls&#39;);</code></pre>
+<h3 id="mailgun">Mailgun</h3>
+<pre class="php"><code>define(&#39;CSCF_USE_SMTP&#39;, true);
+define(&#39;CSCF_SMTP_HOST&#39;, &#39;smtp.mailgun.org&#39;);
+define(&#39;CSCF_SMTP_PORT&#39;, 587);
+define(&#39;CSCF_SMTP_AUTH&#39;, true);
+define(&#39;CSCF_SMTP_USER&#39;, &#39;postmaster@your-domain.mailgun.org&#39;);
+define(&#39;CSCF_SMTP_PASS&#39;, &#39;your-mailgun-password&#39;);
+define(&#39;CSCF_SMTP_SECURE&#39;, &#39;tls&#39;);</code></pre>
+<h3 id="amazon-ses">Amazon SES</h3>
+<pre class="php"><code>define(&#39;CSCF_USE_SMTP&#39;, true);
+define(&#39;CSCF_SMTP_HOST&#39;, &#39;email-smtp.us-east-1.amazonaws.com&#39;); // Change region as needed
+define(&#39;CSCF_SMTP_PORT&#39;, 587);
+define(&#39;CSCF_SMTP_AUTH&#39;, true);
+define(&#39;CSCF_SMTP_USER&#39;, &#39;your-ses-smtp-username&#39;);
+define(&#39;CSCF_SMTP_PASS&#39;, &#39;your-ses-smtp-password&#39;);
+define(&#39;CSCF_SMTP_SECURE&#39;, &#39;tls&#39;);</code></pre>
+<h3 id="office-365-outlook.com">Office 365 / Outlook.com</h3>
+<pre class="php"><code>define(&#39;CSCF_USE_SMTP&#39;, true);
+define(&#39;CSCF_SMTP_HOST&#39;, &#39;smtp.office365.com&#39;);
+define(&#39;CSCF_SMTP_PORT&#39;, 587);
+define(&#39;CSCF_SMTP_AUTH&#39;, true);
+define(&#39;CSCF_SMTP_USER&#39;, &#39;your-email@domain.com&#39;);
+define(&#39;CSCF_SMTP_PASS&#39;, &#39;your-password&#39;);
+define(&#39;CSCF_SMTP_SECURE&#39;, &#39;tls&#39;);</code></pre>
+<h3 id="postmark">Postmark</h3>
+<pre class="php"><code>define(&#39;CSCF_USE_SMTP&#39;, true);
+define(&#39;CSCF_SMTP_HOST&#39;, &#39;smtp.postmarkapp.com&#39;);
+define(&#39;CSCF_SMTP_PORT&#39;, 587);
+define(&#39;CSCF_SMTP_AUTH&#39;, true);
+define(&#39;CSCF_SMTP_USER&#39;, &#39;your-postmark-server-token&#39;);
+define(&#39;CSCF_SMTP_PASS&#39;, &#39;your-postmark-server-token&#39;); // Same as username
+define(&#39;CSCF_SMTP_SECURE&#39;, &#39;tls&#39;);</code></pre>
+<h3 id="sparkpost">SparkPost</h3>
+<pre class="php"><code>define(&#39;CSCF_USE_SMTP&#39;, true);
+define(&#39;CSCF_SMTP_HOST&#39;, &#39;smtp.sparkpostmail.com&#39;);
+define(&#39;CSCF_SMTP_PORT&#39;, 587);
+define(&#39;CSCF_SMTP_AUTH&#39;, true);
+define(&#39;CSCF_SMTP_USER&#39;, &#39;SMTP_Injection&#39;);
+define(&#39;CSCF_SMTP_PASS&#39;, &#39;your-sparkpost-api-key&#39;);
+define(&#39;CSCF_SMTP_SECURE&#39;, &#39;tls&#39;);</code></pre>
+<hr />
+<h2 id="local-development-with-mailpit">Local Development with
+Mailpit</h2>
+<p>Mailpit is perfect for catching emails during development without
+sending real emails.</p>
+<h3 id="docker-setup">Docker Setup</h3>
+<ol type="1">
+<li>Create <code>docker-compose.mailpit.yml</code>:</li>
+</ol>
+<pre class="yaml"><code>version: &#39;3.8&#39;
+
+services:
+  mailpit:
+    image: axllent/mailpit:latest
+    container_name: mailpit
+    ports:
+      - &quot;1025:1025&quot;  # SMTP port
+      - &quot;8025:8025&quot;  # Web UI port</code></pre>
+<ol start="2" type="1">
+<li>Start Mailpit:</li>
+</ol>
+<pre class="bash"><code>docker compose -f docker-compose.mailpit.yml up -d</code></pre>
+<ol start="3" type="1">
+<li>Configure WordPress:</li>
+</ol>
+<pre class="php"><code>define(&#39;CSCF_USE_SMTP&#39;, true);
+define(&#39;CSCF_SMTP_HOST&#39;, &#39;localhost&#39;); // or &#39;host.docker.internal&#39; if WP is in Docker
+define(&#39;CSCF_SMTP_PORT&#39;, 1025);
+define(&#39;CSCF_SMTP_AUTH&#39;, false);
+define(&#39;CSCF_SMTP_SECURE&#39;, &#39;&#39;);</code></pre>
+<ol start="4" type="1">
+<li>View emails at: http://localhost:8025</li>
+</ol>
+<h3 id="using-with-wp-env">Using with wp-env</h3>
+<p>If using wp-env for development, add to
+<code>.wp-env.override.json</code>:</p>
+<pre class="json"><code>{
+  &quot;config&quot;: {
+    &quot;CSCF_USE_SMTP&quot;: true,
+    &quot;CSCF_SMTP_HOST&quot;: &quot;host.docker.internal&quot;,
+    &quot;CSCF_SMTP_PORT&quot;: 1025,
+    &quot;CSCF_SMTP_AUTH&quot;: false,
+    &quot;CSCF_SMTP_SECURE&quot;: &quot;&quot;
+  }
+}</code></pre>
+<hr />
+<h2 id="testing-your-configuration">Testing Your Configuration</h2>
+<h3 id="method-1-debug-mode">Method 1: Debug Mode</h3>
+<p>Enable debug mode to see SMTP communication:</p>
+<pre class="php"><code>define(&#39;CSCF_SMTP_DEBUG&#39;, true);</code></pre>
+<p>This will output detailed SMTP logs when sending emails.</p>
+<h3 id="method-2-test-email-script">Method 2: Test Email Script</h3>
+<p>Create a test file in your WordPress root:</p>
+<pre class="php"><code>&lt;?php
+// test-smtp.php
+require_once(&#39;wp-load.php&#39;);
+
+// Test email
+$to = &#39;test@example.com&#39;;
+$subject = &#39;SMTP Test&#39;;
+$message = &#39;This is a test email from Clean and Simple Contact Form.&#39;;
+$headers = array(&#39;Content-Type: text/plain; charset=UTF-8&#39;);
+
+$result = wp_mail($to, $subject, $message, $headers);
+
+if ($result) {
+    echo &quot;Email sent successfully!&quot;;
+} else {
+    echo &quot;Email failed to send.&quot;;
+    
+    // Check for errors
+    global $phpmailer;
+    if (isset($phpmailer-&gt;ErrorInfo)) {
+        echo &quot;\nError: &quot; . $phpmailer-&gt;ErrorInfo;
+    }
+}</code></pre>
+<h3 id="method-3-use-the-contact-form">Method 3: Use the Contact
+Form</h3>
+<p>Simply submit a test message through the contact form and check if
+it’s delivered.</p>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="common-issues">Common Issues</h3>
+<h4 id="could-not-connect-to-smtp-host">“Could not connect to SMTP
+host”</h4>
+<ul>
+<li><strong>Check</strong>: Firewall settings, port numbers</li>
+<li><strong>Try</strong>: Different ports (25, 587, 465, 2525)</li>
+<li><strong>Verify</strong>: Host name is correct</li>
+</ul>
+<h4 id="smtp-authentication-failed">“SMTP authentication failed”</h4>
+<ul>
+<li><strong>Check</strong>: Username and password</li>
+<li><strong>Note</strong>: Some services require app passwords</li>
+<li><strong>Verify</strong>: Account isn’t locked or requires 2FA</li>
+</ul>
+<h4 id="connection-timeout">“Connection timeout”</h4>
+<ul>
+<li><strong>Check</strong>: Server allows outbound SMTP</li>
+<li><strong>Try</strong>: Increasing timeout in code</li>
+<li><strong>Consider</strong>: Using a different port</li>
+</ul>
+<h4 id="emails-marked-as-spam">Emails marked as spam</h4>
+<ul>
+<li><strong>Set</strong>: Proper FROM address</li>
+<li><strong>Use</strong>: SPF, DKIM records</li>
+<li><strong>Avoid</strong>: Spam trigger words</li>
+</ul>
+<h3 id="debug-output">Debug Output</h3>
+<p>When <code>CSCF_SMTP_DEBUG</code> is enabled, look for output
+like:</p>
+<pre><code>SMTP -&gt; FROM SERVER: 220 smtp.gmail.com ESMTP
+SMTP -&gt; FROM SERVER: 250 smtp.gmail.com at your service
+SMTP -&gt; FROM SERVER: 334 VXNlcm5hbWU6
+SMTP -&gt; FROM SERVER: 334 UGFzc3dvcmQ6
+SMTP -&gt; FROM SERVER: 235 2.7.0 Accepted</code></pre>
+<h3 id="server-requirements">Server Requirements</h3>
+<p>Ensure your server: - Allows outbound SMTP connections - Has required
+PHP extensions (openssl for TLS/SSL) - Isn’t blocking SMTP ports - Has
+correct DNS resolution</p>
+<h3 id="testing-commands">Testing Commands</h3>
+<p>Test connectivity:</p>
+<pre class="bash"><code># Test connection
+telnet smtp.gmail.com 587
+
+# Test with OpenSSL
+openssl s_client -connect smtp.gmail.com:587 -starttls smtp</code></pre>
+<hr />
+<h2 id="security-best-practices">Security Best Practices</h2>
+<h3 id="use-environment-variables">1. Use Environment Variables</h3>
+<p>Instead of hardcoding credentials:</p>
+<pre class="php"><code>define(&#39;CSCF_SMTP_USER&#39;, getenv(&#39;SMTP_USERNAME&#39;));
+define(&#39;CSCF_SMTP_PASS&#39;, getenv(&#39;SMTP_PASSWORD&#39;));</code></pre>
+<h3 id="restrict-file-permissions">2. Restrict File Permissions</h3>
+<p>Ensure <code>wp-config.php</code> has proper permissions:</p>
+<pre class="bash"><code>chmod 600 wp-config.php</code></pre>
+<h3 id="use-encrypted-connections">3. Use Encrypted Connections</h3>
+<p>Always use TLS or SSL when available:</p>
+<pre class="php"><code>define(&#39;CSCF_SMTP_SECURE&#39;, &#39;tls&#39;);</code></pre>
+<h3 id="implement-rate-limiting">4. Implement Rate Limiting</h3>
+<p>Prevent abuse by limiting emails:</p>
+<pre class="php"><code>add_action(&#39;cscf_before_send_email&#39;, function($contact) {
+    $count = get_transient(&#39;cscf_email_count_&#39; . date(&#39;YmdH&#39;));
+    if ($count &gt; 100) { // 100 emails per hour
+        wp_die(&#39;Rate limit exceeded&#39;, 429);
+    }
+    set_transient(&#39;cscf_email_count_&#39; . date(&#39;YmdH&#39;), $count + 1, HOUR_IN_SECONDS);
+});</code></pre>
+<h3 id="monitor-email-logs">5. Monitor Email Logs</h3>
+<p>Keep track of sent emails:</p>
+<pre class="php"><code>add_action(&#39;cscf_after_send_email&#39;, function($contact, $result) {
+    if ($result) {
+        error_log(sprintf(
+            &#39;[CSCF] Email sent to %s from %s at %s&#39;,
+            implode(&#39;, &#39;, cscf_PluginSettings::RecipientEmails()),
+            $contact-&gt;Email,
+            current_time(&#39;mysql&#39;)
+        ));
+    }
+}, 10, 2);</code></pre>
+<h3 id="use-application-passwords">6. Use Application Passwords</h3>
+<p>For services that support it, use application-specific passwords
+instead of your main account password.</p>
+<h3 id="regular-updates">7. Regular Updates</h3>
+<p>Keep WordPress, plugins, and server software updated for security
+patches.</p>
+<h3 id="backup-configuration">8. Backup Configuration</h3>
+<p>Document your SMTP settings securely for disaster recovery.</p>
+<hr />
+<h2 id="alternative-solutions">Alternative Solutions</h2>
+<p>If you need more advanced features, consider dedicated SMTP
+plugins:</p>
+<ul>
+<li><strong>WP Mail SMTP</strong>: User-friendly interface with
+logging</li>
+<li><strong>Post SMTP</strong>: Advanced diagnostics and OAuth
+support</li>
+<li><strong>Easy WP SMTP</strong>: Simple configuration with test
+features</li>
+<li><strong>FluentSMTP</strong>: Modern interface with email
+logging</li>
+</ul>
+<p>These plugins work alongside Clean and Simple Contact Form and
+provide: - GUI configuration - Email logging - Advanced authentication
+(OAuth) - Detailed error reporting - Multiple mailer options</p>
+<p>The constant-based approach in Clean and Simple Contact Form is
+designed to complement these solutions, not replace them.</p>

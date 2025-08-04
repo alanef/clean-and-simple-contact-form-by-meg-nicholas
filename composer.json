@@ -12,6 +12,9 @@
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
+    },
+    "platform": {
+      "php": "7.4"
     }
   },
   "require-dev": {
@@ -20,7 +23,8 @@
     "wp-coding-standards/wpcs": ">=2.2.0",
     "phpcompatibility/phpcompatibility-wp": "*",
     "phpstan/phpstan": "*",
-    "phpunit/phpunit": "^10.5"
+    "phpunit/phpunit": "^9.5",
+    "10up/wp_mock": "^1.0"
   },
   "scripts": {
     "post-update-cmd": ["composer update -d clean-and-simple-contact-form-by-meg-nicholas",
@@ -45,6 +49,8 @@
       "@compat:8.0",
       "@compat:7.4",
       "@phpcs"
-    ]
+    ],
+    "test": "phpunit",
+    "test-verbose": "phpunit --testdox"
   }
 }
