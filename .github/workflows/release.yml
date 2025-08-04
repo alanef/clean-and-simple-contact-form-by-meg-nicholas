@@ -18,9 +18,20 @@ jobs:
   build-release:
     needs: run-checks
     runs-on: ubuntu-latest
+    environment: wordpress-org-repo
     
     steps:
       - uses: actions/checkout@v4
+      
+      - name: Verify no uncommitted changes
+        run: |
+          if [[ -n $(git status -s) ]]; then
+            echo "❌ ERROR: Uncommitted changes detected"
+            echo "Please commit all changes before creating a release tag"
+            git status -s
+            exit 1
+          fi
+          echo "✅ Working directory is clean"
       
       - name: Get required PHP version
         id: php_version

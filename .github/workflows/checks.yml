@@ -49,6 +49,9 @@ jobs:
       - name: Run phpcs checks
         run: composer run-script check
 
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit
+
       - name: Verify version consistency
         run: |
           # Get versions from different files

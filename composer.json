@@ -23,7 +23,8 @@
     "wp-coding-standards/wpcs": ">=2.2.0",
     "phpcompatibility/phpcompatibility-wp": "*",
     "phpstan/phpstan": "*",
-    "phpunit/phpunit": "^9.5"
+    "phpunit/phpunit": "^9.5",
+    "10up/wp_mock": "^1.0"
   },
   "scripts": {
     "post-update-cmd": ["composer update -d clean-and-simple-contact-form-by-meg-nicholas",
