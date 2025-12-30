@@ -87,16 +87,10 @@ jobs:
           name: Release ${{ steps.get_version.outputs.VERSION }}
           body: |
             Release of Clean and Simple Contact Form v${{ steps.get_version.outputs.VERSION }}
-            
-            ## What's New
+
+            ## Changes
             See [changelog](https://fullworksplugins.com/docs/clean-and-simple-contact-form/usage-clean-and-simple-contact-form/change-log-3/) for details.
-            
-            ## Key Features in v4.11
-            - REST API support for headless WordPress
-            - SMTP configuration via constants
-            - Developer hooks for extensibility
-            - Comprehensive documentation
-            
+
             ## Installation
             Download the attached zip file and upload to your WordPress site via Plugins → Add New → Upload Plugin.
           draft: false
