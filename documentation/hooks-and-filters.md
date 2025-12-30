@@ -8,6 +8,7 @@ This document describes all available hooks and filters in the Clean and Simple 
 - [Email Processing Hooks](#email-processing-hooks)
 - [Data Filtering Hooks](#data-filtering-hooks)
 - [Email Content Filters](#email-content-filters)
+- [CSS Class Filters](#css-class-filters)
 - [Spam Filtering](#spam-filtering)
 - [Code Examples](#code-examples)
 
@@ -243,6 +244,89 @@ add_filter('cscf_email_header', function($header) {
     $header .= "X-Priority: 3\r\n";
     return $header;
 });
+```
+
+---
+
+## CSS Class Filters
+
+These filters allow you to customize the CSS classes used by the form elements, enabling integration with any CSS framework or custom styling.
+
+### `cscf_css_classes`
+
+Filters all CSS classes for the form. Use this to completely replace or modify the class mapping.
+
+**Parameters:**
+- `$classes` (array) - Array of CSS classes keyed by element type
+- `$framework` (string) - The currently selected CSS framework (bootstrap, modern, theme-native, none)
+
+**Returns:** Modified array of CSS classes
+
+**Available Class Keys:**
+- `form_group` - Field wrapper div
+- `form_group_error` - Additional classes when field has error
+- `input` - Text input elements
+- `textarea` - Textarea element
+- `checkbox` - Checkbox input
+- `button` - Submit button
+- `help_text` - Error message/help text
+- `input_group` - Input group wrapper
+- `input_addon` - Input addon (for icons)
+- `text_error` - General error text
+
+**Example:**
+```php
+add_filter('cscf_css_classes', function($classes, $framework) {
+    // Use Tailwind classes instead
+    if ($framework === 'none') {
+        $classes['form_group'] = 'mb-4';
+        $classes['form_group_error'] = 'border-red-500';
+        $classes['input'] = 'w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500';
+        $classes['textarea'] = 'w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500';
+        $classes['button'] = 'w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700';
+        $classes['help_text'] = 'text-red-600 text-sm mt-1';
+    }
+    return $classes;
+}, 10, 2);
+```
+
+### `cscf_css_class`
+
+Filters individual CSS class for a specific element. Use this for targeted modifications.
+
+**Parameters:**
+- `$class` (string) - The CSS class(es) for the element
+- `$element` (string) - The element key (form_group, input, button, etc.)
+- `$framework` (string) - The currently selected CSS framework
+
+**Returns:** Modified class string
+
+**Example:**
+```php
+add_filter('cscf_css_class', function($class, $element, $framework) {
+    // Add custom class to all buttons
+    if ($element === 'button') {
+        return $class . ' my-custom-button';
+    }
+
+    // Add tracking class to inputs
+    if ($element === 'input') {
+        return $class . ' js-track-input';
+    }
+
+    return $class;
+}, 10, 3);
+```
+
+**Example - Use Different Classes per Page:**
+```php
+add_filter('cscf_css_class', function($class, $element, $framework) {
+    // Use different button style on landing pages
+    if ($element === 'button' && is_page('landing')) {
+        return 'btn btn-lg btn-primary btn-landing';
+    }
+    return $class;
+}, 10, 3);
 ```
 
 ---

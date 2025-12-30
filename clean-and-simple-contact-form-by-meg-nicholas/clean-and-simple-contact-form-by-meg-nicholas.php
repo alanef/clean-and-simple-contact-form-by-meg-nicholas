@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * @package Clean and Simple Contact Form
  */
@@ -7,7 +8,7 @@
 Plugin Name: Contact Form Clean and Simple
 Plugin URI: https://fullworks.net/products/clean-and-simple-contact-form
 Description: A clean and simple contact form with Google reCAPTCHA and Twitter Bootstrap markup.
-Version: 4.11
+Version: 4.12
 Requires at least: 5.6
 Requires PHP: 7.4
 Author: Alan Fuller
@@ -50,6 +51,7 @@ require 'class.cscf_contact.php';
 require 'class.view.php';
 require 'class.cscf_filters.php';
 require 'class.cscf_rest_api.php';
+require 'class.cscf_css_classes.php';
 require 'ajax.php';
 require 'recaptchav2.php';
 
@@ -75,7 +77,7 @@ if ( ! defined( 'CSCF_VERSION_KEY' ) ) {
 }
 
 if ( ! defined( 'CSCF_VERSION_NUM' ) ) {
-	define( 'CSCF_VERSION_NUM', '4.11' );
+	define( 'CSCF_VERSION_NUM', '4.12' );
 }
 
 if ( ! defined( 'CSCF_OPTIONS_KEY' ) ) {
@@ -86,7 +88,7 @@ if ( ! defined( 'CSCF_OPTIONS_KEY' ) ) {
 require_once CSCF_PLUGIN_DIR . '/vendor/autoload.php';
 new \Fullworks_Free_Plugin_Lib\Main('clean-and-simple-contact-form-by-meg-nicholas/clean-and-simple-contact-form-by-meg-nicholas.php',
 	admin_url( 'options-general.php?page=contact-form-settings' ),
-	'CSCF-Free',
+	'CSCF',
 	'settings_page_contact-form-settings',
 	'Clean and Simple Contact Form',);
 
@@ -145,19 +147,19 @@ if ( defined( 'CSCF_USE_SMTP' ) && CSCF_USE_SMTP ) {
 }
 
 /*get the current version and update options to the new option*/
-$old_version = get_option( CSCF_VERSION_KEY );
+$cscf_old_version = get_option( CSCF_VERSION_KEY );
 update_option( CSCF_VERSION_KEY, CSCF_VERSION_NUM );
 
 /*If this is a new installation then set some defaults*/
-if ( false == $old_version ) {
-	$options                          = get_option( CSCF_OPTIONS_KEY );
-	$options['use_client_validation'] = true;
-	$options['load_stylesheet']       = true;
-	$options['confirm-email']         = true;
-	update_option( CSCF_OPTIONS_KEY, $options );
+if ( false == $cscf_old_version ) {
+	$cscf_options                          = get_option( CSCF_OPTIONS_KEY );
+	$cscf_options['use_client_validation'] = true;
+	$cscf_options['load_stylesheet']       = true;
+	$cscf_options['confirm-email']         = true;
+	update_option( CSCF_OPTIONS_KEY, $cscf_options );
 }
 
 /*if necessary do an upgrade*/
-if ( $old_version < CSCF_VERSION_NUM ) {
-	$cscf->Upgrade( $old_version );
+if ( $cscf_old_version < CSCF_VERSION_NUM ) {
+	$cscf->Upgrade( $cscf_old_version );
 }

@@ -6,21 +6,20 @@ Requires PHP: 7.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: contact, form, contact form, feedback form, bootstrap
-Tested up to: 6.8
-Stable tag: 4.11
+Tested up to: 6.9
+Stable tag: 4.12
 
-A clean and simple contact form with Bootstrap markup.
+A clean and simple contact form with flexible CSS framework support.
 
 
 == Description ==
-A clean and simple AJAX contact form with Google reCAPTCHA, Twitter Bootstrap markup, spam filtering, and REST API support for headless WordPress implementations.
+A clean and simple AJAX contact form with Google reCAPTCHA, flexible CSS framework support, spam filtering, and REST API support for headless WordPress implementations.
 
 *   **Clean**: all user inputs are stripped in order to avoid cross-site scripting (XSS) vulnerabilities.
 
 *   **Simple**: AJAX enabled validation and submission for immediate response and guidance for your users (can be switched off).
 
-*   **Stylish**: Use the included stylesheet or switch it off and use your own for seamless integration with your website.
-Uses **Twitter Bootstrap** classes.
+*   **Flexible Styling**: Choose your CSS framework - Bootstrap (default), Theme Native (inherits your theme's styles), or Minimal (semantic classes for complete custom styling).
 
 *   **REST API Support**: Enable headless WordPress implementations to submit forms via authenticated REST API endpoints.
 
@@ -111,7 +110,13 @@ Here is a list of things that you can change
 
 *   **Message Sent Content**: The message content or body displayed to the user after the message has been sent.
 
-*   **Use this plugin’s default stylesheet**: The plugin comes with a default style sheet to make the form look nice for your user. Untick this if you want to use your theme’s stylesheet instead. The default stylesheet will simply not be linked in.
+*   **CSS Framework**: Choose how the form is styled:
+    - **Bootstrap (Default)**: Uses Bootstrap CSS classes for full Bootstrap compatibility. Best for themes already using Bootstrap.
+    - **Modern (Card style)**: A beautiful, opinionated modern design with card-style layout, large inputs, and CSS variables for easy customization. Includes automatic dark mode support.
+    - **Theme Native**: Uses minimal classes with WordPress's wp-element-button for the submit button. The form inherits your theme's native form styles.
+    - **Minimal**: Uses semantic CSS classes only (cscf-field, cscf-input, etc.) for complete custom styling control.
+
+*   **Use this plugin's default stylesheet**: The plugin comes with a default style sheet to make the form look nice for your user. Untick this if you want to use your theme's stylesheet instead. The default stylesheet will simply not be linked in. This option is most relevant when using the Bootstrap CSS framework.
 
 *   **Use client side validation (Ajax)**: When ticked the contact form will be validated and submitted on the client giving your user instant feedback if they have filled the form in incorrectly. If you wish the form to be validated and submitted only to the server then untick this option.
 
@@ -323,9 +328,38 @@ If your language is not yet available you are very welcome to translate it.
 
 = How do I change the text box sizes? =
 
-The plugin now uses Bootstrap 3. The text box widths now use up 100% of the available width.
+When using Bootstrap (the default), text box widths use up 100% of the available width.
 This makes the form responsive to all types of media. If you want to have a fixed width for the form you can put some styling around the shortcode:
 `<div style="width:600px;">[cscf-contact-form]</div>`
+
+= How do I make the form match my theme's style? =
+
+You have several options:
+
+1. **Modern mode**: Select "Modern (Card style)" for a beautiful, ready-to-use design that can be customized with CSS variables.
+
+2. **Theme Native mode**: Change the CSS Framework setting to "Theme Native". This uses minimal CSS classes and lets your theme's native form styles take over.
+
+3. **Minimal mode**: Change the CSS Framework setting to "Minimal" for complete custom styling control using semantic classes like cscf-field, cscf-input, cscf-button.
+
+4. **Custom CSS**: Keep Bootstrap mode but disable "Use the plugin default stylesheet" and add your own CSS rules.
+
+5. **Developer filters**: Use the `cscf_css_classes` and `cscf_css_class` filters to customize the CSS classes used by the form.
+
+= How do I customize the Modern style? =
+
+The Modern style uses CSS variables that you can override in your theme. Add this to your theme's CSS:
+
+`
+:root {
+  --cscf-primary: #0066cc;       /* Button and focus colors */
+  --cscf-radius: 0.75rem;        /* Border radius */
+  --cscf-border: #d1d5db;        /* Border color */
+  --cscf-error: #dc2626;         /* Error color */
+}
+`
+
+Full list of variables available in the cscf-modern.css file. Dark mode is automatically supported via `prefers-color-scheme` or by adding the `.dark` class to your HTML element.
 
 = Can I have multiple forms? =
 

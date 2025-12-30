@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class cscf {
 	private \Fullworks_Anti_Spam\Anti_Spam_Api $anti_spam;
@@ -32,6 +33,7 @@ class cscf {
 		add_action( 'wp_mail_failed', function ( $wp_error ) {
 			/**  @var $wp_error \WP_Error */
 			if ( defined( 'WP_DEBUG' ) && true == WP_DEBUG && is_wp_error( $wp_error ) ) {
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_trigger_error -- Intentional debug output when WP_DEBUG is enabled
 				trigger_error( 'CSCF Email - wp_mail error msg : ' . esc_html( $wp_error->get_error_message() ), E_USER_WARNING );
 			}
 		}, 10, 1 );
@@ -53,6 +55,9 @@ class cscf {
 			array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 
 		wp_register_style( 'cscf-bootstrap', CSCF_PLUGIN_URL . '/css/bootstrap-forms.min.css',
+			null, CSCF_VERSION_NUM );
+
+		wp_register_style( 'cscf-modern', CSCF_PLUGIN_URL . '/css/cscf-modern.css',
 			null, CSCF_VERSION_NUM );
 
 		wp_register_script( 'csf-recaptcha2',
@@ -172,6 +177,7 @@ class cscf {
 
 	public function SpamFilter( $contact ) {
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- WordPress core hook for spam filtering
 		$commentData = apply_filters( 'preprocess_comment', array(
 			'comment_post_ID'      => $contact->PostID,
 			'comment_author'       => $contact->Name,

@@ -160,6 +160,71 @@ email headers</p>
     return $header;
 });</code></pre>
 <hr />
+<h2 id="css-class-filters">CSS Class Filters</h2>
+<p>These filters allow you to customize the CSS classes used by the form
+elements, enabling integration with any CSS framework or custom
+styling.</p>
+<h3 id="cscf_css_classes"><code>cscf_css_classes</code></h3>
+<p>Filters all CSS classes for the form. Use this to completely replace
+or modify the class mapping.</p>
+<p><strong>Parameters:</strong> - <code>$classes</code> (array) - Array
+of CSS classes keyed by element type - <code>$framework</code> (string)
+- The currently selected CSS framework (bootstrap, modern, theme-native,
+none)</p>
+<p><strong>Returns:</strong> Modified array of CSS classes</p>
+<p><strong>Available Class Keys:</strong> - <code>form_group</code> -
+Field wrapper div - <code>form_group_error</code> - Additional classes
+when field has error - <code>input</code> - Text input elements -
+<code>textarea</code> - Textarea element - <code>checkbox</code> -
+Checkbox input - <code>button</code> - Submit button -
+<code>help_text</code> - Error message/help text -
+<code>input_group</code> - Input group wrapper -
+<code>input_addon</code> - Input addon (for icons) -
+<code>text_error</code> - General error text</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_filter(&#39;cscf_css_classes&#39;, function($classes, $framework) {
+    // Use Tailwind classes instead
+    if ($framework === &#39;none&#39;) {
+        $classes[&#39;form_group&#39;] = &#39;mb-4&#39;;
+        $classes[&#39;form_group_error&#39;] = &#39;border-red-500&#39;;
+        $classes[&#39;input&#39;] = &#39;w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500&#39;;
+        $classes[&#39;textarea&#39;] = &#39;w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500&#39;;
+        $classes[&#39;button&#39;] = &#39;w-full px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700&#39;;
+        $classes[&#39;help_text&#39;] = &#39;text-red-600 text-sm mt-1&#39;;
+    }
+    return $classes;
+}, 10, 2);</code></pre>
+<h3 id="cscf_css_class"><code>cscf_css_class</code></h3>
+<p>Filters individual CSS class for a specific element. Use this for
+targeted modifications.</p>
+<p><strong>Parameters:</strong> - <code>$class</code> (string) - The CSS
+class(es) for the element - <code>$element</code> (string) - The element
+key (form_group, input, button, etc.) - <code>$framework</code> (string)
+- The currently selected CSS framework</p>
+<p><strong>Returns:</strong> Modified class string</p>
+<p><strong>Example:</strong></p>
+<pre class="php"><code>add_filter(&#39;cscf_css_class&#39;, function($class, $element, $framework) {
+    // Add custom class to all buttons
+    if ($element === &#39;button&#39;) {
+        return $class . &#39; my-custom-button&#39;;
+    }
+
+    // Add tracking class to inputs
+    if ($element === &#39;input&#39;) {
+        return $class . &#39; js-track-input&#39;;
+    }
+
+    return $class;
+}, 10, 3);</code></pre>
+<p><strong>Example - Use Different Classes per Page:</strong></p>
+<pre class="php"><code>add_filter(&#39;cscf_css_class&#39;, function($class, $element, $framework) {
+    // Use different button style on landing pages
+    if ($element === &#39;button&#39; &amp;&amp; is_page(&#39;landing&#39;)) {
+        return &#39;btn btn-lg btn-primary btn-landing&#39;;
+    }
+    return $class;
+}, 10, 3);</code></pre>
+<hr />
 <h2 id="spam-filtering">Spam Filtering</h2>
 <h3 id="cscf_spamfilter"><code>cscf_spamfilter</code></h3>
 <p>Allows custom spam filtering logic.</p>

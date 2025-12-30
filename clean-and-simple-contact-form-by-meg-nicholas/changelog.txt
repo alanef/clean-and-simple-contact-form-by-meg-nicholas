@@ -1,3 +1,24 @@
+= 4.12 =
+* Added CSS Framework selection for flexible form styling
+  - Bootstrap (default) - maintains backward compatibility
+  - Modern (Card style) - opinionated modern design with CSS variables for easy customization
+  - Theme Native - minimal classes, inherits theme styles with wp-element-button for submit
+  - Minimal - semantic classes only for complete custom styling
+* New Modern style features:
+  - Card-style container with subtle shadow
+  - Large, comfortable input fields
+  - Clean typography and spacing
+  - Dark mode support (auto-detects or via .dark class)
+  - Full CSS variable system for easy theming
+  - Responsive design
+* Added filter hooks for developers to customize CSS classes
+  - cscf_css_classes filter for complete class mapping override
+  - cscf_css_class filter for individual element customization
+* Improved theme compatibility - form now adapts to different CSS frameworks
+* Added direct file access protection to all PHP files
+* Update wp tested to 6.9
+* update plugin free lib
+
 = 4.11 =
 * Added REST API support for headless WordPress implementations
   - New endpoint at /wp-json/cscf/v1/submit with authentication

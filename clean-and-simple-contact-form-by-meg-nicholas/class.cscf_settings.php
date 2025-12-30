@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /*
  * creates the settings page for the plugin
@@ -58,7 +59,10 @@ class cscf_settings {
             </p>
             <h3><?php esc_html_e( 'Support the developer', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></h3>
             <p>
-                <?php do_action( 'ffpl_ad_display' ); ?>
+                <?php
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- Hook from Starter Plugin library
+				do_action( 'ffpl_ad_display' );
+				?>
             </p>
 
             <form method="post" action="options.php">
@@ -162,6 +166,12 @@ class cscf_settings {
 			$this,
 			'print_section_info_styling',
 		), 'contact-form-settings' );
+		add_settings_field( 'css_framework', esc_html__( 'CSS Framework :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
+			$this,
+			'create_fields',
+		), 'contact-form-settings', 'section_styling', array(
+			'css_framework',
+		) );
 		add_settings_field( 'load_stylesheet', esc_html__( 'Use the plugin default stylesheet (un-tick to use your theme style sheet instead) :', 'clean-and-simple-contact-form-by-meg-nicholas' ), array(
 			$this,
 			'create_fields',
@@ -345,6 +355,14 @@ class cscf_settings {
 			// Validate capability exists
 			if ( empty( $input['rest_api_capability'] ) ) {
 				$input['rest_api_capability'] = 'edit_posts';
+			}
+		}
+
+		// CSS framework - validate against allowed values
+		if ( isset( $input['css_framework'] ) ) {
+			$allowed_frameworks = array_keys( cscf_CSS_Classes::get_presets() );
+			if ( ! in_array( $input['css_framework'], $allowed_frameworks, true ) ) {
+				$input['css_framework'] = 'bootstrap';
 			}
 		}
 
@@ -546,6 +564,24 @@ class cscf_settings {
                     <option <?php echo ( 'dark' == $theme ) ? 'selected' : ''; ?>
                             value="dark"><?php esc_html_e( 'Dark', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></option>
                 </select>
+				<?php
+				break;
+			case 'css_framework':
+				$current = cscf_PluginSettings::CssFramework();
+				$presets = cscf_CSS_Classes::get_presets();
+				?><label for="css_framework" class="screen-reader-text">
+				<?php esc_html_e('CSS framework', 'clean-and-simple-contact-form-by-meg-nicholas'); ?>
+				</label>
+				<select id="css_framework" name="<?php echo esc_attr( CSCF_OPTIONS_KEY ); ?>[css_framework]">
+				<?php foreach ( $presets as $key => $label ) : ?>
+					<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $current, $key ); ?>>
+						<?php echo esc_html( $label ); ?>
+					</option>
+				<?php endforeach; ?>
+				</select>
+				<p class="description">
+					<?php esc_html_e( 'Bootstrap: Full Bootstrap styling (default). Theme Native: Minimal classes, inherits theme styles. Minimal: Semantic classes only for custom styling.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>
+				</p>
 				<?php
 				break;
 			case 'use_client_validation':

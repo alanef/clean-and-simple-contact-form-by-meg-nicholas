@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 add_action( "wp_ajax_cscf-submitform", "cscfsubmitform" );
 add_action( "wp_ajax_nopriv_cscf-submitform", "cscfsubmitform" );
 

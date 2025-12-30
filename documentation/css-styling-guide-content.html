@@ -1,0 +1,476 @@
+<h1 id="clean-and-simple-contact-form---css-styling-guide">Clean and
+Simple Contact Form - CSS Styling Guide</h1>
+<p>This guide covers all the CSS styling options available in the Clean
+and Simple Contact Form plugin, including the new CSS Framework
+selection and how to customize the Modern style using CSS variables.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#css-framework-options">CSS Framework Options</a></li>
+<li><a href="#modern-style---css-variables">Modern Style - CSS
+Variables</a></li>
+<li><a href="#color-customization">Color Customization</a></li>
+<li><a href="#spacing-and-layout">Spacing and Layout</a></li>
+<li><a href="#typography">Typography</a></li>
+<li><a href="#dark-mode">Dark Mode</a></li>
+<li><a href="#developer-filters">Developer Filters</a></li>
+<li><a href="#complete-examples">Complete Examples</a></li>
+</ul>
+<hr />
+<h2 id="css-framework-options">CSS Framework Options</h2>
+<p>The plugin offers four CSS framework options, selectable from
+<strong>Settings &gt; Contact Form &gt; Styling and
+Validation</strong>:</p>
+<h3 id="bootstrap-default">Bootstrap (Default)</h3>
+<p>The classic option for backward compatibility. Uses Bootstrap CSS
+classes:</p>
+<ul>
+<li>Best for themes already using Bootstrap</li>
+<li>Uses classes like <code>form-control</code>, <code>btn</code>,
+<code>form-group</code></li>
+<li>Enable/disable the bundled stylesheet with “Use the plugin default
+stylesheet”</li>
+</ul>
+<h3 id="modern-card-style">Modern (Card style)</h3>
+<p>A beautiful, opinionated design with CSS variables for easy
+customization:</p>
+<ul>
+<li>Card-style container with subtle shadow</li>
+<li>Large, comfortable input fields</li>
+<li>Automatic dark mode support</li>
+<li>Fully customizable via CSS variables</li>
+<li>No external dependencies</li>
+</ul>
+<h3 id="theme-native">Theme Native</h3>
+<p>Minimal classes that let your theme’s styles take over:</p>
+<ul>
+<li>Uses WordPress’s <code>wp-element-button</code> for the submit
+button</li>
+<li>Form inherits your theme’s native form styles</li>
+<li>Best for themes with strong form styling</li>
+</ul>
+<h3 id="minimal-semantic-only">Minimal (Semantic only)</h3>
+<p>Semantic CSS classes for complete custom styling:</p>
+<ul>
+<li>Uses classes like <code>cscf-field</code>, <code>cscf-input</code>,
+<code>cscf-button</code></li>
+<li>No styling applied - you provide all CSS</li>
+<li>Maximum flexibility for custom designs</li>
+</ul>
+<hr />
+<h2 id="modern-style---css-variables">Modern Style - CSS Variables</h2>
+<p>The Modern style uses CSS custom properties (variables) that you can
+override in your theme. This allows complete customization without
+editing plugin files.</p>
+<h3 id="basic-customization">Basic Customization</h3>
+<p>Add this to your theme’s <code>style.css</code> or a custom CSS
+plugin:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Primary color - buttons and focus rings */</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#0066cc</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Border radius - roundness of corners */</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-radius</span>: <span class="dv">0.75</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Border color */</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-border</span>: <span class="cn">#d1d5db</span><span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Error color */</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-error</span>: <span class="cn">#dc2626</span><span class="op">;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="all-available-variables">All Available Variables</h3>
+<p>Here’s the complete list of CSS variables you can customize:</p>
+<h4 id="colors">Colors</h4>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Primary button and focus colors */</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#18181b</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary-hover</span>: <span class="cn">#27272a</span><span class="op">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Background colors */</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-background</span>: <span class="cn">#ffffff</span><span class="op">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-foreground</span>: <span class="cn">#09090b</span><span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-muted</span>: <span class="cn">#f4f4f5</span><span class="op">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-muted-foreground</span>: <span class="cn">#71717a</span><span class="op">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Form elements */</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-border</span>: <span class="cn">#e4e4e7</span><span class="op">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-input-bg</span>: <span class="cn">#ffffff</span><span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-ring</span>: <span class="cn">#18181b</span><span class="op">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* States */</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-error</span>: <span class="cn">#ef4444</span><span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-error-bg</span>: <span class="cn">#fef2f2</span><span class="op">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-success</span>: <span class="cn">#22c55e</span><span class="op">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="spacing">Spacing</h4>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-spacing-xs</span>: <span class="dv">0.25</span><span class="dt">rem</span><span class="op">;</span>   <span class="co">/* 4px */</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-spacing-sm</span>: <span class="dv">0.5</span><span class="dt">rem</span><span class="op">;</span>    <span class="co">/* 8px */</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-spacing-md</span>: <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span>      <span class="co">/* 16px */</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-spacing-lg</span>: <span class="dv">1.5</span><span class="dt">rem</span><span class="op">;</span>    <span class="co">/* 24px */</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-spacing-xl</span>: <span class="dv">2</span><span class="dt">rem</span><span class="op">;</span>      <span class="co">/* 32px */</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="border-radius">Border Radius</h4>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-radius-sm</span>: <span class="dv">0.375</span><span class="dt">rem</span><span class="op">;</span>   <span class="co">/* 6px - small elements */</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-radius</span>: <span class="dv">0.5</span><span class="dt">rem</span><span class="op">;</span>        <span class="co">/* 8px - inputs, buttons */</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-radius-lg</span>: <span class="dv">0.75</span><span class="dt">rem</span><span class="op">;</span>    <span class="co">/* 12px - card container */</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="typography">Typography</h4>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-family</span>: system-ui<span class="op">,</span> -apple-system<span class="op">,</span> BlinkMacSystemFont<span class="op">,</span> <span class="st">&quot;Segoe UI&quot;</span><span class="op">,</span> Roboto<span class="op">,</span> <span class="st">&quot;Helvetica Neue&quot;</span><span class="op">,</span> Arial<span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-size-sm</span>: <span class="dv">0.875</span><span class="dt">rem</span><span class="op">;</span>     <span class="co">/* 14px */</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-size-base</span>: <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span>       <span class="co">/* 16px */</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-size-lg</span>: <span class="dv">1.125</span><span class="dt">rem</span><span class="op">;</span>     <span class="co">/* 18px */</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-line-height</span>: <span class="dv">1.5</span><span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-weight-medium</span>: <span class="dv">500</span><span class="op">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-weight-semibold</span>: <span class="dv">600</span><span class="op">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="shadows">Shadows</h4>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-shadow-sm</span>: <span class="dv">0</span> <span class="dv">1</span><span class="dt">px</span> <span class="dv">2</span><span class="dt">px</span> <span class="dv">0</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">0.05</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-shadow</span>: <span class="dv">0</span> <span class="dv">1</span><span class="dt">px</span> <span class="dv">3</span><span class="dt">px</span> <span class="dv">0</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">0.1</span><span class="fu">)</span><span class="op">,</span> <span class="dv">0</span> <span class="dv">1</span><span class="dt">px</span> <span class="dv">2</span><span class="dt">px</span> <span class="dv">-1</span><span class="dt">px</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">0.1</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-shadow-lg</span>: <span class="dv">0</span> <span class="dv">10</span><span class="dt">px</span> <span class="dv">15</span><span class="dt">px</span> <span class="dv">-3</span><span class="dt">px</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">0.1</span><span class="fu">)</span><span class="op">,</span> <span class="dv">0</span> <span class="dv">4</span><span class="dt">px</span> <span class="dv">6</span><span class="dt">px</span> <span class="dv">-4</span><span class="dt">px</span> <span class="fu">rgb(</span><span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> / <span class="dv">0.1</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h4 id="transitions">Transitions</h4>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-transition</span>: <span class="dv">150</span><span class="dt">ms</span> <span class="fu">cubic-bezier(</span><span class="dv">0.4</span><span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="dv">0.2</span><span class="op">,</span> <span class="dv">1</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<hr />
+<h2 id="color-customization">Color Customization</h2>
+<h3 id="brand-color-matching">Brand Color Matching</h3>
+<p>Match the form to your brand colors:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Blue brand */</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#2563eb</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary-hover</span>: <span class="cn">#1d4ed8</span><span class="op">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-ring</span>: <span class="cn">#3b82f6</span><span class="op">;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Green brand */</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#059669</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary-hover</span>: <span class="cn">#047857</span><span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-ring</span>: <span class="cn">#10b981</span><span class="op">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Purple brand */</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#7c3aed</span><span class="op">;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary-hover</span>: <span class="cn">#6d28d9</span><span class="op">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-ring</span>: <span class="cn">#8b5cf6</span><span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="softmuted-style">Soft/Muted Style</h3>
+<p>For a softer, less contrasting look:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#6b7280</span><span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary-hover</span>: <span class="cn">#4b5563</span><span class="op">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-border</span>: <span class="cn">#e5e7eb</span><span class="op">;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-shadow</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="high-contrast">High Contrast</h3>
+<p>For better accessibility:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#000000</span><span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary-hover</span>: <span class="cn">#1a1a1a</span><span class="op">;</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-border</span>: <span class="cn">#000000</span><span class="op">;</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-foreground</span>: <span class="cn">#000000</span><span class="op">;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<hr />
+<h2 id="spacing-and-layout">Spacing and Layout</h2>
+<h3 id="compact-form">Compact Form</h3>
+<p>Reduce spacing for a tighter layout:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-spacing-lg</span>: <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-spacing-xl</span>: <span class="dv">1.5</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-spacing-md</span>: <span class="dv">0.75</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#cscf</span> <span class="fu">.cscf-input</span><span class="op">,</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="pp">#cscf</span> <span class="fu">.cscf-textarea</span> {</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">padding</span>: <span class="fu">var(</span><span class="va">--cscf-spacing-sm</span><span class="fu">)</span> <span class="fu">var(</span><span class="va">--cscf-spacing-md</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="larger-form">Larger Form</h3>
+<p>Increase spacing for a more spacious feel:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-spacing-lg</span>: <span class="dv">2</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-spacing-xl</span>: <span class="dv">3</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="pp">#cscf</span> <span class="fu">.cscf-input</span><span class="op">,</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#cscf</span> <span class="fu">.cscf-textarea</span> {</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">padding</span>: <span class="dv">1.25</span><span class="dt">rem</span> <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">font-size</span>: <span class="dv">1.125</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="full-width-remove-card">Full Width (Remove Card)</h3>
+<p>Make the form span full width without the card container:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#cscf</span><span class="fu">.cscfBlock</span> {</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">max-width</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">border</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">box-shadow</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">padding</span>: <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">background</span>: <span class="dv">transparent</span><span class="op">;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="custom-width">Custom Width</h3>
+<p>Set a specific form width:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#cscf</span><span class="fu">.cscfBlock</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">max-width</span>: <span class="dv">40</span><span class="dt">rem</span><span class="op">;</span>  <span class="co">/* 640px */</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<hr />
+<h2 id="typography-1">Typography</h2>
+<h3 id="custom-font">Custom Font</h3>
+<p>Use a different font family:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-family</span>: <span class="st">&quot;Inter&quot;</span><span class="op">,</span> system-ui<span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="larger-text">Larger Text</h3>
+<p>Increase font sizes:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-size-sm</span>: <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-size-base</span>: <span class="dv">1.125</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-size-lg</span>: <span class="dv">1.25</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<hr />
+<h2 id="dark-mode">Dark Mode</h2>
+<p>The Modern style automatically supports dark mode in two ways:</p>
+<h3 id="automatic-prefers-color-scheme">1. Automatic
+(prefers-color-scheme)</h3>
+<p>The form automatically adapts to the user’s system preference:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">/* This is built-in - no action needed */</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="im">@media</span> (<span class="kw">prefers-color-scheme</span>: dark) {</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="in">:root:not(</span><span class="fu">.light</span><span class="in">)</span> {</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">--cscf-primary</span>: <span class="cn">#fafafa</span><span class="op">;</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">--cscf-background</span>: <span class="cn">#09090b</span><span class="op">;</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>        <span class="co">/* ... other dark mode colors */</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="manual-.dark-class">2. Manual (.dark class)</h3>
+<p>Add the <code>.dark</code> class to your <code>&lt;html&gt;</code> or
+<code>&lt;body&gt;</code> element:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">html</span> <span class="er">class</span><span class="ot">=</span><span class="st">&quot;dark&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<h3 id="customizing-dark-mode-colors">Customizing Dark Mode Colors</h3>
+<p>Override the dark mode colors:</p>
+<div class="sourceCode" id="cb21"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.dark</span><span class="op">,</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="im">@media</span> (<span class="kw">prefers-color-scheme</span>: dark) {</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="in">:root:not(</span><span class="fu">.light</span><span class="in">)</span> {</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">--cscf-primary</span>: <span class="cn">#60a5fa</span><span class="op">;</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">--cscf-primary-hover</span>: <span class="cn">#93c5fd</span><span class="op">;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">--cscf-background</span>: <span class="cn">#111827</span><span class="op">;</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">--cscf-border</span>: <span class="cn">#374151</span><span class="op">;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="disable-dark-mode">Disable Dark Mode</h3>
+<p>Force light mode regardless of system preference:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#18181b</span><span class="op">;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-background</span>: <span class="cn">#ffffff</span><span class="op">;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="co">/* Set all other variables to light mode values */</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="im">@media</span> (<span class="kw">prefers-color-scheme</span>: dark) {</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="in">:root</span> {</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">/* Override with same light mode values */</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">--cscf-primary</span>: <span class="cn">#18181b</span><span class="op">;</span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">--cscf-background</span>: <span class="cn">#ffffff</span><span class="op">;</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<hr />
+<h2 id="developer-filters">Developer Filters</h2>
+<p>For advanced customization, use PHP filters to modify CSS
+classes:</p>
+<h3 id="cscf_css_classes">cscf_css_classes</h3>
+<p>Override all CSS class mappings:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>add_filter(<span class="st">&#39;cscf_css_classes&#39;</span><span class="ot">,</span> <span class="kw">function</span>(<span class="va">$classes</span><span class="ot">,</span> <span class="va">$framework</span>) {</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Completely replace classes for any framework</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="va">$framework</span> <span class="op">===</span> <span class="st">&#39;modern&#39;</span>) {</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>        <span class="va">$classes</span>[<span class="st">&#39;button&#39;</span>] <span class="op">=</span> <span class="st">&#39;my-custom-button-class&#39;</span><span class="ot">;</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>        <span class="va">$classes</span>[<span class="st">&#39;input&#39;</span>] <span class="op">=</span> <span class="st">&#39;my-custom-input-class&#39;</span><span class="ot">;</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">$classes</span><span class="ot">;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>}<span class="ot">,</span> <span class="dv">10</span><span class="ot">,</span> <span class="dv">2</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="cscf_css_class">cscf_css_class</h3>
+<p>Override individual element classes:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>add_filter(<span class="st">&#39;cscf_css_class&#39;</span><span class="ot">,</span> <span class="kw">function</span>(<span class="va">$class</span><span class="ot">,</span> <span class="va">$element</span><span class="ot">,</span> <span class="va">$framework</span>) {</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Add custom class to all buttons</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="va">$element</span> <span class="op">===</span> <span class="st">&#39;button&#39;</span>) {</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">$class</span> <span class="op">.</span> <span class="st">&#39; my-additional-class&#39;</span><span class="ot">;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">$class</span><span class="ot">;</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>}<span class="ot">,</span> <span class="dv">10</span><span class="ot">,</span> <span class="dv">3</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="available-class-keys">Available Class Keys</h3>
+<ul>
+<li><code>form_group</code> - Field wrapper</li>
+<li><code>form_group_error</code> - Error state for field wrapper</li>
+<li><code>input</code> - Text inputs</li>
+<li><code>textarea</code> - Textarea element</li>
+<li><code>checkbox</code> - Checkbox input</li>
+<li><code>button</code> - Submit button</li>
+<li><code>help_text</code> - Error message text</li>
+<li><code>input_group</code> - Input group wrapper (Bootstrap)</li>
+<li><code>input_addon</code> - Input addon (Bootstrap icons)</li>
+<li><code>text_error</code> - General error text</li>
+</ul>
+<hr />
+<h2 id="complete-examples">Complete Examples</h2>
+<h3 id="example-1-minimal-black-white">Example 1: Minimal Black &amp;
+White</h3>
+<div class="sourceCode" id="cb25"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#000000</span><span class="op">;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary-hover</span>: <span class="cn">#333333</span><span class="op">;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-background</span>: <span class="cn">#ffffff</span><span class="op">;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-border</span>: <span class="cn">#000000</span><span class="op">;</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-radius</span>: <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-radius-lg</span>: <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-shadow</span>: <span class="dv">none</span><span class="op">;</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="example-2-rounded-colorful">Example 2: Rounded &amp;
+Colorful</h3>
+<div class="sourceCode" id="cb26"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#ec4899</span><span class="op">;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary-hover</span>: <span class="cn">#db2777</span><span class="op">;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-ring</span>: <span class="cn">#f472b6</span><span class="op">;</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-radius</span>: <span class="dv">1</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-radius-lg</span>: <span class="dv">1.5</span><span class="dt">rem</span><span class="op">;</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-border</span>: <span class="cn">#fce7f3</span><span class="op">;</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-shadow-lg</span>: <span class="dv">0</span> <span class="dv">20</span><span class="dt">px</span> <span class="dv">25</span><span class="dt">px</span> <span class="dv">-5</span><span class="dt">px</span> <span class="fu">rgb(</span><span class="dv">236</span> <span class="dv">72</span> <span class="dv">153</span> / <span class="dv">0.1</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="pp">#cscf</span><span class="fu">.cscfBlock</span> {</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">border</span>: <span class="dv">2</span><span class="dt">px</span> <span class="dv">solid</span> <span class="fu">var(</span><span class="va">--cscf-primary</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="example-3-corporate-professional">Example 3: Corporate
+Professional</h3>
+<div class="sourceCode" id="cb27"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-font-family</span>: <span class="st">&quot;IBM Plex Sans&quot;</span><span class="op">,</span> system-ui<span class="op">,</span> <span class="dv">sans-serif</span><span class="op">;</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="cn">#0f62fe</span><span class="op">;</span></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary-hover</span>: <span class="cn">#0353e9</span><span class="op">;</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-background</span>: <span class="cn">#f4f4f4</span><span class="op">;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-border</span>: <span class="cn">#8d8d8d</span><span class="op">;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-radius</span>: <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-radius-lg</span>: <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a><span class="pp">#cscf</span><span class="fu">.cscfBlock</span> {</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">border-top</span>: <span class="dv">3</span><span class="dt">px</span> <span class="dv">solid</span> <span class="fu">var(</span><span class="va">--cscf-primary</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="example-4-glass-effect-glassmorphism">Example 4: Glass Effect
+(Glassmorphism)</h3>
+<div class="sourceCode" id="cb28"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-background</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.8</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-border</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.3</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-input-bg</span>: <span class="fu">rgba(</span><span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">255</span><span class="op">,</span> <span class="dv">0.5</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="pp">#cscf</span><span class="fu">.cscfBlock</span> {</span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">backdrop-filter</span>: <span class="fu">blur(</span><span class="dv">10</span><span class="dt">px</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>    -webkit-backdrop-filter: <span class="fu">blur(</span><span class="dv">10</span><span class="dt">px</span><span class="fu">)</span><span class="op">;</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="example-5-using-with-tailwind">Example 5: Using with
+Tailwind</h3>
+<p>If your theme uses Tailwind, you can use Tailwind’s CSS
+variables:</p>
+<div class="sourceCode" id="cb29"><pre
+class="sourceCode css"><code class="sourceCode css"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="in">:root</span> {</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-primary</span>: <span class="fu">rgb(var(</span><span class="va">--color-primary</span><span class="fu">))</span><span class="op">;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-background</span>: <span class="fu">rgb(var(</span><span class="va">--color-background</span><span class="fu">))</span><span class="op">;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">--cscf-border</span>: <span class="fu">rgb(var(</span><span class="va">--color-border</span><span class="fu">))</span><span class="op">;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<hr />
+<h2 id="troubleshooting">Troubleshooting</h2>
+<h3 id="styles-not-applying">Styles Not Applying</h3>
+<ol type="1">
+<li>Make sure “Modern (Card style)” is selected in the CSS Framework
+setting</li>
+<li>Check that your custom CSS is loaded after the plugin CSS</li>
+<li>Use browser DevTools to inspect which styles are being applied</li>
+</ol>
+<h3 id="dark-mode-not-working">Dark Mode Not Working</h3>
+<ol type="1">
+<li>Check if your theme adds a <code>.light</code> class that prevents
+dark mode</li>
+<li>Verify the dark mode media query is not being overridden</li>
+<li>Try adding the <code>.dark</code> class manually to test</li>
+</ol>
+<h3 id="css-variables-not-working">CSS Variables Not Working</h3>
+<ol type="1">
+<li>Ensure you’re defining variables in <code>:root</code> (not a nested
+selector)</li>
+<li>Check for typos in variable names</li>
+<li>Verify your browser supports CSS custom properties (all modern
+browsers do)</li>
+</ol>
+<hr />
+<h2 id="css-class-reference">CSS Class Reference</h2>
+<p>For the Minimal and Theme Native frameworks, these semantic classes
+are available:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Element</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>.cscf-field</code></td>
+<td>Field wrapper</td>
+</tr>
+<tr class="even">
+<td><code>.cscf-field--error</code></td>
+<td>Field with error</td>
+</tr>
+<tr class="odd">
+<td><code>.cscf-input</code></td>
+<td>Text input</td>
+</tr>
+<tr class="even">
+<td><code>.cscf-textarea</code></td>
+<td>Textarea</td>
+</tr>
+<tr class="odd">
+<td><code>.cscf-checkbox</code></td>
+<td>Checkbox</td>
+</tr>
+<tr class="even">
+<td><code>.cscf-button</code></td>
+<td>Submit button</td>
+</tr>
+<tr class="odd">
+<td><code>.cscf-error-message</code></td>
+<td>Error text</td>
+</tr>
+<tr class="even">
+<td><code>.cscf-input-group</code></td>
+<td>Input group wrapper</td>
+</tr>
+<tr class="odd">
+<td><code>.cscf-input-addon</code></td>
+<td>Input addon</td>
+</tr>
+</tbody>
+</table>

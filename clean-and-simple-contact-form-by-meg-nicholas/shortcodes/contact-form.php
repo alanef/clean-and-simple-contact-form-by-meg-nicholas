@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 add_shortcode( 'contact-form', 'cscf_ContactForm' );
 add_shortcode( 'cscf-contact-form', 'cscf_ContactForm' );
 
@@ -32,8 +33,11 @@ function cscf_ContactForm() {
 		wp_enqueue_script( 'cscf-validate' );
 	}
 
-	//only load the stylesheet if required
-	if ( cscf_PluginSettings::LoadStyleSheet() == true ) {
+	//load the appropriate stylesheet based on CSS framework
+	$css_framework = cscf_PluginSettings::CssFramework();
+	if ( 'modern' === $css_framework ) {
+		wp_enqueue_style( 'cscf-modern' );
+	} elseif ( 'bootstrap' === $css_framework && cscf_PluginSettings::LoadStyleSheet() == true ) {
 		wp_enqueue_style( 'cscf-bootstrap' );
 	}
 

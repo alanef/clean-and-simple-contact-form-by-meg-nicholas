@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class cscf_PluginSettings
 {
@@ -203,6 +204,17 @@ class cscf_PluginSettings
     {
         $options = get_option(CSCF_OPTIONS_KEY);
         return isset($options['rest_api_capability']) ? $options['rest_api_capability'] : 'edit_posts';
+    }
+
+    /**
+     * Get the selected CSS framework
+     *
+     * @return string The CSS framework key (bootstrap, theme-native, none)
+     */
+    static function CssFramework()
+    {
+        $options = get_option(CSCF_OPTIONS_KEY);
+        return isset($options['css_framework']) ? $options['css_framework'] : 'bootstrap';
     }
 }
 

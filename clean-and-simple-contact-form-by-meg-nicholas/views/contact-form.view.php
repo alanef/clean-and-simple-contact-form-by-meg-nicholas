@@ -1,3 +1,17 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+<?php
+// Get CSS classes for current framework
+$cscf_css = cscf_CSS_Classes::get_all_classes();
+$cscf_form_group_class = $cscf_css['form_group'];
+$cscf_form_group_error_class = $cscf_css['form_group_error'];
+$cscf_input_class = $cscf_css['input'];
+$cscf_textarea_class = $cscf_css['textarea'];
+$cscf_button_class = $cscf_css['button'];
+$cscf_help_text_class = $cscf_css['help_text'];
+$cscf_input_group_class = $cscf_css['input_group'];
+$cscf_input_addon_class = $cscf_css['input_addon'];
+$cscf_text_error_class = $cscf_css['text_error'];
+?>
 <div id="cscf" class="cscfBlock">
     <div class="cscfMessageSent" style="display:none;">
 		<?php echo wp_kses_post( $messageSentView->Render() ); ?>
@@ -13,23 +27,23 @@
             <input type="hidden" name="post-id" value="<?php echo esc_attr( $postID ); ?>">
 
 			<?php if ( isset( $contact->Errors['recaptcha'] ) ) { ?>
-                <div class="control-group form-group">
-                    <p class="text-error"><?php echo esc_html( $contact->Errors['recaptcha'] ); ?></p>
+                <div class="<?php echo esc_attr( $cscf_form_group_class ); ?>">
+                    <p class="<?php echo esc_attr( $cscf_text_error_class ); ?>"><?php echo esc_html( $contact->Errors['recaptcha'] ); ?></p>
                 </div>
 			<?php } ?>
 
             <!-- name -->
-            <div class="control-group form-group<?php if ( isset( $contact->Errors['name'] ) ) {
-				echo ' error has-error';
+            <div class="<?php echo esc_attr( $cscf_form_group_class ); ?><?php if ( isset( $contact->Errors['name'] ) ) {
+				echo ' ' . esc_attr( $cscf_form_group_error_class );
 			} ?>">
                 <label for="cscf_name"><?php esc_html_e( 'Name:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
 
 
-                <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() ) ? 'input-group' : ''; ?>">
-					<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() && ! empty( $cscf_input_group_class ) ) ? esc_attr( $cscf_input_group_class ) : ''; ?>">
+					<?php if ( cscf_PluginSettings::InputIcons() == true && ! empty( $cscf_input_addon_class ) ) { ?>
+                        <span class="<?php echo esc_attr( $cscf_input_addon_class ); ?>"><span class="glyphicon glyphicon-user"></span></span>
 					<?php } ?>
-                    <input class="form-control input-xlarge"
+                    <input class="<?php echo esc_attr( $cscf_input_class ); ?>"
                            data-rule-required="true"
                            data-msg-required="<?php esc_html_e( 'Please give your name.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
                            type="text" id="cscf_name" name="cscf[name]"
@@ -37,7 +51,7 @@
                            placeholder="<?php esc_html_e( 'Your Name', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
                     />
                 </div>
-                <span for="cscf_name" class="help-inline help-block error"
+                <span for="cscf_name" class="<?php echo esc_attr( $cscf_help_text_class ); ?>"
                       style="display:<?php echo isset( $contact->Errors['name'] ) ? 'block' : 'none'; ?>;">
 
                     <?php if ( isset( $contact->Errors['name'] ) ) {
@@ -48,16 +62,16 @@
 
 
             <!--email address-->
-            <div class="control-group form-group<?php if ( isset( $contact->Errors['email'] ) ) {
-				echo ' error has-error';
+            <div class="<?php echo esc_attr( $cscf_form_group_class ); ?><?php if ( isset( $contact->Errors['email'] ) ) {
+				echo ' ' . esc_attr( $cscf_form_group_error_class );
 			} ?>">
                 <label for="cscf_email"><?php esc_html_e( 'Email Address:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
 
-                <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() ) ? 'input-group' : ''; ?>">
-					<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() && ! empty( $cscf_input_group_class ) ) ? esc_attr( $cscf_input_group_class ) : ''; ?>">
+					<?php if ( cscf_PluginSettings::InputIcons() == true && ! empty( $cscf_input_addon_class ) ) { ?>
+                        <span class="<?php echo esc_attr( $cscf_input_addon_class ); ?>"><span class="glyphicon glyphicon-envelope"></span></span>
 					<?php } ?>
-                    <input class="form-control input-xlarge"
+                    <input class="<?php echo esc_attr( $cscf_input_class ); ?>"
                            data-rule-required="true"
                            data-rule-email="true"
                            data-msg-required="<?php esc_html_e( 'Please give your email address.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
@@ -67,7 +81,7 @@
                            placeholder="<?php esc_html_e( 'Your Email Address', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
                     />
                 </div>
-                <span for="cscf_email" class="help-inline help-block error"
+                <span for="cscf_email" class="<?php echo esc_attr( $cscf_help_text_class ); ?>"
                       style="display:<?php echo isset( $contact->Errors['email'] ) ? 'block' : 'none'; ?>;">
                     <?php if ( isset( $contact->Errors['email'] ) ) {
 	                    echo esc_html( $contact->Errors['email'] );
@@ -77,15 +91,15 @@
 
 			<?php if ( $confirmEmail ) { ?>
                 <!--confirm email address -->
-                <div class="control-group form-group<?php if ( isset( $contact->Errors['confirm-email'] ) ) {
-					echo ' error has-error';
+                <div class="<?php echo esc_attr( $cscf_form_group_class ); ?><?php if ( isset( $contact->Errors['confirm-email'] ) ) {
+					echo ' ' . esc_attr( $cscf_form_group_error_class );
 				} ?>">
                     <label for="cscf_confirm-email"><?php esc_html_e( 'Confirm Email Address:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
-                    <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() ) ? 'input-group' : ''; ?>">
-						<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+                    <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() && ! empty( $cscf_input_group_class ) ) ? esc_attr( $cscf_input_group_class ) : ''; ?>">
+						<?php if ( cscf_PluginSettings::InputIcons() == true && ! empty( $cscf_input_addon_class ) ) { ?>
+                            <span class="<?php echo esc_attr( $cscf_input_addon_class ); ?>"><span class="glyphicon glyphicon-envelope"></span></span>
 						<?php } ?>
-                        <input class="form-control input-xlarge"
+                        <input class="<?php echo esc_attr( $cscf_input_class ); ?>"
                                data-rule-required="true"
                                data-rule-email="true"
                                data-rule-equalTo="#cscf_email"
@@ -97,7 +111,7 @@
                                placeholder="<?php esc_html_e( 'Confirm Your Email Address', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
                         />
                     </div>
-                    <span for="cscf_confirm-email" class="help-inline help-block error"
+                    <span for="cscf_confirm-email" class="<?php echo esc_attr( $cscf_help_text_class ); ?>"
                           style="display:<?php echo isset( $contact->Errors['confirm-email'] ) ? 'block' : 'none'; ?>;">
                     <?php if ( isset( $contact->Errors['confirm-email'] ) ) {
 	                    echo esc_attr( $contact->Errors['confirm-email'] );
@@ -108,15 +122,15 @@
 
 			<?php if ( cscf_PluginSettings::PhoneNumber() ) { ?>
                 <!-- telephone number -->
-                <div class="control-group form-group<?php if ( isset( $contact->Errors['phone-number'] ) ) {
-					echo ' error has-error';
+                <div class="<?php echo esc_attr( $cscf_form_group_class ); ?><?php if ( isset( $contact->Errors['phone-number'] ) ) {
+					echo ' ' . esc_attr( $cscf_form_group_error_class );
 				} ?>">
                     <label for="cscf_phone-number"><?php esc_html_e( 'Phone Number:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
-                    <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() ) ? 'input-group' : ''; ?>">
-						<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-phone-alt"></span></span>
+                    <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() && ! empty( $cscf_input_group_class ) ) ? esc_attr( $cscf_input_group_class ) : ''; ?>">
+						<?php if ( cscf_PluginSettings::InputIcons() == true && ! empty( $cscf_input_addon_class ) ) { ?>
+                            <span class="<?php echo esc_attr( $cscf_input_addon_class ); ?>"><span class="glyphicon glyphicon-phone-alt"></span></span>
 						<?php } ?>
-                        <input class="form-control input-xlarge"
+                        <input class="<?php echo esc_attr( $cscf_input_class ); ?>"
                                data-rule-required="<?php echo ( true === cscf_PluginSettings::PhoneNumberMandatory() ) ? 'true' : 'false'; ?>"
 							   data-msg-required="<?php esc_html_e( 'Please give your phone number.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
 							   type="text" id="cscf_phone-number" name="cscf[phone-number]"
@@ -124,7 +138,7 @@
                                placeholder="<?php esc_html_e( 'Your Phone Number', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
                         />
                     </div>
-                    <span for="cscf_phone-number" class="help-inline help-block error"
+                    <span for="cscf_phone-number" class="<?php echo esc_attr( $cscf_help_text_class ); ?>"
                           style="display:<?php echo isset( $contact->Errors['phone-number'] ) ? 'block' : 'none'; ?>;">
                     <?php if ( isset( $contact->Errors['phone-number'] ) ) {
 	                    echo esc_attr( $contact->Errors['phone-number'] );
@@ -135,22 +149,22 @@
 
 
             <!-- message -->
-            <div class="control-group form-group<?php if ( isset( $contact->Errors['message'] ) ) {
-				echo ' error has-error';
+            <div class="<?php echo esc_attr( $cscf_form_group_class ); ?><?php if ( isset( $contact->Errors['message'] ) ) {
+				echo ' ' . esc_attr( $cscf_form_group_error_class );
 			} ?>">
                 <label for="cscf_message"><?php esc_html_e( 'Message:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
-                <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() ) ? 'input-group' : ''; ?>">
-					<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
+                <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() && ! empty( $cscf_input_group_class ) ) ? esc_attr( $cscf_input_group_class ) : ''; ?>">
+					<?php if ( cscf_PluginSettings::InputIcons() == true && ! empty( $cscf_input_addon_class ) ) { ?>
+                        <span class="<?php echo esc_attr( $cscf_input_addon_class ); ?>"><span class="glyphicon glyphicon-comment"></span></span>
 					<?php } ?>
-                    <textarea class="form-control input-xlarge"
+                    <textarea class="<?php echo esc_attr( $cscf_textarea_class ); ?>"
                               data-rule-required="true"
                               data-msg-required="<?php esc_html_e( 'Please give a message.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
                               id="cscf_message" name="cscf[message]" rows="10"
                               placeholder="<?php esc_html_e( 'Your Message', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"><?php echo esc_textarea( $contact->Message??'' ); ?></textarea>
                 </div>
 
-                <span for="cscf_message" class="help-inline help-block error"
+                <span for="cscf_message" class="<?php echo esc_attr( $cscf_help_text_class ); ?>"
                       style="display:<?php echo isset( $contact->Errors['message'] ) ? 'block' : 'none'; ?>;">
                     <?php if ( isset( $contact->Errors['message'] ) ) {
 	                    echo esc_attr( $contact->Errors['message'] );
@@ -160,19 +174,19 @@
 
 			<?php if ( cscf_PluginSettings::EmailToSender() ) { ?>
                 <!-- email to sender -->
-                <div class="control-group form-group<?php if ( isset( $contact->Errors['email-sender'] ) ) {
-					echo ' error has-error';
+                <div class="<?php echo esc_attr( $cscf_form_group_class ); ?><?php if ( isset( $contact->Errors['email-sender'] ) ) {
+					echo ' ' . esc_attr( $cscf_form_group_error_class );
 				} ?>">
                     <label for="cscf_email-sender"><?php esc_html_e( 'Send me a copy:', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?></label>
-                    <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() ) ? "input-group" : ""; ?>">
-						<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
+                    <div class="<?php echo ( true === cscf_PluginSettings::InputIcons() && ! empty( $cscf_input_group_class ) ) ? esc_attr( $cscf_input_group_class ) : ''; ?>">
+						<?php if ( cscf_PluginSettings::InputIcons() == true && ! empty( $cscf_input_addon_class ) ) { ?>
+                            <span class="<?php echo esc_attr( $cscf_input_addon_class ); ?>"><span class="glyphicon glyphicon-comment"></span></span>
 						<?php } ?>
                         <input <?php echo ( true == $contact->EmailToSender ) ? 'checked' : ''; ?> type="checkbox"
                                                                                                    id="cscf_email-sender"
                                                                                                    name="cscf[email-sender]">
                     </div>
-                    <span for="cscf_email-sender" class="help-inline help-block error"
+                    <span for="cscf_email-sender" class="<?php echo esc_attr( $cscf_help_text_class ); ?>"
                           style="display:<?php echo isset( $contact->Errors['email-sender'] ) ? 'block' : 'none'; ?>;">
                         <?php if ( isset( $contact->Errors['email-sender'] ) ) {
 	                        echo esc_attr( $contact->Errors['email-sender'] );
@@ -185,22 +199,22 @@
 
 			<?php if ( cscf_PluginSettings::ContactConsent() ) { ?>
                 <!-- contact consent -->
-                <div class="control-group form-group<?php if ( isset( $contact->Errors['contact-consent'] ) ) {
-					echo ' error has-error';
+                <div class="<?php echo esc_attr( $cscf_form_group_class ); ?><?php if ( isset( $contact->Errors['contact-consent'] ) ) {
+					echo ' ' . esc_attr( $cscf_form_group_error_class );
 				} ?>">
                     <label for="cscf_contact-consent"><?php echo esc_html( cscf_PluginSettings::ContactConsentMsg() ); ?>:</label>
-                    <div class="<?php echo ( cscf_PluginSettings::InputIcons() ) ? "input-group" : ""; ?>">
-						<?php if ( cscf_PluginSettings::InputIcons() == true ) { ?>
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-comment"></span></span>
+                    <div class="<?php echo ( cscf_PluginSettings::InputIcons() && ! empty( $cscf_input_group_class ) ) ? esc_attr( $cscf_input_group_class ) : ''; ?>">
+						<?php if ( cscf_PluginSettings::InputIcons() == true && ! empty( $cscf_input_addon_class ) ) { ?>
+                            <span class="<?php echo esc_attr( $cscf_input_addon_class ); ?>"><span class="glyphicon glyphicon-comment"></span></span>
 						<?php } ?>
-                        <input class="form-control input-xlarge"
+                        <input class="<?php echo esc_attr( $cscf_input_class ); ?>"
 							   data-rule-required="true"
                                data-msg-required="<?php esc_html_e( 'Please give your consent.', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"
 							<?php echo ( true === $contact->ContactConsent ) ? 'checked' : ''; ?> type="checkbox"
                                id="cscf_contact-consent"
                                name="cscf[contact-consent]">
                     </div>
-                    <span for="cscf[contact-consent]" class="help-inline help-block error"
+                    <span for="cscf[contact-consent]" class="<?php echo esc_attr( $cscf_help_text_class ); ?>"
                           style="display:<?php echo isset( $contact->Errors['contact-consent'] ) ? 'block' : 'none'; ?>;">
                         <?php if ( isset( $contact->Errors['contact-consent'] ) ) {
 	                        echo esc_html( $contact->Errors['contact-consent'] );
@@ -212,9 +226,9 @@
             <!-- recaptcha -->
 			<?php if ( $contact->RecaptchaPublicKey <> '' && $contact->RecaptchaPrivateKey <> '' ) { ?>
 
-                <div class="control-group form-group<?php
+                <div class="<?php echo esc_attr( $cscf_form_group_class ); ?><?php
 				if ( isset( $contact->Errors['recaptcha'] ) ) {
-					echo ' error has-error';
+					echo ' ' . esc_attr( $cscf_form_group_error_class );
 				} ?>">
                     <div id="recaptcha_div">
                         <div class="g-recaptcha" data-theme="<?php echo esc_attr( cscf_PluginSettings::Theme() ); ?>"
@@ -222,7 +236,7 @@
 
 
                         <div for="cscf_recaptcha"
-                             class="help-block has-error error"><?php if ( isset( $contact->Errors['recaptcha'] ) ) {
+                             class="<?php echo esc_attr( $cscf_help_text_class ); ?>"><?php if ( isset( $contact->Errors['recaptcha'] ) ) {
 								echo esc_html( $contact->Errors['recaptcha'] );
 							} ?></div>
 
@@ -253,7 +267,7 @@
                     </div>
                 </div>
 			<?php } ?>
-            <input type="submit" id="cscf_SubmitButton" class="btn btn-default"
+            <input type="submit" id="cscf_SubmitButton" class="<?php echo esc_attr( $cscf_button_class ); ?>"
                    value="<?php esc_html_e( 'Send Message', 'clean-and-simple-contact-form-by-meg-nicholas' ); ?>"/>
         </form>
     </div>
