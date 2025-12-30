@@ -18,6 +18,7 @@ jobs:
   build-release:
     needs: run-checks
     runs-on: ubuntu-latest
+    environment: wordpress-org-repo
 
     steps:
       - uses: actions/checkout@v4

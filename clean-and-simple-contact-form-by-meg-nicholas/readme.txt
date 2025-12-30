@@ -58,7 +58,7 @@ You can turn on reCAPTCHA to avoid your form being abused by bots, however Fullw
 
 *   The form can **integrate seamlessly into your website**. Turn off the plugin’s default css style sheet so that your theme’s style sheet can be used instead.
 
-*   If your theme is based on **twitter bootstrap** then this plugin will fit right in because it already has all the right div’s and CSS classes for bootstrap.
+*   **Flexible CSS styling**: Choose from Bootstrap, Modern (with dark mode), Theme Native, or Minimal styling modes to match your site's design.
 
 *   This plugin will only link in its jQuery file where it’s needed, it **will not impose** itself on every page of your whole site!
 
