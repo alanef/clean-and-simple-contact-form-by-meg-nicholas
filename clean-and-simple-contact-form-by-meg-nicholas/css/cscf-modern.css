@@ -260,13 +260,16 @@
 	border: none;
 	border-radius: var(--cscf-radius);
 	cursor: pointer;
-	transition: background-color var(--cscf-transition), transform var(--cscf-transition);
+	transition: opacity var(--cscf-transition), transform var(--cscf-transition), box-shadow var(--cscf-transition);
 	outline: none;
 	margin-top: var(--cscf-spacing-sm);
 }
 
 #cscf .cscf-button:hover {
-	background-color: var(--cscf-primary-hover);
+	background-color: var(--cscf-primary);
+	opacity: 0.8;
+	transform: translateY(-2px);
+	box-shadow: var(--cscf-shadow-lg);
 }
 
 /* Focus state - visible ring for keyboard navigation */
