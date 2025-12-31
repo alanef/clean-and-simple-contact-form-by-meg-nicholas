@@ -7,7 +7,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: contact, form, contact form, feedback form, bootstrap
 Tested up to: 6.9
-Stable tag: 4.12
+Stable tag: 4.12.1
 
 A clean and simple contact form with flexible CSS framework support.
 

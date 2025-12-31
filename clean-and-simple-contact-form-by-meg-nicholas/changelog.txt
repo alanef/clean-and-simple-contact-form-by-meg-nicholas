@@ -1,3 +1,6 @@
+= 4.12.1 =
+* Corrected tag for free lib opt in
+
 = 4.12 =
 * Added CSS Framework selection for flexible form styling
   - Bootstrap (default) - maintains backward compatibility
