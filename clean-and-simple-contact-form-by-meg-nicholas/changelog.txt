@@ -1,3 +1,18 @@
+= 4.12.2 =
+* Improved accessibility for screen readers
+  - Added aria-describedby linking inputs to error messages
+  - Added aria-required on required fields
+  - Added aria-invalid on fields with validation errors
+  - Added role="alert" and aria-live on message containers
+  - Added aria-hidden on decorative icons
+  - Added title to reCAPTCHA iframe
+  - Added screen-reader-text label for reCAPTCHA fallback
+* Changed phone input from type="text" to type="tel"
+* Added autocomplete attributes for better UX
+* Improved color contrast ratios for WCAG AA compliance
+* Improved button focus visibility for keyboard navigation
+* Improved button hover effect in Modern theme
+
 = 4.12.1 =
 * Corrected tag for free lib opt in
 
