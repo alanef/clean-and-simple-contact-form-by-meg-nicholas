@@ -23,6 +23,8 @@ A clean and simple AJAX contact form with Google reCAPTCHA, flexible CSS framewo
 
 *   **REST API Support**: Enable headless WordPress implementations to submit forms via authenticated REST API endpoints.
 
+*   **Accessible**: Built with accessibility in mind - proper ARIA attributes, keyboard navigation, screen reader support, and WCAG AA compliant color contrast.
+
 
 This is a straightforward contact form for your WordPress site. There is very minimal set-up
 required. Simply install, activate, and then place the short code **[cscf-contact-form]** on your web page.
@@ -72,7 +74,7 @@ Hopefully this plugin will fulfil all your needs.
 
 == PHP 8 Ready ==
 
-Tested on PHP 8.3
+Tested on PHP 8.4
 
 
 == Installation ==

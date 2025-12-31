@@ -2,6 +2,7 @@
   "plugins": [
     "./clean-and-simple-contact-form-by-meg-nicholas"
   ],
+  "phpVersion": "8.4",
   "port": 8500,
   "testsPort": 8501,
   "config": {
