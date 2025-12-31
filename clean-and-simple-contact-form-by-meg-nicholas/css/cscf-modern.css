@@ -269,6 +269,12 @@
 	background-color: var(--cscf-primary-hover);
 }
 
+/* Focus state - visible ring for keyboard navigation */
+#cscf .cscf-button:focus {
+	outline: 2px solid var(--cscf-ring);
+	outline-offset: 2px;
+}
+
 #cscf .cscf-button:focus-visible {
 	box-shadow: 0 0 0 2px var(--cscf-background), 0 0 0 4px var(--cscf-ring);
 }
