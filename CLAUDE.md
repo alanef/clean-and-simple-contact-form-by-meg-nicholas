@@ -6,6 +6,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is the **Clean and Simple Contact Form** WordPress plugin - a Bootstrap-styled AJAX contact form with reCAPTCHA support and spam filtering capabilities.
 
+## Git Workflow
+
+- **Always develop on the `develop` branch** - never commit directly to `main`
+- When ready to release, merge `develop` into `main`
+- Create version tags on `main` (e.g., `git tag 4.12.2 && git push origin 4.12.2`)
+- After tagging, sync develop with main: `git push origin main:develop --force`
+
 ## Common Development Commands
 
 ### Code Quality Checks
