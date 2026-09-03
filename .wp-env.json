@@ -1,7 +1,7 @@
 {
+  "phpVersion": "8.4",
   "plugins": [
-    "./clean-and-simple-contact-form-by-meg-nicholas",
-    "../fullworks-anti-spam-project/fullworks-anti-spam"
+    "./clean-and-simple-contact-form-by-meg-nicholas"
   ],
   "port": 8500,
   "testsPort": 8501,
@@ -11,6 +11,11 @@
     "WP_FS__DEV_MODE": true,
     "WP_DISABLE_FATAL_ERROR_HANDLER": true,
     "JETPACK_DEV_DEBUG": true
+  },
+  "mappings": {
+    "tests": "./tests",
+    "vendor": "./vendor",
+    "phpunit.xml.dist": "./phpunit.xml.dist"
   },
   "env": {
     "development": {

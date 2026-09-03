@@ -1,7 +1,7 @@
 {
-  "name": "fullworks/clean-and-simple-contact-form",
-  "description": "Clean and Simple Contact Form",
-  "type": "wordpress-plugin",
+  "name": "fullworks/clean-and-simple-contact-form-by-meg-nicholas-project",
+  "description": "Development project for the Contact Form Clean and Simple WordPress plugin",
+  "type": "project",
   "license": "GPL-2.0-or-later",
   "authors": [
     {
@@ -10,39 +10,43 @@
     }
   ],
   "config": {
+    "platform": {
+      "php": "7.4.33"
+    },
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true
-    },
-    "platform": {
-      "php": "7.4"
     }
   },
   "require-dev": {
-    "php": ">=7.4",
     "squizlabs/php_codesniffer": "3.*",
-    "wp-coding-standards/wpcs": ">=2.2.0",
+    "wp-coding-standards/wpcs": ">=2.3.0",
     "phpcompatibility/phpcompatibility-wp": "*",
-    "phpstan/phpstan": "*",
     "phpunit/phpunit": "^9.5",
+    "yoast/phpunit-polyfills": "^1.1",
+    "phpstan/phpstan": "*",
     "10up/wp_mock": "^1.0"
   },
   "scripts": {
-    "post-update-cmd": ["composer update -d clean-and-simple-contact-form-by-meg-nicholas",
-      "wp i18n make-pot ./clean-and-simple-contact-form-by-meg-nicholas  ./clean-and-simple-contact-form-by-meg-nicholas/languages/clean-and-simple-contact-form-by-meg-nicholas.pot --skip-audit --exclude='./vendor'"
+    "post-update-cmd": [
+      "@plugin-update",
+      "@make-pot"
     ],
+    "plugin-update": "if [ -f clean-and-simple-contact-form-by-meg-nicholas/composer.json ]; then composer update -d clean-and-simple-contact-form-by-meg-nicholas; fi",
+    "make-pot": "mkdir -p clean-and-simple-contact-form-by-meg-nicholas/languages && wp i18n make-pot ./clean-and-simple-contact-form-by-meg-nicholas ./clean-and-simple-contact-form-by-meg-nicholas/languages/clean-and-simple-contact-form-by-meg-nicholas.pot --skip-audit --exclude='vendor,includes/vendor,node_modules'",
     "build": [
-      "rm -rf zipped",
-      "@composer install -d clean-and-simple-contact-form-by-meg-nicholas --no-dev",
+      "if [ -f clean-and-simple-contact-form-by-meg-nicholas/composer.json ]; then composer install -d clean-and-simple-contact-form-by-meg-nicholas --no-dev; fi",
       "mkdir -p zipped",
-      "zip -r zipped/clean-and-simple-contact-form-by-meg-nicholas.zip clean-and-simple-contact-form-by-meg-nicholas"
+      "wp dist-archive clean-and-simple-contact-form-by-meg-nicholas zipped/clean-and-simple-contact-form-by-meg-nicholas-free.zip --force"
     ],
-    "phpcs": "phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=phpcs_sec.xml --ignore=*/vendor/*  --extensions=php",
-    "compat:8.3": "./vendor/bin/phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/*  --extensions=php --runtime-set testVersion 8.3",
-    "compat:8.2": "./vendor/bin/phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/*  --extensions=php --runtime-set testVersion 8.2",
-    "compat:8.1": "./vendor/bin/phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/*  --extensions=php --runtime-set testVersion 8.1",
-    "compat:8.0": "./vendor/bin/phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/*  --extensions=php --runtime-set testVersion 8.0",
-    "compat:7.4": "./vendor/bin/phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/*  --extensions=php --runtime-set testVersion 7.4",
+    "phpcs": "phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=phpcs_sec.xml --ignore=*/vendor/* --extensions=php",
+    "compat:8.4": "phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/* --extensions=php --runtime-set testVersion 8.4",
+    "compat:8.3": "phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/* --extensions=php --runtime-set testVersion 8.3",
+    "compat:8.2": "phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/* --extensions=php --runtime-set testVersion 8.2",
+    "compat:8.1": "phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/* --extensions=php --runtime-set testVersion 8.1",
+    "compat:8.0": "phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/* --extensions=php --runtime-set testVersion 8.0",
+    "compat:7.4": "phpcs clean-and-simple-contact-form-by-meg-nicholas -s --standard=PHPCompatibilityWP --ignore=*/vendor/* --extensions=php --runtime-set testVersion 7.4",
     "check": [
+      "@compat:8.4",
       "@compat:8.3",
       "@compat:8.2",
       "@compat:8.1",
@@ -50,7 +54,6 @@
       "@compat:7.4",
       "@phpcs"
     ],
-    "test": "phpunit",
-    "test-verbose": "phpunit --testdox"
+    "test": "npm test"
   }
 }

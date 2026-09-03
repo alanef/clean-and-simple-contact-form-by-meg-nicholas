@@ -15,7 +15,12 @@ if ( ! defined( 'CSCF_PLUGIN_NAME' ) ) {
 }
 
 if ( ! defined( 'CSCF_PLUGIN_DIR' ) ) {
-    define( 'CSCF_PLUGIN_DIR', dirname( __DIR__ ) . '/clean-and-simple-contact-form-by-meg-nicholas' );
+    // Repo layout when run locally; wp-env tests container layout when run via run-tests.sh.
+    $cscf_plugin_dir = dirname( __DIR__ ) . '/clean-and-simple-contact-form-by-meg-nicholas';
+    if ( ! is_dir( $cscf_plugin_dir ) ) {
+        $cscf_plugin_dir = '/var/www/html/wp-content/plugins/clean-and-simple-contact-form-by-meg-nicholas';
+    }
+    define( 'CSCF_PLUGIN_DIR', $cscf_plugin_dir );
 }
 
 if ( ! defined( 'CSCF_PLUGIN_URL' ) ) {

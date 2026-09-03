@@ -1,0 +1,6 @@
+{
+  "plugins": [
+    "./clean-and-simple-contact-form-by-meg-nicholas",
+    "../fullworks-anti-spam-project/fullworks-anti-spam"
+  ]
+}

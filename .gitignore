@@ -1,8 +1,23 @@
 .idea/
+.vscode/
+.directory
+.DS_Store
 dist/
+build/
 zipped/
+tmp-build/
 node_modules/
-clean-and-simple-contact-form-by-meg-nicholas/vendor/
 /vendor/
-/.env.wordpress
+/clean-and-simple-contact-form-by-meg-nicholas/vendor/
+/clean-and-simple-contact-form-by-meg-nicholas/includes/vendor/
 .phpunit.result.cache
+*.phpunit.result.cache
+.wp-env.override.json
+.env
+.env.*
+!.env.example
+*.log
+__pycache__/
+# repository specific
+clean-and-simple-contact-form-by-meg-nicholas/vendor/
+/.env.wordpress
