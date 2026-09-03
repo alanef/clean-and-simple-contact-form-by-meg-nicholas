@@ -112,10 +112,17 @@ jobs:
       - name: List shipped files
         run: unzip -l "zipped/$PLUGIN_DIR-free.zip"
 
+      - name: DEBUG dotfiles before
+        run: find tmp-build -name '.*' -not -path '*/vendor/*'
+
       - name: Run plugin check
         uses: wordpress/plugin-check-action@v1
         with:
           build-dir: './tmp-build/${{ env.PLUGIN_DIR }}'
+
+      - name: DEBUG dotfiles after
+        if: always()
+        run: find tmp-build -name '.*' -not -path '*/vendor/*'; ls -la; cat .wp-env.json
 
   tests:
     name: PHPUnit (wp-env)
