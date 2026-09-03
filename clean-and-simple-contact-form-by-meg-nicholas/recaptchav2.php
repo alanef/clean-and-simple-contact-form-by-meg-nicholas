@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 if ( ! class_exists( 'csf_ReCaptchaResponse' ) ) {
 	class csf_ReCaptchaResponseV2 {
 		public $success;

@@ -1,5 +1,6 @@
 = 4.12.3 =
 * update tested version
+* Added direct file access guard to recaptchav2.php (Plugin Check requirement)
 
 = 4.12.2 =
 * Improved accessibility for screen readers
