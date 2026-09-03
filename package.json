@@ -1,6 +1,6 @@
 {
   "name": "clean-and-simple-contact-form-by-meg-nicholas-project",
-  "version": "1.0.0",
+  "version": "4.12.3",
   "private": true,
   "description": "Development project for the Contact Form Clean and Simple WordPress plugin",
   "author": "Alan Fuller <alan@fullworks.net>",
@@ -15,6 +15,6 @@
     "build": "composer run-script build"
   },
   "devDependencies": {
-    "@wordpress/env": "^10.25.0"
+    "@wordpress/env": "^11.14.0"
   }
 }

@@ -1,3 +1,6 @@
+= 4.12.3 =
+* update tested version
+
 = 4.12.2 =
 * Improved accessibility for screen readers
   - Added aria-describedby linking inputs to error messages
