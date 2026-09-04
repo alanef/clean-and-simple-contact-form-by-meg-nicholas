@@ -9,6 +9,7 @@ tmp-build/
 node_modules/
 /vendor/
 /clean-and-simple-contact-form-by-meg-nicholas/vendor/
+/clean-and-simple-contact-form-by-meg-nicholas/composer.lock
 /clean-and-simple-contact-form-by-meg-nicholas/includes/vendor/
 .phpunit.result.cache
 *.phpunit.result.cache
