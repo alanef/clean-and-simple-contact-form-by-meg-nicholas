@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- FAQ entry on where to report security bugs, through the Patchstack Vulnerability Disclosure Program.
+
 ## [4.12.3] - 2026-09-03
 
 ### Changed

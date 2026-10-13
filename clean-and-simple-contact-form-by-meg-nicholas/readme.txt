@@ -374,6 +374,10 @@ So for example, if your 'Contact Me' page has comments below it,
 the reCAPTCHA for the contact form will be displayed correctly but not in the comments form below.
 The comments form will never validate due to no supplied reCAPTCHA code.
 
+= Where do I report security bugs found in this plugin? =
+
+Please report security bugs found in the source code of the Contact Form Clean and Simple plugin through the [Patchstack Vulnerability Disclosure Program](https://patchstack.com/database/vdp/9e5fbd20-c31e-4323-8843-387f3519829f). The Patchstack team will assist you with verification, CVE assignment, and notify the developers of this plugin.
+
 == Changelog ==
 
 [Full Change History](https://fullworksplugins.com/docs/clean-and-simple-contact-form/usage-clean-and-simple-contact-form/change-log-3/)
