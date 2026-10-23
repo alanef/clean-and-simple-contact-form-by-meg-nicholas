@@ -1,4 +1,4 @@
-= Unreleased =
+= 4.13 =
 * Added: FAQ entry on where to report security bugs, through the Patchstack Vulnerability Disclosure Program.
 * Fixed: the opt-in notice could not be dismissed and kept coming back on every page load
 * Fixed: on sites running other Fullworks free plugins, the opt-in notice and menu could belong to the wrong plugin
