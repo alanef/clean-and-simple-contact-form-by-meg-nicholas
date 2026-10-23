@@ -18,6 +18,7 @@ opt-in library to 1.3.3. The readme gains a FAQ on reporting security bugs.
 - On sites running other Fullworks free plugins, the opt-in notice and menu could belong to the wrong plugin.
 - Leaving the opt-in screen without choosing left the notice up for good. Visiting the contact form settings
   now shows the opt-in screen again until you click Allow or Skip.
+- Deleting the plugin now also removes its opt-in setting (`CSCF_form_rendered`).
 
 ### Improvements
 - The notice links straight to the opt-in screen.
@@ -46,7 +47,8 @@ None. The stored opt-in choice (`CSCF_form_rendered`) and dismissals (`CSCF_noti
 - 35f4c59: Sync tooling: release standard (PLUGINS_SMALL-5)
 - 0f262a0: Sync tooling: bump-version.sh keeps package-lock.json in step
 - d1cb31a: Take free_plugin_lib 1.3.3 (PLUGINS_SMALL-6, PLUGINS_SMALL-7)
-- Release 4.13 (version bump)
+- 1d1faaf: Release 4.13 (version bump)
+- 0079249: Remove the opt-in option on uninstall (PLUGINS_SMALL-6)
 
 ## Evidence
 

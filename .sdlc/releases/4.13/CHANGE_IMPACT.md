@@ -14,6 +14,7 @@
 ### Code Areas
 - Bundled `alanef/free_plugin_lib` (vendor/), 1.2.4 to 1.3.3: the opt-in notice, dismiss, the redirect from
   `contact-form-settings` to the opt-in screen, and AJAX handlers scoped per plugin.
+- uninstall.php: also loads the vendor autoloader and calls `Main::plugin_uninstall('CSCF')`.
 - readme.txt: the FAQ entry and the `Type: free` header. No CSCF plugin code changed.
 
 ### Configuration
