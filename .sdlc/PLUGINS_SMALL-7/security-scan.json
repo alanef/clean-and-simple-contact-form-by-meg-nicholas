@@ -1,0 +1,26 @@
+{
+  "issue_id": "PLUGINS_SMALL-7",
+  "scan_date": "2026-10-23T12:00:00Z",
+  "scanned_by": "AI Assistant",
+  "files_analyzed": [
+    "free_plugin_lib:src/Main.php",
+    "free_plugin_lib:src/Classes/Email.php",
+    "clean-and-simple-contact-form-by-meg-nicholas/composer.json"
+  ],
+  "commit_range": {
+    "free_plugin_lib": "0885daf..4f34052",
+    "clean-and-simple-contact-form-by-meg-nicholas": "d1cb31a"
+  },
+  "findings": [],
+  "summary": {
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "info": 0,
+    "total": 0
+  },
+  "recommendation": "PASS",
+  "blocking_issues": [],
+  "notes": "The map lookup adds a fallback on a developer-supplied shortname with any -Free suffix stripped. No new input, and the webhook payload is unchanged. Skip now also requires manage_options, which tightens access control. A sanitisation sweep of v1.3.3 for unsanitised request reads found none; the sweep was validated earlier against 958c57d^."
+}
