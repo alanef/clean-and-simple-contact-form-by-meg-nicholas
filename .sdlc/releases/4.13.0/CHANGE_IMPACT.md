@@ -1,4 +1,4 @@
-# Change Impact Assessment: 4.13
+# Change Impact Assessment: 4.13.0
 
 ## Risk Level: Low
 
@@ -32,7 +32,7 @@
 
 ### Immediate Rollback
 ```bash
-git revert <Release 4.13>..d1cb31a   # then release as 4.13.1
+git revert <Release 4.13.0>..d1cb31a   # then release as 4.13.1
 ```
 
 ### Database Rollback
@@ -43,4 +43,4 @@ N/A
 
 ## Monitoring
 - wp.org support forum for reports of being redirected to the opt-in screen
-- wp.org reviews during the 4.13 period
+- wp.org reviews during the 4.13.0 period

@@ -1,4 +1,4 @@
-# Release 4.13
+# Release 4.13.0
 
 **Date:** 2026-10-23
 **Previous:** 4.12.3
@@ -47,15 +47,15 @@ None. The stored opt-in choice (`CSCF_form_rendered`) and dismissals (`CSCF_noti
 - 35f4c59: Sync tooling: release standard (PLUGINS_SMALL-5)
 - 0f262a0: Sync tooling: bump-version.sh keeps package-lock.json in step
 - d1cb31a: Take free_plugin_lib 1.3.3 (PLUGINS_SMALL-6, PLUGINS_SMALL-7)
-- 1d1faaf: Release 4.13 (version bump)
+- 1d1faaf: Release 4.13.0 (version bump)
 - 0079249: Remove the opt-in option on uninstall (PLUGINS_SMALL-6)
 
 ## Evidence
 
 - Verification: 3/3 (.sdlc/PLUGINS_SMALL-5, -6, -7)
 - Security: 2/2 passed (-6 PASS_WITH_NOTES, -7 PASS), +1 skipped via .trivial
-- Tests: .sdlc/releases/4.13/TESTS_PASSED.md
-- Dependencies: .sdlc/releases/4.13/DEPENDENCY_AUDIT.md (shipped composer clean; dev npm warnings)
+- Tests: .sdlc/releases/4.13.0/TESTS_PASSED.md
+- Dependencies: .sdlc/releases/4.13.0/DEPENDENCY_AUDIT.md (shipped composer clean; dev npm warnings)
 
 ## Contributors
 

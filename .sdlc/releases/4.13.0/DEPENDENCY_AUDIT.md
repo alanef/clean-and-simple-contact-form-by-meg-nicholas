@@ -1,4 +1,4 @@
-# Dependency Audit: 4.13
+# Dependency Audit: 4.13.0
 
 **Date:** 2026-10-23T07:36:17Z
 **Commit:** d1cb31a
